@@ -50,10 +50,25 @@ public class ClubManagerMainActivity extends Activity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
+        Fragment fragment = new PlaceholderFragment();//ClubsFrag();
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
+        switch (position){
+            case 0:
+                fragment = SA_senate_frag.newInstance();//   PlaceholderFragment.newInstance(position);//new PlaceholderFragment();
+                break;
+            case 1:
+                fragment = ClubsFrag.newInstance("club");//= new PlaceholderFragment();//ClubsFrag();
+                break;
+            case 2:
+                fragment = PlaceholderFragment.newInstance(position);
+                break;
+        }
+
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container,fragment)//new ClubsFrag())
+                    .addToBackStack(null)
+                    .commit();
+
     }
 
     public void onSectionAttached(int number) {
@@ -101,6 +116,20 @@ public class ClubManagerMainActivity extends Activity
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fm = getFragmentManager();
+        if (fm.getBackStackEntryCount()>0){
+           // Log.i("MainActivity","popping backstack");
+            fm.popBackStack();
+        }
+        else {
+            super.onBackPressed();
+        }
+
+
     }
 
     /**
