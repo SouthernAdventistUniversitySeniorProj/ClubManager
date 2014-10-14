@@ -1,19 +1,17 @@
 package com.seniorproject.sauclubmanager;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.ListFragment;
-import android.content.DialogInterface;
-import android.net.Uri;
+import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,11 +26,11 @@ import android.widget.Toast;
  * create an instance of this fragment.
  *
  */
-public class ClubsFrag extends ListFragment {
+public class ClubsFrag extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-
+ListView list;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -50,6 +48,7 @@ public class ClubsFrag extends ListFragment {
     // TODO: Rename and change types and number of parameters
 
     private String[] values;
+    private Integer[] clubPics;
     public static ClubsFrag newInstance(String param1) {
         ClubsFrag fragment = new ClubsFrag();
         Bundle args = new Bundle();
@@ -67,18 +66,53 @@ public class ClubsFrag extends ListFragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_clubs, container, false);
 
+        clubPics = new Integer[]{R.drawable.accounting,R.drawable.african_student_union_club,R.drawable.allied_health_club,R.drawable.art_club,
+                R.drawable.asian_club,R.drawable.biology_club,R.drawable.business_club,R.drawable.chemistry_club,R.drawable.communication_club,
+                R.drawable.computer_club,R.drawable.education_club,R.drawable.enactus_club,R.drawable.encounter_club,R.drawable.english_club,
+                R.drawable.expressions_of_praise_club,R.drawable.futbol_club,R.drawable.history_club,R.drawable.latin_america_club,
+                R.drawable.long_term_care_club,R.drawable.management_club,R.drawable.marketing_club, R.drawable.nursing_club,R.drawable.pre_dental_club,
+                R.drawable.pre_med_club,R.drawable.pre_optometry_club,R.drawable.psychology_club,R.drawable.southern_ringtones_club,R.drawable.student_missions_club,
+                R.drawable.wellness_club};
 
-        values = new String[]{"Accounting Club","African Student Union","Allied Health Club",
+        values = new String[]{"Accounting Club","African Student Union Club","Allied Health Club Club",
                 "Art Club","Asian Club","Biology Club","Business Society","Chemistry Club",
                 "Communications Club","Computer Club","Education Club","Enactus","Encounter","English Club/Sigma Tau Delta",
-                "Expressions of Praise","Finance Club","Kayak Club","Latin American Club",
-                "Long-term Health Care Club","Marketing Club","Mathematics Club","Nursing Club",
-                "Phi Alpha Theta History","Physical Therapy Club","Pre-dental Club","Pre-med Club",
-                "Pre-optometry Club","Pre-pharmacy Club","Psi-Chi Club","SE Youth Conf Club (SEYC)",
-                "Southern Ringtones Club","Southern Striders","Student Missions Club","Writers Club"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                "Expressions of Praise","Futbol Club","History Club","Latin American Club","Long-term Health Care Club",
+                "Management Club","Marketing Club","Nursing Club","Pre-dental Club","Pre-med Club",
+                "Pre-optometry Club","Psychology Club","Southern Ringtones Club","Student Missions Club","Wellness Club"};
+
+
+            PicList adapter = new PicList(this.getActivity(), values, clubPics);
+            list= (ListView)rootView.findViewById(R.id.list);
+            list.setAdapter(adapter);
+
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    Toast.makeText(getActivity(), "You Clicked at " +values[+ position], Toast.LENGTH_SHORT).show();
+
+                    FragmentManager manager = getFragmentManager();
+                    FragmentTransaction ft = manager.beginTransaction();
+                    ft.replace(R.id.container, myClub.newInstance(values[position],position));
+                    ft.addToBackStack(null);
+                    // super.onListItemClick(l, v, position, id);
+                    ft.commit();
+
+
+
+                }
+           });
+
+
+
+
+
+
+
+        /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_list_item_1,values);
-        setListAdapter(adapter);
+        setListAdapter(adapter);*/
 
         return rootView;
     }
@@ -90,7 +124,7 @@ public class ClubsFrag extends ListFragment {
         }
     }*/
 
-    @Override
+/*    @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 
         Log.d("fhjkashfljsfjl;","item clicked "+values[position]);
@@ -102,7 +136,7 @@ public class ClubsFrag extends ListFragment {
         ft.addToBackStack(null);
        // super.onListItemClick(l, v, position, id);
         ft.commit();
-    }
+    }*/
 
     @Override
     public void onAttach(Activity activity) {
@@ -144,16 +178,45 @@ public class ClubsFrag extends ListFragment {
 
 //}
 
+    public class PicList extends ArrayAdapter<String>{
+        private final Activity context;
+        private final String[] clubName;
+        private final Integer[] clubPics;
+        public PicList(Activity context,
+                          String[] clubName, Integer[] clubPics) {
+            super(context, R.layout.picture_list, clubName);
+            this.context = context;
+            this.clubName = clubName;
+            this.clubPics = clubPics;
+        }
+        @Override
+        public View getView(int position, View view, ViewGroup parent) {
+            LayoutInflater inflater = context.getLayoutInflater();
+            View rowView= inflater.inflate(R.layout.picture_list, null, true);
+            TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
+            ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
+            txtTitle.setText(clubName[position]);
+            imageView.setImageResource(clubPics[position]);
+            return rowView;
+        }
+    }
+
+
 
 
     public static class myClub extends Fragment {
 
-        private static final String Club_Name = "club_name";//ARG_SECTION_NUMBER = "section_number";
 
-        public static myClub newInstance(String clubName) {
+
+        private static final String Club_Name = "club_name";//ARG_SECTION_NUMBER = "section_number";
+        private static final String Position = "Position";//ARG_SECTION_NUMBER = "section_number";
+        public static myClub newInstance(String clubName, int position ) {
             myClub fragment = new myClub();
             Bundle args = new Bundle();
             args.putString(Club_Name,clubName);
+            args.putInt(Position,position);
+
+           //clubPics.getResourceId()
             fragment.setArguments(args);
             return fragment;
         }
@@ -164,12 +227,16 @@ public class ClubsFrag extends ListFragment {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+            TypedArray clubPics = getResources().obtainTypedArray(R.array.club_pics);
             View rootView = inflater.inflate(R.layout.club_layout_frag, container, false);
             View club_name_view = rootView.findViewById(R.id.club_name);
             View club_descript = rootView.findViewById(R.id.club_description);
+            View club_pic = rootView.findViewById(R.id.imageView);
             ((TextView)club_name_view).setText(this.getArguments().get(Club_Name).toString());
             ((TextView)club_descript).setText("A brief description and a few fun facts about The "+ this.getArguments().get(Club_Name).toString());
 
+            ((ImageView)club_pic).setImageResource(clubPics.getResourceId(this.getArguments().getInt(Position),0));
+            //leave join implementation
         /*    final Button joinButton = (Button) rootView.findViewById(R.id.join_button);
                 joinButton.setOnClickListener(new View.OnClickListener() {
                     @Override

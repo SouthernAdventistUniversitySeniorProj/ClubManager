@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="club_pics">
+        <item>@drawable/accounting</item>
+        <item>@drawable/african_student_union_club</item>
+        <item>@drawable/allied_health_club</item>
+        <item>@drawable/art_club</item>
+        <item>@drawable/asian_club</item>
+        <item>@drawable/biology_club</item>
+        <item>@drawable/business_club</item>
+        <item>@drawable/chemistry_club</item>
+        <item>@drawable/communication_club</item>
+        <item>@drawable/computer_club</item>
+        <item>@drawable/education_club</item>
+        <item>@drawable/enactus_club</item>
+        <item>@drawable/encounter_club</item>
+        <item>@drawable/english_club</item>
+        <item>@drawable/expressions_of_praise_club</item>
+        <item>@drawable/futbol_club</item>
+        <item>@drawable/history_club</item>
+        <item>@drawable/latin_america_club</item>
+        <item>@drawable/long_term_care_club</item>
+        <item>@drawable/management_club</item>
+        <item>@drawable/marketing_club</item>
+        <item>@drawable/nursing_club</item>
+        <item>@drawable/pre_dental_club</item>
+        <item>@drawable/pre_med_club</item>
+        <item>@drawable/pre_optometry_club</item>
+        <item>@drawable/psychology_club</item>
+        <item>@drawable/southern_ringtones_club</item>
+        <item>@drawable/student_missions_club</item>
+        <item>@drawable/wellness_club</item>
+    </string-array>
+</resources>
