@@ -19,8 +19,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.view.View.OnClickListener;
+import android.content.Intent;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -89,6 +92,7 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+
         mDrawerListView = (ListView) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -248,7 +252,9 @@ public class NavigationDrawerFragment extends Fragment {
         }
 
         if (item.getItemId() == R.id.action_example) {
-            Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Signed Out", Toast.LENGTH_SHORT).show();
+            
+            
             return true;
         }
 
@@ -270,6 +276,7 @@ public class NavigationDrawerFragment extends Fragment {
         return getActivity().getActionBar();
     }
 
+
     /**
      * Callbacks interface that all activities using this fragment must implement.
      */
@@ -279,4 +286,6 @@ public class NavigationDrawerFragment extends Fragment {
          */
         void onNavigationDrawerItemSelected(int position);
     }
+
+
 }

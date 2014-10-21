@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -60,7 +61,7 @@ public class ClubManagerMainActivity extends Activity
                 fragment = ClubsFrag.newInstance("club");//= new PlaceholderFragment();//ClubsFrag();
                 break;
             case 2:
-                fragment = PlaceholderFragment.newInstance(position);
+                fragment = CalendarFrag.newInstance();
                 break;
         }
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="calendar_textView">Calendar</string>
+    <string name="calendar_textView_tab">Calendar</string>
+
+</resources>
