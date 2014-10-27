@@ -74,13 +74,9 @@
                     android:id="@+id/ForgotPassText"
                     android:text="@string/ForgotPassText"
                     android:layout_gravity="right"
-                    android:autoLink="web"
                     android:textStyle="italic"
                     android:textColor="#0000FF"
-                    android:layout_weight="1"
-                    android:enabled="true"
-                    android:linksClickable="true"
-                    android:autoText="true" />
+                    android:layout_weight="1" />
 
                 <Button
                     android:id="@+id/email_sign_in_button"

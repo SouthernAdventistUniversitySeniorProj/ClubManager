@@ -1,24 +1,16 @@
 package com.seniorproject.sauclubmanager;
 
 import android.app.Activity;
-
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.TextView;
-
 
 public class ClubManagerMainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -55,14 +47,18 @@ public class ClubManagerMainActivity extends Activity
         FragmentManager fragmentManager = getFragmentManager();
         switch (position){
             case 0:
-                fragment = SA_senate_frag.newInstance();//   PlaceholderFragment.newInstance(position);//new PlaceholderFragment();
+                fragment = sa_frag.newInstance();
                 break;
             case 1:
-                fragment = ClubsFrag.newInstance("club");//= new PlaceholderFragment();//ClubsFrag();
+                fragment = SA_senate_frag.newInstance();//   PlaceholderFragment.newInstance(position);//new PlaceholderFragment();
                 break;
             case 2:
+                fragment = ClubsFrag.newInstance("club");//= new PlaceholderFragment();//ClubsFrag();
+                break;
+            case 3:
                 fragment = CalendarFrag.newInstance();
                 break;
+
         }
 
             fragmentManager.beginTransaction()
@@ -74,13 +70,16 @@ public class ClubManagerMainActivity extends Activity
 
     public void onSectionAttached(int number) {
         switch (number) {
-            case 1:
+            case 2:
                 mTitle = getString(R.string.title_section1);
                 break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
+            case 1:
+                mTitle = getString(R.string.title_section4);
                 break;
             case 3:
+                mTitle = getString(R.string.title_section2);
+                break;
+            case 4:
                 mTitle = getString(R.string.title_section3);
                 break;
         }
