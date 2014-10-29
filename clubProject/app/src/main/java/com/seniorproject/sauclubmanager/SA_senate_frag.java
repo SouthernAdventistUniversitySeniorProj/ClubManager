@@ -7,7 +7,9 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TabHost;
 import android.widget.TextView;
 
 /**
@@ -56,6 +58,7 @@ public class SA_senate_frag extends Fragment {
             //mParam2 = getArguments().getString(ARG_PARAM2);
         }
         //Student Association Senate Home Page
+
     }
 
     @Override
@@ -65,8 +68,39 @@ public class SA_senate_frag extends Fragment {
         View aboutSA = rootView.findViewById(R.id.textView);
         ((TextView)aboutSA).setText("Senate is the legislative branch of the Student Association responsible for representing the various needs and desires of our great student body. It meets every other Wednesday to discuss what we can do to improve students' Southern experience as well as the community around our university, and then to enact as many of those changes as is within Senate power.");
 
-        //TextView textView = new TextView(getActivity());
-        //textView.setText(R.string.hello_blank_fragment);
+        //sn_banner_imageView
+        ImageButton button = (ImageButton) rootView.findViewById(R.id.sn_banner_imageView);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("https://www.southern.edu/sa/senate/Pages/senate.aspx"));
+                startActivity(intent);
+            }
+        }) ;
+
+        //sn_minutes_button
+        Button button2 = (Button) rootView.findViewById(R.id.sn_minutes_button);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("https://www.southern.edu/sa/senate/Pages/senateminutes.aspx"));
+                startActivity(intent);
+            }
+        }) ;
+
+        //sn_senators_button
+        Button button3 = (Button) rootView.findViewById(R.id.sn_senators_button);
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("https://www.southern.edu/sa/senate/Pages/senators.aspx"));
+                startActivity(intent);
+            }
+        }) ;
+
         return rootView;
     }
 }

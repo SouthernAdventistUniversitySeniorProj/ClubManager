@@ -5,11 +5,21 @@ package com.seniorproject.sauclubmanager;
 
 
 
+        import android.app.DatePickerDialog;
+        import android.app.Dialog;
+        import android.content.Intent;
         import android.os.Bundle;
         import android.app.Fragment;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
+        import android.widget.CalendarView;
+        import android.widget.Toast;
+
+        import com.seniorproject.sauclubmanager.com.seniorproject.utilities.LoginScreen;
+        import com.seniorproject.sauclubmanager.com.seniorproject.utilities.cal_event_frag;
+
+        import java.util.Calendar;
 
 /**
  * A simple {@link android.app.Fragment} subclass.
@@ -17,6 +27,7 @@ package com.seniorproject.sauclubmanager;
  * create an instance of this fragment.
  *
  */
+
 public class CalendarFrag extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +38,10 @@ public class CalendarFrag extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private int mYear;
+    private int mMonth;
+    private int mDay;
+    static final int DATE_PICKER_ID = 1111;
 
     /**
      * Use this factory method to create a new instance of
@@ -52,6 +67,20 @@ public class CalendarFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.calendar_activity, container, false);
+
+        CalendarView calendarView = (CalendarView) rootView.findViewById(R.id.calendarView);
+        calendarView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Toast.makeText(getActivity(), "Viewing Current Events for Today...", Toast.LENGTH_SHORT).show();
+                Intent myintent = new Intent(getActivity(), cal_event_frag.class);
+                startActivity(myintent);
+
+            }
+        });
+
+
         return rootView;
     }
 

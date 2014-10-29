@@ -4,6 +4,7 @@ package com.seniorproject.sauclubmanager;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.provider.ContactsContract;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -19,11 +20,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
 import android.content.Intent;
+
+import com.seniorproject.sauclubmanager.com.seniorproject.utilities.LoginScreen;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -254,8 +259,8 @@ public class NavigationDrawerFragment extends Fragment {
 
         if (item.getItemId() == R.id.action_example) {
             Toast.makeText(getActivity(), "Signed Out", Toast.LENGTH_SHORT).show();
-            
-            
+            Intent myintent = new Intent(getActivity(), LoginScreen.class);
+            startActivity(myintent);
             return true;
         }
 
@@ -274,6 +279,8 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private ActionBar getActionBar() {
+
+
         return getActivity().getActionBar();
     }
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+
+import com.seniorproject.sauclubmanager.com.seniorproject.utilities.settings_frag;
 
 public class ClubManagerMainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -113,6 +116,7 @@ public class ClubManagerMainActivity extends Activity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            setContentView(R.layout.settings_frag);
             return true;
         }
         return super.onOptionsItemSelected(item);
