@@ -25,6 +25,8 @@ import android.widget.Toast;
 import android.view.View.OnClickListener;
 import android.content.Intent;
 
+import com.seniorproject.sauclubmanager.com.seniorproject.utilities.LoginScreen;
+
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
@@ -110,6 +112,7 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section1),
                         getString(R.string.title_section2),
                         getString(R.string.title_section3),
+                        getString(R.string.title_section5)
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -254,7 +257,8 @@ public class NavigationDrawerFragment extends Fragment {
 
         if (item.getItemId() == R.id.action_example) {
             Toast.makeText(getActivity(), "Signed Out", Toast.LENGTH_SHORT).show();
-            
+            Intent myIntent = new Intent(getActivity(), LoginScreen.class);
+            startActivity(myIntent);
             
             return true;
         }

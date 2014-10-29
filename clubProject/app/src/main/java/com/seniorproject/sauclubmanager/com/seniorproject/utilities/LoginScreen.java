@@ -5,9 +5,11 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -20,9 +22,11 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import java.util.ArrayList;
@@ -41,18 +45,27 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "qmarcelle@gmail.com:hello","test@test.com:hello"
+            "test@test.com:hello"//"qmarcelle@gmail.com:hello",
     };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
 
+    //Shared Prefs/utilities
+    private boolean saveLogin;
+    private SharedPreferences loginPreferences;
+    private SharedPreferences.Editor loginPrefsEditor;
+    private String useremail,password;
+
+
     // UI references.
-    private AutoCompleteTextView mEmailView;
+    private EditText mEmailView; // used to be AutoCompleteTextView type
+    private EditText newUsername;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private CheckBox saveLoginCheckbox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +77,13 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
         t.setMovementMethod(LinkMovementMethod.getInstance());
 
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        populateAutoComplete();
+        mEmailView = (EditText) findViewById(R.id.email);
+        //newUsername = (EditText) findViewById(R.id.email);
+
+
+
+        //mEmailView.setText();
+        //populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -79,21 +97,72 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
             }
         });
 
+        //old hardcoded logic
+        /*for (String credential : DUMMY_CREDENTIALS) {
+            String[] pieces = credential.split(":");
+            mEmailView.setText(pieces[0]);
+            mPasswordView.setText(pieces[1]);
+        }*/
+
+
+        // Set up utility references
+        saveLoginCheckbox = (CheckBox)findViewById(R.id.remember);
+        loginPreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
+        loginPrefsEditor = loginPreferences.edit();
+
+
+
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                    //InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    //imm.hideSoftInputFromWindow(editTextUsername.getWindowToken(), 0);
+
+                    useremail = mEmailView.getText().toString();
+                    password = mPasswordView.getText().toString();
+
+                    if (saveLoginCheckbox.isChecked()) {
+                        loginPrefsEditor.putBoolean("saveLogin", true);
+                        loginPrefsEditor.putString("username", useremail);
+                        //loginPrefsEditor.putString("password", password);
+                        loginPrefsEditor.commit();
+                    } else {
+                        loginPrefsEditor.clear();
+                        loginPrefsEditor.commit();
+                    }
                 attemptLogin();
             }
         });
 
+        saveLogin = loginPreferences.getBoolean("saveLogin", false);
+        if(saveLogin == true){
+
+            mEmailView.setText(loginPreferences.getString("username", ""));
+            //mPasswordView.setText(loginPreferences.getString("password",""));
+            saveLoginCheckbox.setChecked(true);
+        }
+
+        //hide keyboard if login was saved
+        if(saveLoginCheckbox.isChecked())
+        {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(mEmailView.getWindowToken(), 0);
+        }
+
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+
+
+
+
     }
 
-    private void populateAutoComplete() {
+    /*private void populateAutoComplete() {
         getLoaderManager().initLoader(0, null, this);
-    }
+    }*/
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -109,7 +178,7 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
         mEmailView.setError(null);
         mPasswordView.setError(null);
 
-        // Store values at the time of the login attempt.
+        // Store values at the time of the login attempt._______________________________________________________SHARED PREF STORAGE HERE
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
@@ -192,6 +261,27 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
+    //__________________TO DO_______________________________________________________________________________________________________________________---------------------------------
+   /* public void onClick(View view)
+    {
+        if (view == ok) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(editTextUsername.getWindowToken(), 0);
+
+            String email = mEmailView.getText().toString();
+            String password = mPasswordView.getText().toString();
+
+            if (saveLoginCheckBox.isChecked()) {
+                loginPrefsEditor.putBoolean("saveLogin", true);
+                loginPrefsEditor.putString("username", username);
+                loginPrefsEditor.putString("password", password);
+                loginPrefsEditor.commit();
+            } else {
+                loginPrefsEditor.clear();
+                loginPrefsEditor.commit();
+            }
+
+    }*/
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
@@ -219,7 +309,7 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
             cursor.moveToNext();
         }
 
-        addEmailsToAutoComplete(emails);
+       // addEmailsToAutoComplete(emails);
     }
 
     @Override
@@ -238,14 +328,14 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
     }
 
 
-    private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
+   /* private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<String>(LoginScreen.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);
-    }
+    }*/
 
     /**
      * Represents an asynchronous login/registration task used to authenticate
