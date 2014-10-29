@@ -61,7 +61,6 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
 
     // UI references.
     private EditText mEmailView; // used to be AutoCompleteTextView type
-    private EditText newUsername;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;

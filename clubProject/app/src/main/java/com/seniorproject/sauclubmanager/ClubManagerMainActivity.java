@@ -58,6 +58,9 @@ public class ClubManagerMainActivity extends Activity
             case 3:
                 fragment = CalendarFrag.newInstance();
                 break;
+            /*case 4:
+                fragment = MyFeed_frag.newInstance("club");
+                break;*/
 
         }
 
@@ -82,9 +85,9 @@ public class ClubManagerMainActivity extends Activity
             case 4:
                 mTitle = getString(R.string.title_section3);
                 break;
-            case 5:
+            /*case 5:
                 mTitle = getString(R.string.title_section5);
-                break;
+                break;*/
         }
     }
 

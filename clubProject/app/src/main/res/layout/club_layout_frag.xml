@@ -45,4 +45,15 @@
         android:layout_gravity="right"
         android:clickable="true"
         android:enabled="false" />
+
+    <CheckedTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add to favorite clubs"
+
+        android:clickable="true"
+        android:id="@+id/favorite"
+        android:hint="Checked"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"/>
+
 </LinearLayout>
