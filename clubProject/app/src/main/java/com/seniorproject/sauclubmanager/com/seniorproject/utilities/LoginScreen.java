@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,10 +30,19 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import com.seniorproject.sauclubmanager.ClubManagerMainActivity;
 import com.seniorproject.sauclubmanager.R;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 
 /**
  * A login screen that offers login via email/password.
@@ -65,11 +75,16 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
     private View mProgressView;
     private View mLoginFormView;
     private CheckBox saveLoginCheckbox;
+    private Button signIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
+
+        //CONNECT TO DB
+        Connection conn = null;
+
 
         //register link
         TextView btn = (TextView) findViewById(R.id.action_reg);
@@ -87,23 +102,18 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
 
         // Set up the login form.
         mEmailView = (EditText) findViewById(R.id.email);
-        //newUsername = (EditText) findViewById(R.id.email);
-
-
-
-        //mEmailView.setText();
-        //populateAutoComplete();
-
         mPasswordView = (EditText) findViewById(R.id.password);
+        //signIn = (Button)findViewById(R.id.email_sign_in_button);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
+                @Override
+                public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                    if (id == R.id.login || id == EditorInfo.IME_NULL) {
+                        attemptLogin();
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
-            }
+
         });
 
         //old hardcoded logic
@@ -126,21 +136,38 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
             @Override
             public void onClick(View view) {
 
-                    //InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                    //imm.hideSoftInputFromWindow(editTextUsername.getWindowToken(), 0);
+                //InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                //imm.hideSoftInputFromWindow(editTextUsername.getWindowToken(), 0);
 
-                    useremail = mEmailView.getText().toString();
-                    password = mPasswordView.getText().toString();
+                useremail = mEmailView.getText().toString();
+                password = mPasswordView.getText().toString();
 
-                    if (saveLoginCheckbox.isChecked()) {
-                        loginPrefsEditor.putBoolean("saveLogin", true);
-                        loginPrefsEditor.putString("username", useremail);
-                        //loginPrefsEditor.putString("password", password);
-                        loginPrefsEditor.commit();
-                    } else {
-                        loginPrefsEditor.clear();
-                        loginPrefsEditor.commit();
-                    }
+                ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+                postParameters.add(new BasicNameValuePair("username",useremail));
+                postParameters.add(new BasicNameValuePair("password",password));
+
+                Connection response = null;
+                try{
+
+                    //response = CustomHttpClient.executeHttpPost("<CONNECTION STRING?>", postParameters);
+                    String res = response.toString();
+                    res = res.replaceAll("\\s+","");
+
+
+                }
+                catch (Exception e){
+
+                }
+
+                if (saveLoginCheckbox.isChecked()) {
+                    loginPrefsEditor.putBoolean("saveLogin", true);
+                    loginPrefsEditor.putString("username", useremail);
+                    //loginPrefsEditor.putString("password", password);
+                    loginPrefsEditor.commit();
+                } else {
+                    loginPrefsEditor.clear();
+                    loginPrefsEditor.commit();
+                }
                 attemptLogin();
             }
         });
@@ -302,7 +329,7 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
                 // Select only email addresses.
                 ContactsContract.Contacts.Data.MIMETYPE +
                         " = ?", new String[]{ContactsContract.CommonDataKinds.Email
-                                                                     .CONTENT_ITEM_TYPE},
+                .CONTENT_ITEM_TYPE},
 
                 // Show primary email addresses first. Note that there won't be
                 // a primary email address if the user hasn't specified one.
@@ -318,7 +345,7 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
             cursor.moveToNext();
         }
 
-       // addEmailsToAutoComplete(emails);
+        // addEmailsToAutoComplete(emails);
     }
 
     @Override
@@ -360,24 +387,70 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
             mPassword = password;
         }
 
+
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
+            // Suggestion:  Load these from a properties object.
+            String DRIVER = "net.sourceforge.jtds.jdbc.Driver";
+
+            // Register the native JDBC driver. If the driver cannot be
+            // registered, the test cannot continue.
+            try {
+                Class.forName(DRIVER);
+            } catch (Exception e) {
+                System.out.println("Driver failed to register.");
+                System.out.println(e.getMessage());
+                System.exit(1);
+            }
+
+            Connection response;
+            Statement statement = null;
+            ResultSet resultSet = null;
+            String dbUsername;
+
             try {
                 // Simulate network access.
                 Thread.sleep(2000);
+
+                Log.d("salfjg;sajfjsagjsajg", "Before attempting to open db connection");
+
+                String dbURL = "jdbc:jtds:sqlserver://216.249.119.136;instance=ClubProject;DatabaseName=ClubDatabase";
+                //login to server
+                response = DriverManager.getConnection(dbURL, "sa", "d1559563!");
+
+                Log.d("salfjg;sajfjsagjsajg", "tried to open db connection");
+
+                statement = response.createStatement();
+
+                resultSet = statement.executeQuery("Select * From Users");
+
+
+                /*while (rs.next()) {
+                    System.out.println("User " + rs.getString(2) + " " + rs.getString(3) + " has ID "
+                            + rs.getInt(1) + " & Email: " + rs.getString(5));*/
+
+                while (resultSet.next()){
+                    //check if the email entered is in the database
+                    if(resultSet.getString(5).equals(mEmail))
+                    {
+                        Log.d("JHGJGJKGHJGIHGHH","email found...checking password");
+                        return resultSet.getString(4).equals(mPassword);
+
+                    }
+                    //return false;
+                }
+
+
             } catch (InterruptedException e) {
                 return false;
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
+
+
 
             // TODO: register the new account here.
             return true;

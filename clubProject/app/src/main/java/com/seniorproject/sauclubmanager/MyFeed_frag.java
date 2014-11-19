@@ -99,8 +99,8 @@ public class MyFeed_frag  extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         //super.onAttach(activity);
-        ((ClubManagerMainActivity) activity).onSectionAttached(
-                getArguments().getInt(ARG_PARAM1));
+        /*((ClubManagerMainActivity) activity).onSectionAttached(
+                getArguments().getInt(ARG_PARAM1));*/
         /*try {
             mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {

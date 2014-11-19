@@ -93,7 +93,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
 
         mDrawerListView = (ListView) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
@@ -259,7 +259,7 @@ public class NavigationDrawerFragment extends Fragment {
             Toast.makeText(getActivity(), "Signed Out", Toast.LENGTH_SHORT).show();
             Intent myIntent = new Intent(getActivity(), LoginScreen.class);
             startActivity(myIntent);
-            
+
             return true;
         }
 

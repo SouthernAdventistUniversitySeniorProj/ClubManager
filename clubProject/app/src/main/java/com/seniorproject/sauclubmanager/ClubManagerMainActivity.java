@@ -70,10 +70,10 @@ public class ClubManagerMainActivity extends Activity
 
         }
 
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container,fragment)//new ClubsFrag())
-                    .addToBackStack(null)
-                    .commit();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container,fragment)//new ClubsFrag())
+                .addToBackStack(null)
+                .commit();
 
     }
 
@@ -142,7 +142,7 @@ public class ClubManagerMainActivity extends Activity
     public void onBackPressed() {
         FragmentManager fm = getFragmentManager();
         if (fm.getBackStackEntryCount()>0){
-           // Log.i("MainActivity","popping backstack");
+            // Log.i("MainActivity","popping backstack");
             fm.popBackStack();
         }
         else {
@@ -179,7 +179,7 @@ public class ClubManagerMainActivity extends Activity
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_club_manager_main, container, false);
             return rootView;
         }

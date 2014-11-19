@@ -266,21 +266,21 @@ public class ClubsFrag extends Fragment {
                 });*/
             }
 
-                return rootView;
+            return rootView;
+        }
+
+
+        public void setFav(int position)
+        {
+            clubPrefs = getActivity().getSharedPreferences(namesofClubs[position], Context.MODE_PRIVATE);
+            if(getFav(position)==true) {
+                clubPrefsEditor.putBoolean("isFav", false);
             }
-
-
-public void setFav(int position)
-{
-    clubPrefs = getActivity().getSharedPreferences(namesofClubs[position], Context.MODE_PRIVATE);
-    if(getFav(position)==true) {
-        clubPrefsEditor.putBoolean("isFav", false);
-    }
-    else
-    {
-        clubPrefsEditor.putBoolean("isFav", true);
-    }
-}
+            else
+            {
+                clubPrefsEditor.putBoolean("isFav", true);
+            }
+        }
 
 
         public boolean getFav(int position){
