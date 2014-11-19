@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="club_pics">
+    <integer-array name="club_pics">
         <item>@drawable/accounting</item>
         <item>@drawable/african_student_union_club</item>
         <item>@drawable/allied_health_club</item>
@@ -30,5 +30,76 @@
         <item>@drawable/southern_ringtones_club</item>
         <item>@drawable/student_missions_club</item>
         <item>@drawable/wellness_club</item>
+    </integer-array>
+
+    <string-array name="club_names">
+        <item>Accounting Club</item>
+        <item>African Student Union Club</item>
+        <item>Allied Health Club</item>
+        <item>Art Club</item>
+        <item>Asian Club</item>
+        <item>Biology Club</item>
+        <item>Business Society</item>
+        <item>Chemistry Club</item>
+        <item>Communications Club</item>
+        <item>Computer Club</item>
+        <item>Education Club</item>
+        <item>Enactus</item>
+        <item>Encounter</item>
+        <item>English Club/Sigma Tau Delta</item>
+        <item>Expressions of Praise</item>
+        <item>Futbol Club</item>
+        <item>History Club</item>
+        <item>Latin American Club</item>
+        <item>Long-term Health Care Club</item>
+        <item>Management Club</item>
+        <item>Marketing Club</item>
+        <item>Nursing Club</item>
+        <item>Pre-dental Club</item>
+        <item>Pre-med Club</item>
+        <item>Pre-optometry Club</item>
+        <item>Psychology Club</item>
+        <item>Southern Ringtones Club</item>
+        <item>Student Missions Club</item>
+        <item>Wellness Club</item>
     </string-array>
+
+
+
+
+
+
+<!--    <string-array name="club_pics">
+        <item>@drawable/accounting</item>
+        <item>@drawable/african_student_union_club</item>
+        <item>@drawable/allied_health_club</item>
+        <item>@drawable/art_club</item>
+        <item>@drawable/asian_club</item>
+        <item>@drawable/biology_club</item>
+        <item>@drawable/business_club</item>
+        <item>@drawable/chemistry_club</item>
+        <item>@drawable/communication_club</item>
+        <item>@drawable/computer_club</item>
+        <item>@drawable/education_club</item>
+        <item>@drawable/enactus_club</item>
+        <item>@drawable/encounter_club</item>
+        <item>@drawable/english_club</item>
+        <item>@drawable/expressions_of_praise_club</item>
+        <item>@drawable/futbol_club</item>
+        <item>@drawable/history_club</item>
+        <item>@drawable/latin_america_club</item>
+        <item>@drawable/long_term_care_club</item>
+        <item>@drawable/management_club</item>
+        <item>@drawable/marketing_club</item>
+        <item>@drawable/nursing_club</item>
+        <item>@drawable/pre_dental_club</item>
+        <item>@drawable/pre_med_club</item>
+        <item>@drawable/pre_optometry_club</item>
+        <item>@drawable/psychology_club</item>
+        <item>@drawable/southern_ringtones_club</item>
+        <item>@drawable/student_missions_club</item>
+        <item>@drawable/wellness_club</item>
+    </string-array>-->
+
+
 </resources>
