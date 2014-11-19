@@ -54,9 +54,9 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
      */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
+   /* private static final String[] DUMMY_CREDENTIALS = new String[]{
             "test@test.com:hello"//"qmarcelle@gmail.com:hello",
-    };
+    };*/
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -92,7 +92,10 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
 
             @Override
             public void onClick(View v) {
-                setContentView(R.layout.login_reg_frag);
+                //setContentView(R.layout.login_reg_frag);
+                Intent myIntent = new Intent(LoginScreen.this, reg_login_frag.class);
+                startActivity(myIntent);
+                finish();
             }
         });
 
