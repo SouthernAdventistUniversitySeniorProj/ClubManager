@@ -46,7 +46,8 @@
                 android:id="@+id/sa_phone_textView"
                 android:src="@drawable/dialer_icon"
                 android:layout_column="3"
-                android:background="@android:color/transparent"/>
+                android:background="@android:color/transparent"
+                android:paddingLeft="100dp" />
         </TableRow>
     </TableLayout>
 
@@ -68,7 +69,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:id="@+id/textView1"
-            android:maxLines = "20"
+            android:maxLines = "25"
             android:scrollbars = "vertical"
             />
     </FrameLayout>
@@ -89,7 +90,8 @@
                 android:id="@+id/sa_fb_button"
                 android:src="@drawable/facebook"
                 android:background="@android:color/transparent"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY"
+                android:paddingRight="20dp" />
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -97,13 +99,8 @@
                 android:id="@+id/sa_twitter_button"
                 android:src="@drawable/twitter"
                 android:background="@android:color/transparent"
-                android:scaleType="fitXY"/>
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+                android:scaleType="fitXY"
+                android:paddingRight="20dp" />
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -111,7 +108,9 @@
                 android:id="@+id/sa_instagram_button"
                 android:background="@android:color/transparent"
                 android:scaleType="fitXY"
-                android:src="@drawable/instagram" />
+                android:src="@drawable/instagram"
+                android:layout_column="2"
+                android:paddingRight="20dp" />
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -119,7 +118,15 @@
                 android:id="@+id/sa_email_button"
                 android:background="@android:color/transparent"
                 android:scaleType="fitXY"
-                android:src="@drawable/email" />
+                android:src="@drawable/email"
+                android:layout_column="3"
+                android:paddingRight="0dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
         </TableRow>
 

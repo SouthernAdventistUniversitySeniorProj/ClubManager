@@ -24,12 +24,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.seniorproject.sauclubmanager.ClubManagerMainActivity;
+import com.seniorproject.sauclubmanager.R;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -38,11 +42,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import com.seniorproject.sauclubmanager.ClubManagerMainActivity;
-import com.seniorproject.sauclubmanager.R;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 
 /**
  * A login screen that offers login via email/password.
@@ -77,10 +76,20 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
     private CheckBox saveLoginCheckbox;
     private Button signIn;
 
+    // regusers
+    EditText reg_id, reg_fname, reg_lname, reg_email, reg_pass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
+
+        // regusers
+        reg_id = (EditText) findViewById(R.id.reg_id);
+        reg_fname = (EditText) findViewById(R.id.reg_fname);
+        reg_lname = (EditText) findViewById(R.id.reg_lname);
+        reg_email = (EditText) findViewById(R.id.reg_email);
+        reg_pass = (EditText) findViewById(R.id.reg_pass);
 
         //CONNECT TO DB
         Connection conn = null;
@@ -425,23 +434,19 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
                 statement = response.createStatement();
 
                 resultSet = statement.executeQuery("Select * From Users");
-
-
                 /*while (rs.next()) {
                     System.out.println("User " + rs.getString(2) + " " + rs.getString(3) + " has ID "
                             + rs.getInt(1) + " & Email: " + rs.getString(5));*/
 
-                while (resultSet.next()){
+                while (resultSet.next()) {
                     //check if the email entered is in the database
-                    if(resultSet.getString(5).equals(mEmail))
-                    {
-                        Log.d("JHGJGJKGHJGIHGHH","email found...checking password");
+                    if (resultSet.getString(5).equals(mEmail)) {
+                        Log.d("JHGJGJKGHJGIHGHH", "email found...checking password");
                         return resultSet.getString(4).equals(mPassword);
 
                     }
                     //return false;
                 }
-
 
             } catch (InterruptedException e) {
                 return false;
@@ -449,10 +454,8 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
                 e.printStackTrace();
             }
 
-
-
-
             // TODO: register the new account here.
+
             return true;
         }
 
