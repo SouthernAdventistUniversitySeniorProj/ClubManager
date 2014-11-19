@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Intent;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
+import com.seniorproject.sauclubmanager.com.seniorproject.utilities.Database;
 import com.seniorproject.sauclubmanager.com.seniorproject.utilities.settings_frag;
 
 public class ClubManagerMainActivity extends Activity
@@ -41,6 +42,8 @@ public class ClubManagerMainActivity extends Activity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+
     }
 
     @Override
@@ -119,7 +122,14 @@ public class ClubManagerMainActivity extends Activity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            setContentView(R.layout.settings_frag);
+            FragmentManager manager = getFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(android.R.id.content, new settings_frag.settings_fragment());
+            transaction.commit();
+            return true;
+        }
+        if (id == R.id.action_report) {
+            setContentView(R.layout.report_frag);
             return true;
         }
         return super.onOptionsItemSelected(item);

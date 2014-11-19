@@ -25,6 +25,8 @@ import android.widget.Toast;
 import android.view.View.OnClickListener;
 import android.content.Intent;
 
+import com.seniorproject.sauclubmanager.com.seniorproject.utilities.LoginScreen;
+
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">

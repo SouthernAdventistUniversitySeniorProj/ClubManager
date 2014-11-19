@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <PreferenceCategory
+        android:title="Username and Email"
+        android:layout_width="match_parent">
+        <EditTextPreference
+            android:key="reg_pass"
+            android:title="Password"
+            android:summary="Edit your password here."
+            android:defaultValue=""
+            android:dialogTitle="Enter your new password: " />
+        <EditTextPreference
+            android:key="reg_email"
+            android:title="Configure Email"
+            android:summary="Change your email address here."
+            android:defaultValue="your@email.com"
+            android:dialogTitle="Enter your new email here: "/>
+    </PreferenceCategory>
+</PreferenceScreen>

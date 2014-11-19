@@ -72,6 +72,16 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
+        //register link
+        TextView btn = (TextView) findViewById(R.id.action_reg);
+        btn.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                setContentView(R.layout.login_reg_frag);
+            }
+        });
+
         //forget password link
         TextView t = (TextView) findViewById(R.id.ForgotPassText);
         t.setMovementMethod(LinkMovementMethod.getInstance());

@@ -1,51 +1,31 @@
 package com.seniorproject.sauclubmanager.com.seniorproject.utilities;
 
-import android.app.Fragment;
-import android.content.Intent;
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
+import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 
 import com.seniorproject.sauclubmanager.R;
-import com.seniorproject.sauclubmanager.sa_frag;
 
-/**
- * Created by User on 10/29/2014.
- */
-public class settings_frag extends Fragment {
-
-    public static settings_frag newInstance() {
-        settings_frag fragment = new settings_frag();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.settings_frag, container, false);
-
-        //save button
-        Button button = (Button) rootView.findViewById(R.id.settings_save_button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), sa_frag.class);
-                startActivity(intent);
-            }
-        }) ;
-
-        return rootView;
-    }
-
+public class settings_frag extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            // mParam1 = getArguments().getString(ARG_PARAM1);
-            //mParam2 = getArguments().getString(ARG_PARAM2);
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(android.R.id.content, new settings_fragment());
+        transaction.commit();
+    }
+
+    public static class settings_fragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            PreferenceManager manager = getPreferenceManager();
+            manager.setSharedPreferencesName("settings_frag");
+            addPreferencesFromResource(R.xml.settings_frag);
         }
 
     }
