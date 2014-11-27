@@ -1,23 +1,17 @@
 package com.seniorproject.sauclubmanager;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
 
 /**
  * Created by Qwynn on 10/29/2014.
  */
-public class MyFeed_frag  extends Fragment {
+public class myfeed extends DashboardActivity {
 
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.myfeed);
+    }
+/*
     ListView list;
 
     private static final String ARG_PARAM1 = "param1";
@@ -26,15 +20,15 @@ public class MyFeed_frag  extends Fragment {
     private Integer[] clubPics;
     private String[] post;
 
-    public static MyFeed_frag newInstance(String param1) {
-        MyFeed_frag fragment = new MyFeed_frag();
+    public static myfeed newInstance(String param1) {
+        myfeed fragment = new myfeed();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public MyFeed_frag() {
+    public myfeed() {
         // Required empty public constructor
     }
 
@@ -60,7 +54,7 @@ public class MyFeed_frag  extends Fragment {
                 "Pre-optometry Club", "Psychology Club", "Southern Ringtones Club", "Student Missions Club", "Wellness Club"};
 
 
-        FeedList adapter = new FeedList(this.getActivity(), clubNames, clubPics,clubNames);
+        FeedList adapter = new FeedList(this, clubNames, clubPics,clubNames);
         list = (ListView) rootView.findViewById(R.id.list);
         list.setAdapter(adapter);
 
@@ -81,16 +75,10 @@ public class MyFeed_frag  extends Fragment {
             }
         });
 
-
-
-
-
-
-
         /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_list_item_1,values);
         setListAdapter(adapter);*/
-
+/*
         return rootView;
     }
 
@@ -106,7 +94,7 @@ public class MyFeed_frag  extends Fragment {
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
-        }*/
+        }
     }
 
     @Override
@@ -130,7 +118,6 @@ public class MyFeed_frag  extends Fragment {
             this.clubPics = clubPics;
             this.post = post;
         }
-
-
     }
+    */
 }

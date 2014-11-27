@@ -1,4 +1,4 @@
-package com.seniorproject.sauclubmanager.com.seniorproject.utilities;
+package com.seniorproject.sauclubmanager;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,8 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
-import com.seniorproject.sauclubmanager.R;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

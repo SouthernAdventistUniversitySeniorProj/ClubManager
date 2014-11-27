@@ -1,4 +1,4 @@
-package com.seniorproject.sauclubmanager.com.seniorproject.utilities;
+package com.seniorproject.sauclubmanager;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -28,9 +28,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import com.seniorproject.sauclubmanager.ClubManagerMainActivity;
-import com.seniorproject.sauclubmanager.R;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -464,7 +461,7 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
             showProgress(false);
 
             if (success) {
-                Intent myIntent = new Intent(LoginScreen.this, ClubManagerMainActivity.class);
+                Intent myIntent = new Intent(LoginScreen.this, HomeActivity.class);
                 startActivity(myIntent);
                 finish();
             } else {
