@@ -171,7 +171,7 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
                 if (saveLoginCheckbox.isChecked()) {
                     loginPrefsEditor.putBoolean("saveLogin", true);
                     loginPrefsEditor.putString("username", useremail);
-                    //loginPrefsEditor.putString("password", password);
+                    loginPrefsEditor.putString("password", password);
                     loginPrefsEditor.commit();
                 } else {
                     loginPrefsEditor.clear();
@@ -185,7 +185,7 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
         if(saveLogin == true){
 
             mEmailView.setText(loginPreferences.getString("username", ""));
-            //mPasswordView.setText(loginPreferences.getString("password",""));
+            mPasswordView.setText(loginPreferences.getString("password",""));
             saveLoginCheckbox.setChecked(true);
         }
 
@@ -436,12 +436,24 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
 
                 while (resultSet.next()) {
                     //check if the email entered is in the database
-                    if (resultSet.getString(5).equals(mEmail)) {
+                    Log.d("JHGJGJKGHJGIHGHH", "checking email..........");
+                    String myResultEmail = resultSet.getString(5);
+                    String myResultPassword = resultSet.getString(4);
+                    if (myResultEmail.equals(mEmail)) {
                         Log.d("JHGJGJKGHJGIHGHH", "email found...checking password");
-                        return resultSet.getString(4).equals(mPassword);
+                        return myResultPassword.equals(mPassword);
 
                     }
-                    //return false;
+                    //logic for the last row in the table
+                    if(resultSet.isLast())
+                    {
+                        if (resultSet.getString(5).equals(mEmail)) {
+                            Log.d("JHGJGJKGHJGIHGHH", "email found...checking password");
+                            return resultSet.getString(4).equals(mPassword);
+
+                        }
+                        return false;
+                    }
                 }
 
             } catch (InterruptedException e) {

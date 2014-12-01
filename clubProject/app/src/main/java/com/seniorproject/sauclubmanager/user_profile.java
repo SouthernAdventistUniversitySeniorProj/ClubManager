@@ -55,7 +55,7 @@ public class user_profile extends DashboardActivity {
             response = DriverManager.getConnection(dbURL, "sa", "d1559563!");
             Log.d("salfjg;sajfjsagjsajg", "tried to open db connection");
             statement = response.createStatement();
-            statement.executeSQLQuery("Select * From Users Where Email = '"+email+"';", null, null, null);
+           // statement.executeSQLQuery("Select * From Users Where Email = '"+email+"';", null, null, null);
 
         } catch (InterruptedException e) {
             // return false;

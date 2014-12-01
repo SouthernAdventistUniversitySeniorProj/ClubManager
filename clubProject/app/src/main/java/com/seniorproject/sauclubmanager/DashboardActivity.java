@@ -115,35 +115,6 @@ public class DashboardActivity extends Activity {
        // startActivity (new Intent(getApplicationContext(), AboutActivity.class));
     }
 
-    /**
-     * Handle the click of a Feature button.
-     */
-    public void onClickFeature (View v) {
-        int id = v.getId ();
-        switch (id) {
-            case R.id.home_btn_feature1 :
-                startActivity (new Intent(getApplicationContext(), user_profile.class));
-                break;
-            case R.id.home_btn_feature2 :
-                startActivity (new Intent(getApplicationContext(), myfeed.class));
-                break;
-            case R.id.home_btn_feature3 :
-                startActivity (new Intent(getApplicationContext(), myevents.class));
-                break;
-            case R.id.home_btn_feature4 :
-                startActivity (new Intent(getApplicationContext(), clubs.class));
-                break;
-            case R.id.home_btn_feature5 :
-                startActivity (new Intent(getApplicationContext(), sa.class));
-                break;
-            case R.id.home_btn_feature6 :
-                startActivity (new Intent(getApplicationContext(), sa_senate_.class));
-                break;
-            default:
-                break;
-        }
-    }
-
 
 // More Methods
 
