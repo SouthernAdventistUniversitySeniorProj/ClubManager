@@ -11,7 +11,8 @@
         <activity
             android:name=".com.seniorproject.utilities.LoginScreen"
             android:label="@string/title_activity_login_screen"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
+            >
+            <!--android:windowSoftInputMode="adjustResize|stateVisible"-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

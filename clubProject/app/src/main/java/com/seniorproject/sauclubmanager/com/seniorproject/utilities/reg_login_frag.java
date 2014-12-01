@@ -37,6 +37,7 @@ public class reg_login_frag extends Activity {
     public String adduser;
 
     private UserRegisterTask mRegTask = null;
+    private String userID,fName,lName,email,password;
 
 
 
@@ -176,7 +177,7 @@ public class reg_login_frag extends Activity {
                 System.exit(1);
             }
 
-            Connection response;
+            Connection response = null;
             Statement statement = null;
             ResultSet resultSet = null;
             String dbUsername;
@@ -192,13 +193,16 @@ public class reg_login_frag extends Activity {
                 response = DriverManager.getConnection(dbURL, "sa", "d1559563!");
 
                 Log.d("salfjg;sajfjsagjsajg", "tried to open db connection");
+               // Log.d("salfjg;sajfjsagjsajg", statement.toString());
+
 
                 statement = response.createStatement();
 
                 resultSet = statement.executeQuery("Select * From Users");
 
                 statement.executeUpdate("INSERT INTO Users (UserId, FirstName, LastName, Pass, Email) " +
-                        "VALUES ("+UserId+", '"+FirstName+"','"+LastName+"' , '"+mPassword+"', '"+mEmail+"');");
+                        "VALUES ('"+UserId+"', '"+FirstName+"','"+LastName+"' , '"+mPassword+"', '"+mEmail+"');");
+                statement.close();
 
 
 
@@ -210,8 +214,6 @@ public class reg_login_frag extends Activity {
             }
 
 
-
-
             // TODO: register the new account here.
             return true;
         }
@@ -219,7 +221,9 @@ public class reg_login_frag extends Activity {
         @Override
         protected void onPostExecute(final Boolean success) {
             mRegTask = null;
+
             //showProgress(false);
+
 
             if (success) {
                 Intent myIntent = new Intent(reg_login_frag.this, LoginScreen.class);

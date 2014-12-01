@@ -77,7 +77,7 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
     private Button signIn;
 
     // regusers
-    EditText reg_id, reg_fname, reg_lname, reg_email, reg_pass;
+    //EditText reg_id, reg_fname, reg_lname, reg_email, reg_pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,11 +85,11 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
         setContentView(R.layout.activity_login_screen);
 
         // regusers
-        reg_id = (EditText) findViewById(R.id.reg_id);
+      /*  reg_id = (EditText) findViewById(R.id.reg_id);
         reg_fname = (EditText) findViewById(R.id.reg_fname);
         reg_lname = (EditText) findViewById(R.id.reg_lname);
         reg_email = (EditText) findViewById(R.id.reg_email);
-        reg_pass = (EditText) findViewById(R.id.reg_pass);
+        reg_pass = (EditText) findViewById(R.id.reg_pass);*/
 
         //CONNECT TO DB
         Connection conn = null;
