@@ -1,45 +1,29 @@
 package com.seniorproject.sauclubmanager;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TabHost;
 import android.widget.TextView;
-
-import com.seniorproject.sauclubmanager.com.seniorproject.utilities.LoginScreen;
 
 /**
  * Created by User on 10/26/2014.
  */
-public class sa_frag extends Fragment {
+public class sa extends DashboardActivity {
 
-    public static sa_frag newInstance() {
-        sa_frag fragment = new sa_frag();
-        Bundle args = new Bundle();
-        //args.putString(ARG_PARAM1, param1);
-        //args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    public sa_frag() {
-
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.sa);
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.sa_layout_frag, container, false);
+        View rootView = inflater.inflate(R.layout.sa, container, false);
         View aboutSA1 = rootView.findViewById(R.id.textView1);
         ((TextView) aboutSA1).setText("Hey Guys!\n" +
                 "Chances are that you have probably been to a party, an event, or a get together that you would consider to be wack. Maybe a song, a person, or a class. The reality is that there are a lot of things in life that we can define as wack. However, many wonder what defines a good person, song, activity, or event from a bad one. The truth is, it is you who controls whether something is wack or awesome.\n" +
@@ -151,16 +135,5 @@ public class sa_frag extends Fragment {
         }) ;
 
         return rootView;
-    }
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            // mParam1 = getArguments().getString(ARG_PARAM1);
-            //mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
     }
 }

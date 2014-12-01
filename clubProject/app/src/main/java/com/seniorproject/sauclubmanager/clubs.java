@@ -1,38 +1,12 @@
 package com.seniorproject.sauclubmanager;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CheckedTextView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ClubsFrag.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ClubsFrag#newInstance} factory method to
- * create an instance of this fragment.
- *
- */
-public class ClubsFrag extends Fragment {
+public class clubs extends DashboardActivity {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -41,7 +15,10 @@ public class ClubsFrag extends Fragment {
     private String mParam1;
     private String mParam2;
 
-
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.clubs);
+    }
 
     // private OnFragmentInteractionListener mListener;
 
@@ -58,40 +35,23 @@ public class ClubsFrag extends Fragment {
     private String[] values;
     private Integer[] clubPics;
 
-    public ClubsFrag() {
-        // Required empty public constructor
-    }
-
-    public static ClubsFrag newInstance(String param1) {
-        ClubsFrag fragment = new ClubsFrag();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public void onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_clubs, container, false);
+        View rootView = inflater.inflate(R.layout.clubs, container, false);
 
-        clubPics = new Integer[]{R.drawable.accounting,R.drawable.african_student_union_club,R.drawable.allied_health_club,R.drawable.art_club,
-                R.drawable.asian_club,R.drawable.biology_club,R.drawable.business_club,R.drawable.chemistry_club,R.drawable.communication_club,
-                R.drawable.computer_club,R.drawable.education_club,R.drawable.enactus_club,R.drawable.encounter_club,R.drawable.english_club,
-                R.drawable.expressions_of_praise_club,R.drawable.futbol_club,R.drawable.history_club,R.drawable.latin_america_club,
-                R.drawable.long_term_care_club,R.drawable.management_club,R.drawable.marketing_club, R.drawable.nursing_club,R.drawable.pre_dental_club,
-                R.drawable.pre_med_club,R.drawable.pre_optometry_club,R.drawable.psychology_club,R.drawable.southern_ringtones_club,R.drawable.student_missions_club,
+        clubPics = new Integer[]{R.drawable.accounting, R.drawable.african_student_union_club, R.drawable.allied_health_club, R.drawable.art_club,
+                R.drawable.asian_club, R.drawable.biology_club, R.drawable.business_club, R.drawable.chemistry_club, R.drawable.communication_club,
+                R.drawable.computer_club, R.drawable.education_club, R.drawable.enactus_club, R.drawable.encounter_club, R.drawable.english_club,
+                R.drawable.expressions_of_praise_club, R.drawable.futbol_club, R.drawable.history_club, R.drawable.latin_america_club,
+                R.drawable.long_term_care_club, R.drawable.management_club, R.drawable.marketing_club, R.drawable.nursing_club, R.drawable.pre_dental_club,
+                R.drawable.pre_med_club, R.drawable.pre_optometry_club, R.drawable.psychology_club, R.drawable.southern_ringtones_club, R.drawable.student_missions_club,
                 R.drawable.wellness_club};
 
 
-        values = getActivity().getResources().getStringArray(R.array.club_names);
-
-
-
-
-
-        PicList adapter = new PicList(this.getActivity(), values, clubPics);
+        values = getResources().getStringArray(R.array.club_names);
+/*
+        PicList adapter = new PicList(this, values, clubPics);
         list= (ListView)rootView.findViewById(R.id.list);
         list.setAdapter(adapter);
 
@@ -99,7 +59,7 @@ public class ClubsFrag extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Toast.makeText(getActivity(), "You Clicked at " +values[+ position], Toast.LENGTH_SHORT).show();
+              /*  Toast.makeText(this, "You Clicked at " +values[+ position], Toast.LENGTH_SHORT).show();
 
                 FragmentManager manager = getFragmentManager();
                 FragmentTransaction ft = manager.beginTransaction();
@@ -113,25 +73,19 @@ public class ClubsFrag extends Fragment {
             }
         });
 
-
-
-
-
-
-
-        /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_list_item_1,values);
-        setListAdapter(adapter);*/
+        setListAdapter(adapter);
 
         return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-   /* public void onButtonPressed(Uri uri) {
+    public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
-    }*/
+    }
 
 /*    @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
@@ -145,11 +99,11 @@ public class ClubsFrag extends Fragment {
         ft.addToBackStack(null);
        // super.onListItemClick(l, v, position, id);
         ft.commit();
-    }*/
+    }
 
     @Override
     public void onAttach(Activity activity) {
-        super.onAttach(activity);
+       /* super.onAttach(this);
         //super.onAttach(activity);
         ((ClubManagerMainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_PARAM1));
@@ -158,7 +112,7 @@ public class ClubsFrag extends Fragment {
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
-        }*/
+        }
     }
 
     @Override
@@ -263,7 +217,7 @@ public class ClubsFrag extends Fragment {
                         leave_button.setEnabled(true);
 
                     }
-                });*/
+                });
             }
 
             return rootView;
@@ -307,7 +261,7 @@ public class ClubsFrag extends Fragment {
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
-     */
+
 
 
 
@@ -340,6 +294,5 @@ public class ClubsFrag extends Fragment {
             return rowView;
         }
     }
-
-
-}
+*/
+    }}
