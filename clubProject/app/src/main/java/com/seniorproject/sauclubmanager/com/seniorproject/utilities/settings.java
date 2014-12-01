@@ -9,7 +9,7 @@ import android.preference.PreferenceManager;
 
 import com.seniorproject.sauclubmanager.R;
 
-public class settings_frag extends Activity {
+public class settings extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

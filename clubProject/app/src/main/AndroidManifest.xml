@@ -24,12 +24,11 @@
         <activity android:name=".user_profile"/>
         <activity android:name=".myfeed"/>
         <activity android:name=".myevents"/>
-        <activity android:name=".clubs"/>
         <activity android:name=".sa"/>
         <activity android:name=".sa_senate_"/>
 
         <activity
-            android:name=".reg_login_frag"
+            android:name=".reg_login"
             android:label="@string/reg_text" >
         </activity>
     </application>

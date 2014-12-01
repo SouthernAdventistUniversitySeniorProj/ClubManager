@@ -99,7 +99,7 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
             @Override
             public void onClick(View v) {
                 //setContentView(R.layout.login_reg_frag);
-                Intent myIntent = new Intent(LoginScreen.this, reg_login_frag.class);
+                Intent myIntent = new Intent(LoginScreen.this, reg_login.class);
                 startActivity(myIntent);
                 finish();
             }

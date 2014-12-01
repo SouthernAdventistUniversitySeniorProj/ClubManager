@@ -14,7 +14,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class reg_login_frag extends Activity {
+public class reg_login extends Activity {
 
     private EditText reg_id, reg_fname, reg_lname, reg_email, reg_pass;
   //  public String adduser;
@@ -23,7 +23,7 @@ public class reg_login_frag extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_reg_frag);
+        setContentView(R.layout.login_reg);
 
         //Setup UI Elements
         reg_id = (EditText) findViewById(R.id.reg_id);
@@ -151,7 +151,7 @@ public class reg_login_frag extends Activity {
             mRegTask = null;
             //showProgress(false);
             if (success) {
-                Intent myIntent = new Intent(reg_login_frag.this, LoginScreen.class);
+                Intent myIntent = new Intent(reg_login.this, LoginScreen.class);
                 startActivity(myIntent);
                 finish();
             } else {

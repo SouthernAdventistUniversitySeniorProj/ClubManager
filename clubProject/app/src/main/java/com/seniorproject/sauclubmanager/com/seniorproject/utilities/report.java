@@ -13,7 +13,7 @@ import com.seniorproject.sauclubmanager.R;
 /**
  * Created by User on 11/19/2014.
  */
-public class report_frag extends Activity {
+public class report extends Activity {
     private EditText namereport;
     private EditText reportemail;
     private EditText textreport;
@@ -24,7 +24,7 @@ public class report_frag extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.report_frag);
+        setContentView(R.layout.report);
 
         namereport = (EditText) findViewById(R.id.name_report);
         reportemail = (EditText) findViewById(R.id.report_email);

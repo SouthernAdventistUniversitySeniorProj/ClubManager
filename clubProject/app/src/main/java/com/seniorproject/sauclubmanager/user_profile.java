@@ -1,10 +1,15 @@
 package com.seniorproject.sauclubmanager;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
 
-/**
- * Created by User on 11/26/2014.
- */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class user_profile extends DashboardActivity {
     /**
      * onCreate - called when the activity is first created.
@@ -12,9 +17,54 @@ public class user_profile extends DashboardActivity {
      * This is where you should do all of your normal static set up: create views, bind data to lists, etc.
      * This method also provides you with a Bundle containing the activity's previously frozen state, if there was one.
      */
+
+    private String id, fname, lname, pass;
+    private AutoCompleteTextView email;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_profile);
+
+        email = (AutoCompleteTextView) findViewById(R.id.email);
+
+        //Setup DB Connection
+        String DRIVER = "net.sourceforge.jtds.jdbc.Driver";
+
+        // Register the native JDBC driver. If the driver cannot be
+        // registered, the test cannot continue.
+        try {
+            Class.forName(DRIVER);
+        } catch (Exception e) {
+            System.out.println("Driver failed to register.");
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
+
+        Connection response;
+        Statement statement;
+        //  ResultSet resultSet = null;
+        //  String dbUsername;
+
+        try {
+            // Simulate network access.
+            Thread.sleep(2000);
+            Log.d("salfjg;sajfjsagjsajg", "Before attempting to open db connection");
+            String dbURL = "jdbc:jtds:sqlserver://216.249.119.136;instance=ClubProject;DatabaseName=ClubDatabase";
+
+            //login to server
+            response = DriverManager.getConnection(dbURL, "sa", "d1559563!");
+            Log.d("salfjg;sajfjsagjsajg", "tried to open db connection");
+            statement = response.createStatement();
+            statement.executeSQLQuery("Select * From Users Where Email = '"+email+"';", null, null, null);
+
+        } catch (InterruptedException e) {
+            // return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        TextView userpro_text = (TextView)findViewById(R.id.userpro_title);
+        userpro_text.setText("Welcome " + fname + " " + lname + "!");
     }
 
     /**
