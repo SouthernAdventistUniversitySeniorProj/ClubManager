@@ -76,9 +76,13 @@ public class user_profile extends DashboardActivity {
         Logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginScreen.loginPreferences = getSharedPreferences("saveLogin", MODE_PRIVATE);
-                LoginScreen.loginPrefsEditor.remove("username");
-                LoginScreen.loginPrefsEditor.remove("password");
+                //get shared prefs and clear them
+                LoginScreen.loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+                //LoginScreen.loginPrefsEditor.remove("username");
+                //LoginScreen.loginPrefsEditor.remove("password");
+                LoginScreen.loginPrefsEditor.putBoolean("saveLogin", false);
+                LoginScreen.loginPrefsEditor.putString("username", "email");
+                LoginScreen.loginPrefsEditor.putString("password", "password");
                 LoginScreen.loginPrefsEditor.commit();
                 LoginScreen.saveLoginCheckbox.setChecked(false);
                 Intent intent = new Intent(user_profile.this, LoginScreen.class);

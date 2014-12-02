@@ -2,6 +2,7 @@ package com.seniorproject.sauclubmanager;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -45,6 +46,7 @@ import java.util.List;
  * A login screen that offers login via email/password.
 
  */
+@SuppressLint("NewApi")
 public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
 
     /**
@@ -77,6 +79,7 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
     // regusers
     //EditText reg_id, reg_fname, reg_lname, reg_email, reg_pass;
 
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -207,6 +210,7 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
+    @SuppressLint("NewApi")
     public void attemptLogin() {
         if (mAuthTask != null) {
             return;
@@ -321,6 +325,7 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
 
     }*/
 
+    @SuppressLint("NewApi")
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         return new CursorLoader(this,
@@ -379,6 +384,7 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
+    @SuppressLint("NewApi")
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
@@ -436,13 +442,15 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
                     Log.d("JHGJGJKGHJGIHGHH", "checking email..........");
                     String myResultEmail = resultSet.getString(5);
                     String myResultPassword = resultSet.getString(4);
-                    if (myResultEmail.equals(mEmail)) {
+                    //DELETE BELOW BEFORE PRODUCTION
+                    return true;
+                    /*if (myResultEmail.equals(mEmail)) {
                         Log.d("JHGJGJKGHJGIHGHH", "email found...checking password");
                         return myResultPassword.equals(mPassword);
 
-                    }
+                    }*/
                     //logic for the last row in the table
-                    if(resultSet.isLast())
+                   /* if(resultSet.isLast())
                     {
                         if (resultSet.getString(5).equals(mEmail)) {
                             Log.d("JHGJGJKGHJGIHGHH", "email found...checking password");
@@ -450,7 +458,7 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
 
                         }
                         return false;
-                    }
+                    }*/
                 }
 
             } catch (InterruptedException e) {

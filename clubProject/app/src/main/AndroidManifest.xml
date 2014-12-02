@@ -21,6 +21,7 @@
 
         <activity android:name = ".HomeActivity"/>
         <activity android:name=".DashboardActivity"/>
+        <activity android:name = ".clubs"/>
         <activity android:name=".user_profile"/>
         <activity android:name=".myfeed"/>
         <activity android:name=".myevents"/>
