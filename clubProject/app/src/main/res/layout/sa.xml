@@ -19,6 +19,18 @@
         <TextView style="@style/TitleBarText"
             android:text="@string/title_feature5"
             android:id="@+id/user_pro_title"/>
+        <ImageButton
+            style="@style/TitleBarAction"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/sa_phone_textView"
+            android:id="@+id/sa_phone_textView"
+            android:src="@drawable/dialer_icon"
+            android:background="@android:color/transparent" />
+        <ImageButton style="@style/TitleBarAction"
+            android:contentDescription="@string/description_home"
+            android:src="@drawable/logout"
+            android:onClick="Logout_button"
+            android:id="@+id/logout_button" />
     </LinearLayout>
 
     <TableLayout
@@ -51,17 +63,6 @@
                 android:text="@string/sa_senate_button"
                 android:id="@+id/sa_senate_button"
                 android:layout_column="2" />
-
-            <ImageButton
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/sa_phone_textView"
-                android:id="@+id/sa_phone_textView"
-                android:src="@drawable/dialer_icon"
-                android:layout_column="3"
-                android:background="@android:color/transparent"
-                android:paddingLeft="100dp" />
         </TableRow>
     </TableLayout>
 

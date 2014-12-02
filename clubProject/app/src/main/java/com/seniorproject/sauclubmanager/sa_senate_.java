@@ -25,7 +25,8 @@ public class sa_senate_ extends DashboardActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       setContentView(R.layout.senate);
+        setContentView(R.layout.senate);
+        Logout_button();
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,5 +69,24 @@ public class sa_senate_ extends DashboardActivity {
         }) ;
 
         return rootView;
+
+    }
+
+    public void Logout_button() {
+        ImageButton Logout_button = (ImageButton) findViewById(R.id.logout_button);
+        Logout_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoginScreen.loginPreferences = getSharedPreferences("saveLogin", MODE_PRIVATE);
+                LoginScreen.loginPrefsEditor.remove("username");
+                LoginScreen.loginPrefsEditor.remove("password");
+                LoginScreen.loginPrefsEditor.commit();
+                LoginScreen.saveLoginCheckbox.setChecked(false);
+                Intent intent = new Intent(sa_senate_.this, LoginScreen.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 }

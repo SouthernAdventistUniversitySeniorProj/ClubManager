@@ -17,6 +17,11 @@
         <TextView style="@style/TitleBarText"
             android:text="@string/title_feature4"
             android:id="@+id/user_pro_title"/>
+        <ImageButton style="@style/TitleBarAction"
+            android:contentDescription="@string/description_home"
+            android:src="@drawable/logout"
+            android:onClick="Logout_button"
+            android:id="@+id/logout_button" />
     </LinearLayout>
 
     <ListView

@@ -5,7 +5,10 @@ package com.seniorproject.sauclubmanager;
 
 
 
+        import android.content.Intent;
         import android.os.Bundle;
+        import android.view.View;
+        import android.widget.ImageButton;
 
 /**
  * A simple {@link android.app.Fragment} subclass.
@@ -31,6 +34,25 @@ public class myevents extends DashboardActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar_activity);
+        Logout_button();
+    }
+
+    public void Logout_button() {
+        ImageButton Logout_button = (ImageButton) findViewById(R.id.logout_button);
+        Logout_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoginScreen.loginPreferences = getSharedPreferences("saveLogin", MODE_PRIVATE);
+                LoginScreen.loginPrefsEditor.remove("username");
+                LoginScreen.loginPrefsEditor.remove("password");
+                LoginScreen.loginPrefsEditor.commit();
+                LoginScreen.saveLoginCheckbox.setChecked(false);
+                Intent intent = new Intent(myevents.this, LoginScreen.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 /*
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

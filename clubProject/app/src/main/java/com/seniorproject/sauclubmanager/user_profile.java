@@ -1,8 +1,11 @@
 package com.seniorproject.sauclubmanager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.AutoCompleteTextView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.sql.Connection;
@@ -65,8 +68,26 @@ public class user_profile extends DashboardActivity {
 
         TextView userpro_text = (TextView)findViewById(R.id.userpro_title);
         userpro_text.setText("Welcome " + fname + " " + lname + "!");
+        Logout_button();
     }
 
+    public void Logout_button() {
+        ImageButton Logout_button = (ImageButton) findViewById(R.id.logout_button);
+        Logout_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoginScreen.loginPreferences = getSharedPreferences("saveLogin", MODE_PRIVATE);
+                LoginScreen.loginPrefsEditor.remove("username");
+                LoginScreen.loginPrefsEditor.remove("password");
+                LoginScreen.loginPrefsEditor.commit();
+                LoginScreen.saveLoginCheckbox.setChecked(false);
+                Intent intent = new Intent(user_profile.this, LoginScreen.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
     /**
      * onDestroy
      * The final call you receive before your activity is destroyed.

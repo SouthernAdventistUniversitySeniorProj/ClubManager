@@ -40,6 +40,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * A login screen that offers login via email/password.
 
@@ -59,10 +60,10 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
     private UserLoginTask mAuthTask = null;
 
     //Shared Prefs/utilities
-    private boolean saveLogin;
-    private SharedPreferences loginPreferences;
-    private SharedPreferences.Editor loginPrefsEditor;
-    private String useremail,password;
+    public static boolean saveLogin;
+    public static SharedPreferences loginPreferences;
+    public static SharedPreferences.Editor loginPrefsEditor;
+    public static String useremail,password;
 
 
     // UI references.
@@ -70,7 +71,7 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    private CheckBox saveLoginCheckbox;
+    public static CheckBox saveLoginCheckbox;
     private Button signIn;
 
     // regusers
@@ -114,14 +115,14 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
         mPasswordView = (EditText) findViewById(R.id.password);
         //signIn = (Button)findViewById(R.id.email_sign_in_button);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                @Override
-                public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                    if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                        attemptLogin();
-                        return true;
-                    }
-                    return false;
+            @Override
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (id == R.id.login || id == EditorInfo.IME_NULL) {
+                    attemptLogin();
+                    return true;
                 }
+                return false;
+            }
 
         });
 
@@ -134,10 +135,9 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
 
 
         // Set up utility references
-        saveLoginCheckbox = (CheckBox)findViewById(R.id.remember);
-        loginPreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
+        saveLoginCheckbox = (CheckBox) findViewById(R.id.remember);
+        loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
         loginPrefsEditor = loginPreferences.edit();
-
 
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
@@ -152,19 +152,18 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
                 password = mPasswordView.getText().toString();
 
                 ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-                postParameters.add(new BasicNameValuePair("username",useremail));
-                postParameters.add(new BasicNameValuePair("password",password));
+                postParameters.add(new BasicNameValuePair("username", useremail));
+                postParameters.add(new BasicNameValuePair("password", password));
 
                 Connection response = null;
-                try{
+                try {
 
                     //response = CustomHttpClient.executeHttpPost("<CONNECTION STRING?>", postParameters);
                     String res = response.toString();
-                    res = res.replaceAll("\\s+","");
+                    res = res.replaceAll("\\s+", "");
 
 
-                }
-                catch (Exception e){
+                } catch (Exception e) {
 
                 }
 
@@ -182,23 +181,21 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
         });
 
         saveLogin = loginPreferences.getBoolean("saveLogin", false);
-        if(saveLogin == true){
+        if (saveLogin == true) {
 
             mEmailView.setText(loginPreferences.getString("username", ""));
-            mPasswordView.setText(loginPreferences.getString("password",""));
+            mPasswordView.setText(loginPreferences.getString("password", ""));
             saveLoginCheckbox.setChecked(true);
         }
 
         //hide keyboard if login was saved
-        if(saveLoginCheckbox.isChecked())
-        {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (saveLoginCheckbox.isChecked()) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(mEmailView.getWindowToken(), 0);
         }
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-
     }
 
     /*private void populateAutoComplete() {
