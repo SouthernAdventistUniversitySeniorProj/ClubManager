@@ -2,6 +2,9 @@ package com.seniorproject.sauclubmanager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -16,9 +19,14 @@ public class HomeActivity extends DashboardActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
        // Logout_button();
+       // getActionBar().setHomeButtonEnabled(true);
+       // getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void Logout_button() {
+
+
+    // MOVE THIS LOGIC TO A MENU FOR UNIFORMITY
+  /*  public void Logout_button() {
         ImageButton Logout_button = (ImageButton) findViewById(R.id.logout_button);
         Logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,7 +42,7 @@ public class HomeActivity extends DashboardActivity {
                 finish();
             }
         });
-    }
+    }*/
 
     /**
      * onDestroy

@@ -19,26 +19,33 @@ public class sa extends DashboardActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sa);
-        Logout_button();
+        getActionBar().setHomeButtonEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        //Logout_button();
     }
 
-    public void Logout_button() {
+    // MOVE THIS LOGIC TO A MENU FOR UNIFORMITY
+   /* public void Logout_button() {
         ImageButton Logout_button = (ImageButton) findViewById(R.id.logout_button);
         Logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginScreen.loginPreferences = getSharedPreferences("saveLogin", MODE_PRIVATE);
-                LoginScreen.loginPrefsEditor.remove("username");
-                LoginScreen.loginPrefsEditor.remove("password");
+                //get shared prefs and clear them
+                LoginScreen.loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+                //LoginScreen.loginPrefsEditor.remove("username");
+                //LoginScreen.loginPrefsEditor.remove("password");
+                LoginScreen.loginPrefsEditor.putBoolean("saveLogin", false);
+                LoginScreen.loginPrefsEditor.putString("username", "email");
+                LoginScreen.loginPrefsEditor.putString("password", "password");
                 LoginScreen.loginPrefsEditor.commit();
                 LoginScreen.saveLoginCheckbox.setChecked(false);
-                Intent intent = new Intent(sa.this, LoginScreen.class);
+                Intent intent = new Intent(user_profile.this, LoginScreen.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
             }
         });
-    }
+    }*/
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -143,7 +150,7 @@ public class sa extends DashboardActivity {
         txt1.setMovementMethod(new ScrollingMovementMethod());
 
         //phonelink link
-        ImageButton button9 = (ImageButton) rootView.findViewById(R.id.sa_phone_textView);
+        /*ImageButton button9 = (ImageButton) rootView.findViewById(R.id.sa_phone_textView);
         button9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,7 +158,7 @@ public class sa extends DashboardActivity {
                         Uri.parse("tel:l4232362723"));
                 startActivity(intent);
             }
-        }) ;
+        }) ;*/
 
         return rootView;
     }

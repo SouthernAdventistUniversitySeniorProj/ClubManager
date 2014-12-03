@@ -4,7 +4,24 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout style="@style/TitleBar">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/userpro_title"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+
+</LinearLayout>
+
+    <!--    <LinearLayout style="@style/TitleBar">
         <ImageView style="@style/TitleBarLogo"
             android:contentDescription="@string/description_logo"
             android:src="@drawable/s_a_icon"
@@ -21,19 +38,4 @@
             android:src="@drawable/logout"
             android:onClick="Logout_button"
             android:id="@+id/logout_button" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/userpro_title"
-            android:layout_gravity="center_horizontal" />
-    </LinearLayout>
-
-</LinearLayout>
+    </LinearLayout>-->

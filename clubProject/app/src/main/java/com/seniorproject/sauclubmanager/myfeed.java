@@ -13,26 +13,32 @@ public class myfeed extends DashboardActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myfeed);
-        Logout_button();
+        getActionBar().setHomeButtonEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void Logout_button() {
+    // MOVE THIS LOGIC TO A MENU FOR UNIFORMITY
+   /* public void Logout_button() {
         ImageButton Logout_button = (ImageButton) findViewById(R.id.logout_button);
         Logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginScreen.loginPreferences = getSharedPreferences("saveLogin", MODE_PRIVATE);
-                LoginScreen.loginPrefsEditor.remove("username");
-                LoginScreen.loginPrefsEditor.remove("password");
+                //get shared prefs and clear them
+                LoginScreen.loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+                //LoginScreen.loginPrefsEditor.remove("username");
+                //LoginScreen.loginPrefsEditor.remove("password");
+                LoginScreen.loginPrefsEditor.putBoolean("saveLogin", false);
+                LoginScreen.loginPrefsEditor.putString("username", "email");
+                LoginScreen.loginPrefsEditor.putString("password", "password");
                 LoginScreen.loginPrefsEditor.commit();
                 LoginScreen.saveLoginCheckbox.setChecked(false);
-                Intent intent = new Intent(myfeed.this, LoginScreen.class);
+                Intent intent = new Intent(user_profile.this, LoginScreen.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
             }
         });
-    }
+    }*/
 /*
     ListView list;
 

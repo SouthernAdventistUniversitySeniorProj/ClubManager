@@ -7,7 +7,11 @@
     android:layout_height="match_parent"
     tools:context="com.seniorproject.sauclubmanager.myevents">
 
-    <LinearLayout style="@style/TitleBar">
+
+
+</RelativeLayout>
+
+    <!--<LinearLayout style="@style/TitleBar">
         <ImageView style="@style/TitleBarLogo"
             android:contentDescription="@string/description_logo"
             android:src="@drawable/s_a_icon"
@@ -24,6 +28,4 @@
             android:src="@drawable/logout"
             android:onClick="Logout_button"
             android:id="@+id/logout_button" />
-    </LinearLayout>
-
-</RelativeLayout>
+    </LinearLayout>-->

@@ -433,9 +433,6 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
                 statement = response.createStatement();
 
                 resultSet = statement.executeQuery("Select * From Users");
-                /*while (rs.next()) {
-                    System.out.println("User " + rs.getString(2) + " " + rs.getString(3) + " has ID "
-                            + rs.getInt(1) + " & Email: " + rs.getString(5));*/
 
                 while (resultSet.next()) {
                     //check if the email entered is in the database

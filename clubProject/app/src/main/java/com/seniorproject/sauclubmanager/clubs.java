@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class clubs extends Activity {
+public class clubs extends DashboardActivity {
 
     private String[] values;
     private String[] clubPics;
@@ -33,6 +33,9 @@ public class clubs extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clubs);
+        getActionBar().setHomeButtonEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
 //Initialize private variables
         ctx=this;
         values = this.getResources().getStringArray(R.array.club_names);

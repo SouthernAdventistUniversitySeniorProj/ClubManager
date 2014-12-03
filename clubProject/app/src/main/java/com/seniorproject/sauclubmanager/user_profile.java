@@ -3,7 +3,9 @@ package com.seniorproject.sauclubmanager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -27,8 +29,17 @@ public class user_profile extends DashboardActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_profile);
+        getActionBar().setHomeButtonEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         email = (AutoCompleteTextView) findViewById(R.id.email);
+
+
+      //  public void onAttachedToWindow() {
+          //  super.onAttachedToWindow();
+           // this.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD);
+
+
 
         //Setup DB Connection
         String DRIVER = "net.sourceforge.jtds.jdbc.Driver";
@@ -68,30 +79,8 @@ public class user_profile extends DashboardActivity {
 
         TextView userpro_text = (TextView)findViewById(R.id.userpro_title);
         userpro_text.setText("Welcome " + fname + " " + lname + "!");
-        Logout_button();
     }
 
-    public void Logout_button() {
-        ImageButton Logout_button = (ImageButton) findViewById(R.id.logout_button);
-        Logout_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //get shared prefs and clear them
-                LoginScreen.loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-                //LoginScreen.loginPrefsEditor.remove("username");
-                //LoginScreen.loginPrefsEditor.remove("password");
-                LoginScreen.loginPrefsEditor.putBoolean("saveLogin", false);
-                LoginScreen.loginPrefsEditor.putString("username", "email");
-                LoginScreen.loginPrefsEditor.putString("password", "password");
-                LoginScreen.loginPrefsEditor.commit();
-                LoginScreen.saveLoginCheckbox.setChecked(false);
-                Intent intent = new Intent(user_profile.this, LoginScreen.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }
     /**
      * onDestroy
      * The final call you receive before your activity is destroyed.
@@ -158,7 +147,15 @@ public class user_profile extends DashboardActivity {
      * Followed by either onRestart() if this activity is coming back to interact with the user,
      * or onDestroy() if this activity is going away.
      */
-    protected void onStop () {
-        super.onStop ();
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        //Log.d("iHHIHIPHOUHOHOUHOHPUHO", "MYonStop is called");
+        // insert here your instructions
     }
+
+
+
+
 }

@@ -6,9 +6,10 @@
         android:allowBackup="true"
         android:icon="@drawable/s_a_icon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/Theme.Seniorproj" >
 
         <activity
+
             android:name=".LoginScreen"
             android:label="@string/title_activity_login_screen"
             >
@@ -19,18 +20,30 @@
             </intent-filter>
         </activity>
 
-        <activity android:name = ".HomeActivity"/>
+        <activity android:name = ".HomeActivity"
+                  android:label="My Dashboard"/>
         <activity android:name=".DashboardActivity"/>
-        <activity android:name = ".clubs"/>
-        <activity android:name=".user_profile"/>
-        <activity android:name=".myfeed"/>
-        <activity android:name=".myevents"/>
-        <activity android:name=".sa"/>
-        <activity android:name=".sa_senate_"/>
-
+        <activity android:name = ".clubs"
+                  android:label="Clubs"
+                  android:icon="@drawable/title_home_default"/>
+        <activity android:name=".user_profile"
+                  android:label="My Profile"
+                  android:icon="@drawable/title_home_default"/>
+        <activity android:name=".myfeed"
+                  android:label="My Feed"
+                  android:icon="@drawable/title_home_default"/>
+        <activity android:name=".myevents"
+                  android:label="My Events"
+                  android:icon="@drawable/title_home_default"/>
+        <activity android:name=".sa"
+                  android:label="Student Association"
+                  android:icon="@drawable/title_home_default"/>
+        <activity android:name=".sa_senate_"
+                  android:label="S. A. Senate"
+                  android:icon="@drawable/title_home_default"/>
         <activity
-            android:name=".reg_login"
-            android:label="@string/reg_text" >
+                  android:name=".reg_login"
+                  android:label="@string/reg_text" >
         </activity>
     </application>
 
@@ -40,3 +53,5 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />\
 </manifest>
+    <!--android:name=".LoginScreen"
+               android:label="@string/title_activity_login_screen"-->

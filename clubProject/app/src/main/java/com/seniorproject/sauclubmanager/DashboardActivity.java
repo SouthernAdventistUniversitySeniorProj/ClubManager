@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +23,53 @@ public class DashboardActivity extends Activity {
         super.onCreate(savedInstanceState);
     }
 
+
+
+    //GLOBAL MENU
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.global, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == R.id.action_logout){
+            Log.d("salfjg;sajfjsagjsajg", "Logout Clicked");
+            //get shared prefs and clear them
+            LoginScreen.loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+            //LoginScreen.loginPrefsEditor.remove("username");
+            //LoginScreen.loginPrefsEditor.remove("password");
+            LoginScreen.loginPrefsEditor.putBoolean("saveLogin", false);
+            LoginScreen.loginPrefsEditor.putString("username", "email");
+            LoginScreen.loginPrefsEditor.putString("password", "password");
+            LoginScreen.loginPrefsEditor.commit();
+            LoginScreen.saveLoginCheckbox.setChecked(false);
+            Intent intent = new Intent(DashboardActivity.this, LoginScreen.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
+        else{
+            // if a the new item is clicked show "Toast" message.
+        }
+////Home button pressed take me back to the main screen
+        if(item.getItemId() == android.R.id.home){
+            Intent intent = new Intent(DashboardActivity.this, HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
+        else{
+            // if a the new item is clicked show "Toast" message.
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
     /**
      * onDestroy
      * The final call you receive before your activity is destroyed.
@@ -28,6 +77,7 @@ public class DashboardActivity extends Activity {
      * or because the system is temporarily destroying this instance of the activity to save space.
      * You can distinguish between these two scenarios with the isFinishing() method.
      */
+
     protected void onDestroy () {
         super.onDestroy ();
     }
