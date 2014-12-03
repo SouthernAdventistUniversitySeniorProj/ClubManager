@@ -442,15 +442,12 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
                     Log.d("JHGJGJKGHJGIHGHH", "checking email..........");
                     String myResultEmail = resultSet.getString(5);
                     String myResultPassword = resultSet.getString(4);
-                    //DELETE BELOW BEFORE PRODUCTION
-                    return true;
-                    /*if (myResultEmail.equals(mEmail)) {
+                    if (myResultEmail.equals(mEmail)) {
                         Log.d("JHGJGJKGHJGIHGHH", "email found...checking password");
                         return myResultPassword.equals(mPassword);
-
-                    }*/
+                    }
                     //logic for the last row in the table
-                   /* if(resultSet.isLast())
+                    if(resultSet.isLast())
                     {
                         if (resultSet.getString(5).equals(mEmail)) {
                             Log.d("JHGJGJKGHJGIHGHH", "email found...checking password");
@@ -458,7 +455,7 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
 
                         }
                         return false;
-                    }*/
+                    }
                 }
 
             } catch (InterruptedException e) {

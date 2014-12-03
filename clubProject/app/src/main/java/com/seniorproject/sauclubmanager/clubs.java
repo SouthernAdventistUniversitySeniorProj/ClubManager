@@ -1,224 +1,138 @@
-        package com.seniorproject.sauclubmanager;
+package com.seniorproject.sauclubmanager;
 
-        import android.app.Activity;
+import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-        import android.app.ListActivity;
-        import android.app.ListFragment;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-        import android.widget.ImageView;
-        import android.widget.ListView;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * to handle interaction events.
- * create an instance of this fragment.
- *
- */
-public class clubs extends ListActivity {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    // private OnFragmentInteractionListener mListener;
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ClubsFrag.
-     */
-    // TODO: Rename and change types and number of parameters
+public class clubs extends Activity {
 
     private String[] values;
-    private Integer[] clubPics;
-    ListView list;
-    /*public static clubs newInstance(String param1) {
-        clubs fragment = new clubs();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        fragment.setArguments(args);
-        return fragment;
-    }*/
+    private String[] clubPics;
+    private ListView clubListView;
+    private Context ctx;
+
     public clubs() {
         // Required empty public constructor
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        //View rootView = inflater.inflate(R.layout.clubs, container, false);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.clubs);
-
-
-        clubPics = new Integer[]{R.drawable.accounting, R.drawable.african_student_union_club, R.drawable.allied_health_club, R.drawable.art_club,
-                R.drawable.asian_club, R.drawable.biology_club, R.drawable.business_club, R.drawable.chemistry_club, R.drawable.communication_club,
-                R.drawable.computer_club, R.drawable.education_club, R.drawable.enactus_club, R.drawable.encounter_club, R.drawable.english_club,
-                R.drawable.expressions_of_praise_club, R.drawable.futbol_club, R.drawable.history_club, R.drawable.latin_america_club,
-                R.drawable.long_term_care_club, R.drawable.management_club, R.drawable.marketing_club, R.drawable.nursing_club, R.drawable.pre_dental_club,
-                R.drawable.pre_med_club, R.drawable.pre_optometry_club, R.drawable.psychology_club, R.drawable.southern_ringtones_club, R.drawable.student_missions_club,
-                R.drawable.wellness_club};
-
-
+//Initialize private variables
+        ctx=this;
         values = this.getResources().getStringArray(R.array.club_names);
-
-        PicList adapter = new PicList(this, values, clubPics);
-        list= (ListView)findViewById(R.id.list);
-        list.setAdapter(adapter);
-
-
-
-
-
-
-
-
-
-        /*FeedList adapter = new FeedList(this, clubNames, clubPics,clubNames);
-        list = (ListView) rootView.findViewById(R.id.list);
-        list.setAdapter(adapter);*/
-
-        /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,values);*/
-        setListAdapter(adapter);
-
-        //return rootView;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-   /* public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+        clubPics = this.getResources().getStringArray(R.array.club_pics);
+        clubListView = ( ListView ) findViewById( R.id.club_list);
+//List to hold club objects
+        List clubList = new ArrayList();
+//forloop to initialize club objects
+        for (int i = 0; i < values.length; i++) {
+            clubList.add(new Club(values[i],clubPics[i]));
         }
-    }*/
-
- /*   @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-
-        Log.d("fhjkashfljsfjl;","item clicked "+values[position]);
-        Toast.makeText(this, values[position]+" selected",Toast.LENGTH_LONG).show();
-
-        FragmentManager manager = getFragmentManager();
-        FragmentTransaction ft = manager.beginTransaction();
-      //  ft.replace(R.id.container, myClub.newInstance(values[position]));
-        ft.addToBackStack(null);
-        // super.onListItemClick(l, v, position, id);
-        ft.commit();
-    }*/
-
-
-
-
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-
-
-
-//    public interface OnFragmentInteractionListener {
-//        // TODO: Update argument type and name
-//        public void onFragmentInteraction(Uri uri);
-//    }
-
-//}
-
-
-
-    /*public static class myClub extends Fragment {
-
-        private static final String Club_Name = "club_name";//ARG_SECTION_NUMBER = "section_number";
-
-        public static myClub newInstance(String clubName) {
-            myClub fragment = new myClub();
-            Bundle args = new Bundle();
-            args.putString(Club_Name,clubName);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public myClub() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.club_layout, container, false);
-            View club_name_view = rootView.findViewById(R.id.club_name);
-            View club_descript = rootView.findViewById(R.id.club_description);
-            ((TextView)club_name_view).setText(this.getArguments().get(Club_Name).toString());
-            ((TextView)club_descript).setText("A brief description and a few fun facts about The "+ this.getArguments().get(Club_Name).toString());
-
-        *//*    final Button joinButton = (Button) rootView.findViewById(R.id.join_button);
-                joinButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Button leave_button = (Button)view.findViewById(R.id.leave_button);
-                        leave_button.setEnabled(true);
-
-                    }
-                });*//*
-
-            return rootView;
-        }
-*/
-
-
-      /*  @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            *//*((ClubManagerMainActivity) activity).onSectionAttached(
-                    getArguments().getInt(Club_Name));*//*
-        }*/
-   // }
-
-
-    public class PicList extends ArrayAdapter<String>{
-        private final Activity context;
-        private final String[] clubName;
-        private final Integer[] clubPics;
-        public PicList(Activity context,
-                       String[] clubName, Integer[] clubPics) {
-            super(context, R.layout.picture_list, clubName);
-            this.context = context;
-            this.clubName = clubName;
-            this.clubPics = clubPics;
-        }
-        @Override
-        public View getView(int position, View view, ViewGroup parent) {
-            LayoutInflater inflater = context.getLayoutInflater();
-            View rowView= inflater.inflate(R.layout.picture_list, null, true);
-            TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
-            ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
-            txtTitle.setText(clubName[position]);
-            imageView.setImageResource(clubPics[position]);
-            return rowView;
-        }
+        clubListView.setAdapter( new ClubListAdapterWithCache(ctx, R.layout.picture_list, clubList ));
     }
 
 
+    //// CLUB OBJECT
+    public class Club {
+        private String Name;
+        private String Image;
+
+        public Club(String name, String image) {
+            super();
+            this.Name = name;
+            this.Image = image;
+        }
+        //get and set variables
+        public String getName(){
+            return Name;
+        }
+        public void setName (String nameText) {
+            Name = nameText;
+        }
+        public String getImage() {
+            return Image;
+        }
+        public void setImage (String image) {
+            this.Image = image;
+        }
+    }
+
+    ///// CACHE for clubs used for efficiency
+    class ClubListViewCache {
+        private View BaseView;
+        private TextView clubNameText;
+        private ImageView clubImage;
+        public ClubListViewCache(View baseView) {
+            this.BaseView = baseView;
+        }
+        public View getBaseView() {
+            return BaseView;
+        }
+        public TextView getClubNameText(int resource) {
+            if (clubNameText == null) {
+                clubNameText = (TextView) BaseView.findViewById(R.id.clubName);
+            }
+            return clubNameText;
+        }
+        public ImageView getClubImage (int resource){
+            if(clubImage == null) {
+                clubImage = (ImageView) BaseView.findViewById(R.id.clubImage);
+            }
+            return clubImage;
+        }
+    }
+    /////////////// Custom Adapter for clubs listview
+    public class ClubListAdapterWithCache extends ArrayAdapter<Club>{
+        private int resource;
+        private LayoutInflater inflater;
+        private Context context;
+
+        public ClubListAdapterWithCache ( Context ctx, int resourceId, List objects) {
+            super( ctx, resourceId, objects );
+            resource = resourceId;
+            inflater = LayoutInflater.from( ctx );
+            context=ctx;
+        }
+
+        @Override
+        public View getView ( int position, View convertView, ViewGroup parent ) {
+            Club clubObj = getItem(position);
+            ClubListViewCache viewCache;
+            if ( convertView == null ) {
+                convertView = (RelativeLayout) inflater.inflate( resource, null );
+                viewCache = new ClubListViewCache( convertView );
+                convertView.setTag( viewCache );
+            }
+            else {
+                convertView = ( RelativeLayout ) convertView;
+                viewCache = ( ClubListViewCache ) convertView.getTag();
+            }
+            TextView txtName = viewCache.getClubNameText(resource);
+            txtName.setText(clubObj.getName());
+
+            ImageView clubImage = viewCache.getClubImage(resource);
+            String uri = clubObj.getImage();
+            int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
+            Drawable image = context.getResources().getDrawable(imageResource);
+            clubImage.setImageDrawable(image);
+            return convertView;
+        }
+    }
 
 }
