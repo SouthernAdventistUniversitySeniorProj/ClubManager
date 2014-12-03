@@ -41,6 +41,9 @@
         <activity android:name=".sa_senate_"
                   android:label="S. A. Senate"
                   android:icon="@drawable/title_home_default"/>
+        <activity android:name=".ClubActivity"
+            android:label="S. A. Clubs"
+            android:icon="@drawable/title_home_default"/>
         <activity
                   android:name=".reg_login"
                   android:label="@string/reg_text" >

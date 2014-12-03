@@ -3,16 +3,20 @@ package com.seniorproject.sauclubmanager;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +28,10 @@ public class clubs extends DashboardActivity {
     private String[] clubPics;
     private ListView clubListView;
     private Context ctx;
+    private Intent intent;
+
+    public final static String CLUB_NAME = "default club name";
+    public final static String CLUB_PIC = "drawable/accounting";
 
     public clubs() {
         // Required empty public constructor
@@ -48,7 +56,24 @@ public class clubs extends DashboardActivity {
             clubList.add(new Club(values[i],clubPics[i]));
         }
         clubListView.setAdapter( new ClubListAdapterWithCache(ctx, R.layout.picture_list, clubList ));
+        clubListView.setOnItemClickListener(new OnItemClickListenerListViewItem(){
+
+            public void onItemClick(AdapterView<?> a, View
+                    v, int position, long id) {
+                Log.d("salfjg;sajfjsagjsajg", values[position]+" "+ clubPics[position]+" "+"Item Clicked");
+                launchClubPage(values[position],clubPics[position]);
+            }
+        });
+
     }
+    public  void launchClubPage(String clubName, String clubPic){
+
+        intent = new Intent(this,ClubActivity.class);
+        intent.putExtra("CLUB_NAME", clubName);
+        intent.putExtra("CLUB_PIC", clubPic);
+        startActivity(intent);
+    }
+
 
 
     //// CLUB OBJECT
@@ -136,6 +161,29 @@ public class clubs extends DashboardActivity {
             clubImage.setImageDrawable(image);
             return convertView;
         }
+    }
+    public class OnItemClickListenerListViewItem implements AdapterView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            Context context = view.getContext();
+
+            TextView textViewItem = ((TextView) view.findViewById(R.id.clubName));
+
+            // get the clicked item name
+            String listItemText = textViewItem.getText().toString();
+
+            // get the clicked item ID
+            String listItemId = textViewItem.getTag().toString();
+
+            // just toast it
+            Toast.makeText(context, "Item: " + listItemText + ", Item ID: " + listItemId, Toast.LENGTH_SHORT).show();
+
+           // ((DashboardActivity) context).alertDialogStores.cancel();
+
+        }
+
     }
 
 }
