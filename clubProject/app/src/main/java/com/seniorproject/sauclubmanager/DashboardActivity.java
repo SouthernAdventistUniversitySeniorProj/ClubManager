@@ -12,9 +12,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.seniorproject.sauclubmanager.com.seniorproject.utilities.report;
-import com.seniorproject.sauclubmanager.com.seniorproject.utilities.settings;
-
 public class DashboardActivity extends Activity {
 
     /**

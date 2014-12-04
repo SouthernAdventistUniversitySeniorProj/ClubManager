@@ -42,10 +42,15 @@
                   android:label="S. A. Senate"
                   android:icon="@drawable/title_home_default"/>
         <activity android:name=".ClubActivity"
-            android:label="S. A. Clubs"
-            android:icon="@drawable/title_home_default"/>
-        <activity
-                  android:name=".reg_login"
+                  android:label="S. A. Clubs"
+                  android:icon="@drawable/title_home_default"/>
+        <activity android:name=".settings"
+                  android:label="Settings"
+                  android:icon="@drawable/title_home_default"/>
+        <activity android:name=".report"
+                  android:label="Send Report"
+                  android:icon="@drawable/title_home_default"/>
+        <activity android:name=".reg_login"
                   android:label="@string/reg_text" >
         </activity>
     </application>

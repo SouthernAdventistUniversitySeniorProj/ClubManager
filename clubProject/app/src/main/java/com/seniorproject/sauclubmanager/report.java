@@ -1,6 +1,5 @@
-package com.seniorproject.sauclubmanager.com.seniorproject.utilities;
+package com.seniorproject.sauclubmanager;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,12 +7,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.seniorproject.sauclubmanager.R;
+import com.seniorproject.sauclubmanager.com.seniorproject.utilities.GMailSender;
 
 /**
  * Created by User on 11/19/2014.
  */
-public class report extends Activity {
+public class report extends DashboardActivity {
     private EditText namereport;
     private EditText reportemail;
     private EditText textreport;
