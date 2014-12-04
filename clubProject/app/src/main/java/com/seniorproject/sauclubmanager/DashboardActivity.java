@@ -6,10 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.seniorproject.sauclubmanager.com.seniorproject.utilities.report;
+import com.seniorproject.sauclubmanager.com.seniorproject.utilities.settings;
 
 public class DashboardActivity extends Activity {
 
@@ -29,19 +33,18 @@ public class DashboardActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.global, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.club_manager_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(item.getItemId() == R.id.action_logout){
+        if(item.getItemId() == R.id.action_example){
             Log.d("salfjg;sajfjsagjsajg", "Logout Clicked");
             //get shared prefs and clear them
             LoginScreen.loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-            //LoginScreen.loginPrefsEditor.remove("username");
-            //LoginScreen.loginPrefsEditor.remove("password");
             LoginScreen.loginPrefsEditor.putBoolean("saveLogin", false);
             LoginScreen.loginPrefsEditor.putString("username", "email");
             LoginScreen.loginPrefsEditor.putString("password", "password");
@@ -55,6 +58,17 @@ public class DashboardActivity extends Activity {
         else{
             // if a the new item is clicked show "Toast" message.
         }
+
+        if(item.getItemId() == R.id.action_settings) {
+            Intent intent = new Intent(DashboardActivity.this, settings.class);
+            startActivity(intent);
+        }
+
+        if(item.getItemId() == R.id.action_report) {
+            Intent intent = new Intent(DashboardActivity.this, report.class);
+            startActivity(intent);
+        }
+
 ////Home button pressed take me back to the main screen
         if(item.getItemId() == android.R.id.home){
             Intent intent = new Intent(DashboardActivity.this, HomeActivity.class);

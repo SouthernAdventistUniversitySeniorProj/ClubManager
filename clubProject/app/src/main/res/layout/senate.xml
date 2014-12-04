@@ -5,31 +5,20 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical"
-            android:layout_gravity="center_vertical">
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/senate_spinner"
+            android:entries="@array/senate_array"
+            android:spinnerMode="dropdown"
+            android:layout_gravity="top" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sn_minutes_button"
-                android:id="@+id/sn_minutes_button" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sn_senators_button"
-                android:id="@+id/sn_senators_button"/>
-        </TableRow>
-    </TableLayout>
+        </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -56,23 +45,3 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.20" />
 </LinearLayout>
-
-<!--
-<LinearLayout style="@style/TitleBar">
-<ImageView style="@style/TitleBarLogo"
-    android:contentDescription="@string/description_logo"
-    android:src="@drawable/s_a_icon"
-    android:id="@+id/s_a_icon" />
-<ImageButton style="@style/TitleBarAction"
-    android:contentDescription="@string/description_home"
-    android:src="@drawable/title_home_default"
-    android:onClick="onClickHome" />
-<TextView style="@style/TitleBarText"
-    android:text="@string/title_feature6"
-    android:id="@+id/user_pro_title"/>
-<ImageButton style="@style/TitleBarAction"
-    android:contentDescription="@string/description_home"
-    android:src="@drawable/logout"
-    android:onClick="Logout_button"
-    android:id="@+id/logout_button" />
-</LinearLayout>-->

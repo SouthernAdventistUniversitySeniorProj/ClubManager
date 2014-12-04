@@ -13,143 +13,118 @@
         android:orientation="vertical"
         android:layout_gravity="center">
 
-        <TableRow
+        <LinearLayout style="@style/TitleBar"
+            android:orientation="horizontal">
+            <ImageButton
+                style="@style/TitleBarAction"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/sa_phone_textView"
+                android:id="@+id/sa_phone_textView"
+                android:src="@drawable/dialer_icon"
+                android:background="@android:color/transparent" />
+
+            <TextView
+                style="@style/TitleBarAction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/sa_text"
+                android:id="@+id/sa_title"
+                android:textStyle="bold|italic"
+                android:textColor="#ffffffff"
+                android:textAlignment="center"
+                android:paddingTop="10dp"
+                android:paddingLeft="200dp" />
+        </LinearLayout>
+    </TableLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/textView1"
+                android:maxLines = "30"
+                android:scrollbars = "vertical"/>
+        </FrameLayout>
+
+        <!--<LinearLayout-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content">-->
+
+            <!--<ImageButton-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/sa_fb_button"-->
+                <!--android:src="@drawable/facebook"-->
+                <!--android:background="@android:color/transparent"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:paddingRight="20dp" />-->
+
+            <!--<ImageButton-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/sa_twitter_button"-->
+                <!--android:src="@drawable/twitter"-->
+                <!--android:background="@android:color/transparent"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:paddingRight="20dp" />-->
+
+            <!--<ImageButton-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/sa_instagram_button"-->
+                <!--android:background="@android:color/transparent"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@drawable/instagram"-->
+                <!--android:layout_column="2"-->
+                <!--android:paddingRight="20dp" />-->
+
+            <!--<ImageButton-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/sa_email_button"-->
+                <!--android:background="@android:color/transparent"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@drawable/email"-->
+                <!--android:layout_column="3"-->
+                <!--android:paddingRight="0dp" />-->
+
+        <!--</LinearLayout>-->
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="vertical"
-            android:layout_gravity="center_vertical">
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1">
 
-            <Button
-                android:layout_width="wrap_content"
+            <Spinner
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:text="@string/sa_about_button"
-                android:id="@+id/sa_about_button" />
+                android:id="@+id/sa_spinner"
+                android:entries="@array/sa_info_array"
+                android:spinnerMode="dropdown"
+                android:layout_gravity="bottom" />
 
-            <Button
-                android:layout_width="wrap_content"
+            <Spinner
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/sa_officers_button"
-                android:id="@+id/sa_officers_button"/>
+                android:id="@+id/sa_social_spinner"
+                android:entries="@array/sa_social_array"
+                android:spinnerMode="dropdown"
+                android:layout_gravity="bottom" />
+        </LinearLayout>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sa_senate_button"
-                android:id="@+id/sa_senate_button"
-                android:layout_column="2" />
-        </TableRow>
-    </TableLayout>
+    </LinearLayout>
 
-    <ImageButton
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/sa_banner_imageView"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/sa_header"
-        android:background="@android:color/transparent"
-        android:scaleType="fitXY" />
-
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/textView1"
-            android:maxLines = "25"
-            android:scrollbars = "vertical"
-            />
-    </FrameLayout>
-
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center">
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/sa_fb_button"
-                android:src="@drawable/facebook"
-                android:background="@android:color/transparent"
-                android:scaleType="fitXY"
-                android:paddingRight="20dp" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/sa_twitter_button"
-                android:src="@drawable/twitter"
-                android:background="@android:color/transparent"
-                android:scaleType="fitXY"
-                android:paddingRight="20dp" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/sa_instagram_button"
-                android:background="@android:color/transparent"
-                android:scaleType="fitXY"
-                android:src="@drawable/instagram"
-                android:layout_column="2"
-                android:paddingRight="20dp" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/sa_email_button"
-                android:background="@android:color/transparent"
-                android:scaleType="fitXY"
-                android:src="@drawable/email"
-                android:layout_column="3"
-                android:paddingRight="0dp" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-        </TableRow>
-    </TableLayout>
 </LinearLayout>
-
-
-    <!-- <LinearLayout style="@style/TitleBar">
-        <ImageView style="@style/TitleBarLogo"
-            android:contentDescription="@string/description_logo"
-            android:src="@drawable/s_a_icon"
-            android:id="@+id/s_a_icon" />
-        <ImageButton style="@style/TitleBarAction"
-            android:contentDescription="@string/description_home"
-            android:src="@drawable/title_home_default"
-            android:onClick="onClickHome" />
-        <TextView style="@style/TitleBarText"
-            android:text="@string/title_feature5"
-            android:id="@+id/user_pro_title"/>
-        <ImageButton
-            style="@style/TitleBarAction"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/sa_phone_textView"
-            android:id="@+id/sa_phone_textView"
-            android:src="@drawable/dialer_icon"
-            android:background="@android:color/transparent" />
-        <ImageButton style="@style/TitleBarAction"
-            android:contentDescription="@string/description_home"
-            android:src="@drawable/logout"
-            android:onClick="Logout_button"
-            android:id="@+id/logout_button" />
-    </LinearLayout>-->

@@ -64,9 +64,26 @@
         <item>Wellness Club</item>
     </string-array>
 
+    <string-array name="sa_info_array">
+        <item>links</item>
+        <item>About</item>
+        <item>Officers</item>
+        <item>More Information...</item>
+    </string-array>
 
+    <string-array name="sa_social_array">
+        <item>social links</item>
+        <item>Facebook</item>
+        <item>Twitter</item>
+        <item>Instagram</item>
+        <item>Email</item>
+    </string-array>
 
-
+    <string-array name="senate_array">
+        <item>information...</item>
+        <item>Mintues</item>
+        <item>Current Senators</item>
+    </string-array>
 
 
 <!--    <string-array name="club_pics">

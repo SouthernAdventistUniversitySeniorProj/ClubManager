@@ -48,7 +48,7 @@ public class report extends Activity {
     }
 
     protected void sendEmailtoUser() {
-        subject = (namereport + "Thank You for your submission!");
+        subject = (namereport + ", Thank You for your submission!");
         body = ("Thank you for submitting your report. We will work hard to fix " +
                 " your issues your experiencing. If you submitted a suggestion or improvement" +
                 " we will work hard to make sure requests come true!");

@@ -147,39 +147,7 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                //imm.hideSoftInputFromWindow(editTextUsername.getWindowToken(), 0);
-
-                useremail = mEmailView.getText().toString();
-                password = mPasswordView.getText().toString();
-
-                ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-                postParameters.add(new BasicNameValuePair("username", useremail));
-                postParameters.add(new BasicNameValuePair("password", password));
-
-                Connection response = null;
-                try {
-
-                    //response = CustomHttpClient.executeHttpPost("<CONNECTION STRING?>", postParameters);
-                    String res = response.toString();
-                    res = res.replaceAll("\\s+", "");
-
-
-                } catch (Exception e) {
-
-                }
-
-                if (saveLoginCheckbox.isChecked()) {
-                    loginPrefsEditor.putBoolean("saveLogin", true);
-                    loginPrefsEditor.putString("username", useremail);
-                    loginPrefsEditor.putString("password", password);
-                    loginPrefsEditor.commit();
-                } else {
-                    loginPrefsEditor.clear();
-                    loginPrefsEditor.commit();
-                }
-                attemptLogin();
+                autoLogin();
             }
         });
 
@@ -199,6 +167,48 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+
+        if (useremail != "" || password != "") {
+            mEmailSignInButton.performClick();
+        }
+    }
+
+    private void autoLogin() {
+        //InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        //imm.hideSoftInputFromWindow(editTextUsername.getWindowToken(), 0);
+
+        useremail = mEmailView.getText().toString();
+        password = mPasswordView.getText().toString();
+
+        ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+        postParameters.add(new BasicNameValuePair("username", useremail));
+        postParameters.add(new BasicNameValuePair("password", password));
+
+        Connection response = null;
+        try {
+
+            //response = CustomHttpClient.executeHttpPost("<CONNECTION STRING?>", postParameters);
+            String res = response.toString();
+            res = res.replaceAll("\\s+", "");
+
+
+        } catch (Exception e) {
+
+        }
+
+        if (saveLoginCheckbox.isChecked()) {
+            loginPrefsEditor.putBoolean("saveLogin", true);
+            loginPrefsEditor.putString("username", useremail);
+            loginPrefsEditor.putString("password", password);
+            loginPrefsEditor.commit();
+        } else {
+            loginPrefsEditor.clear();
+            loginPrefsEditor.commit();
+        }
+        attemptLogin();
+
+
     }
 
     /*private void populateAutoComplete() {

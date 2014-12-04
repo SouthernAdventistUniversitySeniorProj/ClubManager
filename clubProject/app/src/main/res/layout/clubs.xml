@@ -29,6 +29,11 @@
             android:id="@+id/user_pro_title"/>
         <ImageButton style="@style/TitleBarAction"
             android:contentDescription="@string/description_home"
+            android:src="@drawable/settings"
+            android:onClick="onClickFeature"
+            android:id="@+id/settings_button" />
+        <ImageButton style="@style/TitleBarAction"
+            android:contentDescription="@string/description_home"
             android:src="@drawable/logout"
             android:onClick="Logout_button"
             android:id="@+id/logout_button" />

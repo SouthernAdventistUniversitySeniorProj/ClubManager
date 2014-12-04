@@ -16,9 +16,7 @@
     <!-- Student Association Senate Home Page -->
 
     <!-- SA Page -->
-    <string name="sa_officers_button">Officers</string>
-    <string name="sa_about_button">About</string>
-    <string name="sa_senate_button">Senate</string>
+    <string name="sa_text">SA</string>
     <string name="sa_phone_textView"><a href="tel:l4232362723">(423)-236-2723</a></string>
 
     <!-- SN Page -->
@@ -59,25 +57,5 @@
     <string name="description_about">About</string>
     <string name="description_home">Home</string>
     <string name="description_search">Search</string>
-    <string name="description_feature1">Feature 1</string>
-    <string name="description_feature2">Feature 2</string>
-    <string name="description_feature3">Feature 3</string>
-    <string name="description_feature4">Feature 4</string>
-    <string name="description_feature5">Feature 5</string>
-    <string name="description_feature6">Feature 6</string>
-
-
-
-    <string name="default_intro">This is the default content view for an activity. Be sure to change your activity\'s onCreate method. Use setContentView on a custom layout.</string>
-    <string name="feature1_intro">Feature 1 content goes here.</string>
-    <string name="feature2_intro">Feature 2 content goes here.</string>
-    <string name="feature3_intro">Feature 3 content goes here.</string>
-    <string name="feature4_intro">Feature 4 content goes here.</string>
-    <string name="feature5_intro">Feature 5 content goes here.</string>
-    <string name="feature6_intro">Feature 6 content goes here.</string>
-
-    <string name="about_intro">This app is a demo to show you how to do an Android app based on the Dashboard pattern that has been used in apps like Twitter, Google IO, and Evernote.</string>
-    <string name="search_intro">Content for the Search page goes here.</string>
-
 
 </resources>

@@ -3,12 +3,12 @@ package com.seniorproject.sauclubmanager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class sa_senate_ extends DashboardActivity {
     // TODO: Rename parameter arguments, choose names that match
@@ -30,16 +30,16 @@ public class sa_senate_ extends DashboardActivity {
 
         setContentView(R.layout.senate);
         //Logout_button();
-    }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.senate, container, false);
-        View aboutSA = rootView.findViewById(R.id.textView);
-        ((TextView)aboutSA).setText("Senate is the legislative branch of the Student Association responsible for representing the various needs and desires of our great student body. It meets every other Wednesday to discuss what we can do to improve students' Southern experience as well as the community around our university, and then to enact as many of those changes as is within Senate power.");
+        View aboutSA = findViewById(R.id.textView);
+        ((TextView)aboutSA).setText("Senate is the legislative branch of the Student Association responsible " +
+                "for representing the various needs and desires of our great student body. " +
+                "It meets every other Wednesday to discuss what we can do to improve students' Southern " +
+                "experience as well as the community around our university, and then to enact as many of " +
+                "those changes as is within Senate power.");
 
         //sn_banner_imageView
-        ImageButton button = (ImageButton) rootView.findViewById(R.id.sn_banner_imageView);
+        ImageButton button = (ImageButton) findViewById(R.id.sn_banner_imageView);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,52 +49,33 @@ public class sa_senate_ extends DashboardActivity {
             }
         }) ;
 
-        //sn_minutes_button
-        Button button2 = (Button) rootView.findViewById(R.id.sn_minutes_button);
-        button2.setOnClickListener(new View.OnClickListener() {
+        final Spinner spin = (Spinner) findViewById(R.id.senate_spinner);
+        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("https://www.southern.edu/sa/senate/Pages/senateminutes.aspx"));
-                startActivity(intent);
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                // TODO Auto-generated method stub
+                String  mselection = spin.getSelectedItem().toString();
+                if (mselection.equals("Mintues")) {
+                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                            Uri.parse("https://www.southern.edu/sa/senate/Pages/senateminutes.aspx"));
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), mselection, Toast.LENGTH_LONG).show();
+                    spin.setSelection(0);
+                }
+                else if (mselection.equals("Current Senators")) {
+                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                            Uri.parse("https://www.southern.edu/sa/senate/Pages/senators.aspx"));
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), mselection, Toast.LENGTH_LONG).show();
+                    spin.setSelection(0);
+                }
             }
-        }) ;
-
-        //sn_senators_button
-        Button button3 = (Button) rootView.findViewById(R.id.sn_senators_button);
-        button3.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("https://www.southern.edu/sa/senate/Pages/senators.aspx"));
-                startActivity(intent);
-            }
-        }) ;
-
-        return rootView;
-
-    }
-
-    // MOVE THIS LOGIC TO A MENU FOR UNIFORMITY
-   /* public void Logout_button() {
-        ImageButton Logout_button = (ImageButton) findViewById(R.id.logout_button);
-        Logout_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //get shared prefs and clear them
-                LoginScreen.loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-                //LoginScreen.loginPrefsEditor.remove("username");
-                //LoginScreen.loginPrefsEditor.remove("password");
-                LoginScreen.loginPrefsEditor.putBoolean("saveLogin", false);
-                LoginScreen.loginPrefsEditor.putString("username", "email");
-                LoginScreen.loginPrefsEditor.putString("password", "password");
-                LoginScreen.loginPrefsEditor.commit();
-                LoginScreen.saveLoginCheckbox.setChecked(false);
-                Intent intent = new Intent(user_profile.this, LoginScreen.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+                //
             }
         });
-    }*/
+    }
 }

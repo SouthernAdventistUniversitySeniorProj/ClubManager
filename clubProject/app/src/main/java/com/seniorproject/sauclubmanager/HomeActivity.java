@@ -2,11 +2,9 @@ package com.seniorproject.sauclubmanager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
+import android.view.MenuInflater;
 import android.view.View;
-import android.widget.ImageButton;
 
 public class HomeActivity extends DashboardActivity {
     /**
@@ -22,8 +20,6 @@ public class HomeActivity extends DashboardActivity {
        // getActionBar().setHomeButtonEnabled(true);
        // getActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
-
 
     // MOVE THIS LOGIC TO A MENU FOR UNIFORMITY
   /*  public void Logout_button() {
