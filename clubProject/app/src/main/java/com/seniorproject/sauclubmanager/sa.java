@@ -28,8 +28,10 @@ public class sa extends DashboardActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sa);
-        getActionBar().setHomeButtonEnabled(true);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        if (LoginScreen.loginSuccess == "yes") {
+            getActionBar().setHomeButtonEnabled(true);
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         final Spinner spin = (Spinner) findViewById(R.id.sa_spinner);
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

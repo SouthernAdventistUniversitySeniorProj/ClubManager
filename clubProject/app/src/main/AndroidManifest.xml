@@ -10,8 +10,8 @@
 
         <activity
 
-            android:name=".LoginScreen"
-            android:label="@string/title_activity_login_screen"
+            android:name=".unHomeActivity"
+            android:label="Campus Social Life"
             >
             <!--android:windowSoftInputMode="adjustResize|stateVisible"-->
             <intent-filter>
@@ -20,6 +20,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name = ".LoginScreen"
+            android:label="@string/title_activity_login_screen"/>
         <activity android:name = ".HomeActivity"
                   android:label="My Dashboard"/>
         <activity android:name=".DashboardActivity"/>

@@ -1,7 +1,5 @@
 package com.seniorproject.sauclubmanager;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -41,8 +39,10 @@ public class clubs extends DashboardActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clubs);
-        getActionBar().setHomeButtonEnabled(true);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        if (LoginScreen.loginSuccess == "yes") {
+            getActionBar().setHomeButtonEnabled(true);
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
 //Initialize private variables
         ctx=this;
@@ -67,7 +67,6 @@ public class clubs extends DashboardActivity {
 
     }
     public  void launchClubPage(String clubName, String clubPic){
-
         intent = new Intent(this,ClubActivity.class);
         intent.putExtra("CLUB_NAME", clubName);
         intent.putExtra("CLUB_PIC", clubPic);
@@ -162,6 +161,7 @@ public class clubs extends DashboardActivity {
             return convertView;
         }
     }
+
     public class OnItemClickListenerListViewItem implements AdapterView.OnItemClickListener {
 
         @Override
@@ -183,7 +183,5 @@ public class clubs extends DashboardActivity {
            // ((DashboardActivity) context).alertDialogStores.cancel();
 
         }
-
     }
-
 }

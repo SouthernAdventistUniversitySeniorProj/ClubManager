@@ -66,6 +66,7 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
     public static SharedPreferences loginPreferences;
     public static SharedPreferences.Editor loginPrefsEditor;
     public static String useremail,password;
+    public static String loginSuccess = "no";
 
 
     // UI references.
@@ -169,10 +170,15 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
         mProgressView = findViewById(R.id.login_progress);
 
 
-        if (useremail != "" || password != "") {
+        if (loginPreferences.getString("username", "") != "" || loginPreferences.getString("password", "") != "") {
             mEmailSignInButton.performClick();
+            loginSuccess = "yes";
+
+        } else {
+            loginSuccess = "no";
         }
     }
+    // saving email for ClubActivity
 
     private void autoLogin() {
         //InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -210,7 +216,6 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
 
 
     }
-
     /*private void populateAutoComplete() {
         getLoaderManager().initLoader(0, null, this);
     }*/
@@ -230,7 +235,7 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
         mEmailView.setError(null);
         mPasswordView.setError(null);
 
-        // Store values at the time of the login attempt._______________________________________________________SHARED PREF STORAGE HERE
+        // Store values at the time of the login attempt. SHARED PREF STORAGE HERE
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
@@ -313,7 +318,7 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
-    //__________________TO DO_______________________________________________________________________________________________________________________---------------------------------
+    //_TO DO_
    /* public void onClick(View view)
     {
         if (view == ok) {
@@ -332,7 +337,6 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
                 loginPrefsEditor.clear();
                 loginPrefsEditor.commit();
             }
-
     }*/
 
     @SuppressLint("NewApi")
@@ -484,10 +488,12 @@ public class LoginScreen extends Activity implements LoaderCallbacks<Cursor>{
             if (success) {
                 Intent myIntent = new Intent(LoginScreen.this, HomeActivity.class);
                 startActivity(myIntent);
+                loginSuccess = "yes";
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
+                loginSuccess = "no";
             }
         }
 

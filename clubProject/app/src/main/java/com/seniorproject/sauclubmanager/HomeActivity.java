@@ -2,8 +2,6 @@ package com.seniorproject.sauclubmanager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 
 public class HomeActivity extends DashboardActivity {
@@ -135,6 +133,9 @@ public class HomeActivity extends DashboardActivity {
                 break;
             case R.id.home_btn_feature6 :
                 startActivity (new Intent(getApplicationContext(), sa_senate_.class));
+                break;
+            case R.id.login_feature :
+                startActivity (new Intent(getApplicationContext(), LoginScreen.class));
                 break;
             default:
                 break;

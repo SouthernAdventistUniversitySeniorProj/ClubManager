@@ -25,8 +25,10 @@ public class sa_senate_ extends DashboardActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().setHomeButtonEnabled(true);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        if (LoginScreen.loginSuccess == "yes") {
+            getActionBar().setHomeButtonEnabled(true);
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         setContentView(R.layout.senate);
         //Logout_button();

@@ -93,7 +93,7 @@ public class reg_login extends Activity {
         private final String mPassword;
         private final String FirstName;
         private final String LastName;
-        private final String UserId;
+        public final String UserId;
 
         UserRegisterTask(String email, String password, String userId,String firstName, String lastName) {
             UserId = userId;
@@ -102,6 +102,7 @@ public class reg_login extends Activity {
             mEmail = email;
             mPassword = password;
         }
+
 
         @Override
         protected Boolean doInBackground(Void... params) {

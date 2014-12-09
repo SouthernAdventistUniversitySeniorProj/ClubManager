@@ -1,17 +1,12 @@
 package com.seniorproject.sauclubmanager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -23,7 +18,7 @@ public class user_profile extends DashboardActivity {
      * This method also provides you with a Bundle containing the activity's previously frozen state, if there was one.
      */
 
-    private String id, fname, lname, pass;
+    public String id, fname, lname, Uemail;
     private AutoCompleteTextView email;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +34,6 @@ public class user_profile extends DashboardActivity {
           //  super.onAttachedToWindow();
            // this.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD);
 
-
-
         //Setup DB Connection
         String DRIVER = "net.sourceforge.jtds.jdbc.Driver";
 
@@ -54,31 +47,39 @@ public class user_profile extends DashboardActivity {
             System.exit(1);
         }
 
-        Connection response;
-        Statement statement;
-        //  ResultSet resultSet = null;
+        Connection response = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
         //  String dbUsername;
 
         try {
             // Simulate network access.
             Thread.sleep(2000);
-            Log.d("salfjg;sajfjsagjsajg", "Before attempting to open db connection");
             String dbURL = "jdbc:jtds:sqlserver://216.249.119.136;instance=ClubProject;DatabaseName=ClubDatabase";
-
+            Log.d("salfjg;sajfjsagjsajg", "Before attempting to open db connection ---> " + dbURL);
             //login to server
             response = DriverManager.getConnection(dbURL, "sa", "d1559563!");
             Log.d("salfjg;sajfjsagjsajg", "tried to open db connection");
             statement = response.createStatement();
-           // statement.executeSQLQuery("Select * From Users Where Email = '"+email+"';", null, null, null);
+            resultSet = statement.executeQuery("Select * From Users Where Email = '"+email+"';");
+
+            while (resultSet.next()) {
+                //check if the email entered is in the database
+                Log.d("JHGJGJKGHJGIHGHH", "checking email..........");
+                fname = resultSet.getString(2);
+                lname = resultSet.getString(3);
+                Uemail = resultSet.getString(5);
+
+            }
 
         } catch (InterruptedException e) {
-            // return false;
+            //return false;
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        TextView userpro_text = (TextView)findViewById(R.id.userpro_title);
-        userpro_text.setText("Welcome " + fname + " " + lname + "!");
+        //TextView userpro_text = (TextView)findViewById(R.id.userpro_title);
+        //userpro_text.setText("Welcome " + fname + " " + lname + "!");
     }
 
     /**
