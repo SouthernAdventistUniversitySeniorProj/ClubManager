@@ -10,6 +10,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.parse.ParseUser;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -24,7 +26,23 @@ public class user_profile extends DashboardActivity {
      */
 
     private String id, fname, lname, pass;
-    private AutoCompleteTextView email;
+
+
+
+
+    //Setup Ui reference variables
+    private TextView name;//userpro_name
+    private TextView classStand;//userpro_classStanding
+    private TextView userEmail;//userpro_email
+
+
+    //SERVER SIDE KEY VALUES
+    private static final String firstName = "firstName";
+    private static final String lastName = "lastName";
+    private static final String email = "email";
+    private static final String classStanding = "classStanding";
+    //private static final String mainClub = "mainClub";
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,53 +50,26 @@ public class user_profile extends DashboardActivity {
         getActionBar().setHomeButtonEnabled(true);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        email = (AutoCompleteTextView) findViewById(R.id.email);
+        ParseUser curUser = ParseUser.getCurrentUser();
+
+        //connect ui widgets to their private variables
+        name = (TextView) findViewById(R.id.userpro_name);
+        classStand = (TextView) findViewById(R.id.userpro_classStanding);
+        userEmail = (TextView) findViewById(R.id.userpro_email);
+
+        //get and display the info from the web to the appropriate ui field
+
+        //get and store
+        String firstPart = curUser.get(firstName).toString();
+        String lastPart = curUser.get(lastName).toString();
+
+        name.setText(firstPart + " " +lastPart);
+        classStand.setText(curUser.get(classStanding).toString());
+        userEmail.setText(curUser.get(email).toString());
 
 
-      //  public void onAttachedToWindow() {
-          //  super.onAttachedToWindow();
-           // this.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD);
 
 
-
-        //Setup DB Connection
-        String DRIVER = "net.sourceforge.jtds.jdbc.Driver";
-
-        // Register the native JDBC driver. If the driver cannot be
-        // registered, the test cannot continue.
-        try {
-            Class.forName(DRIVER);
-        } catch (Exception e) {
-            System.out.println("Driver failed to register.");
-            System.out.println(e.getMessage());
-            System.exit(1);
-        }
-
-        Connection response;
-        Statement statement;
-        //  ResultSet resultSet = null;
-        //  String dbUsername;
-
-        try {
-            // Simulate network access.
-            Thread.sleep(2000);
-            Log.d("salfjg;sajfjsagjsajg", "Before attempting to open db connection");
-            String dbURL = "jdbc:jtds:sqlserver://216.249.119.136;instance=ClubProject;DatabaseName=ClubDatabase";
-
-            //login to server
-            response = DriverManager.getConnection(dbURL, "sa", "d1559563!");
-            Log.d("salfjg;sajfjsagjsajg", "tried to open db connection");
-            statement = response.createStatement();
-           // statement.executeSQLQuery("Select * From Users Where Email = '"+email+"';", null, null, null);
-
-        } catch (InterruptedException e) {
-            // return false;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        //TextView userpro_text = (TextView)findViewById(R.id.userpro_title);
-       // userpro_text.setText("Welcome " + fname + " " + lname + "!");
     }
 
     /**
@@ -114,6 +105,22 @@ public class user_profile extends DashboardActivity {
      */
     protected void onRestart () {
         super.onRestart ();
+        ParseUser curUser = ParseUser.getCurrentUser();
+
+        //connect ui widgets to their private variables
+        name = (TextView) findViewById(R.id.userpro_name);
+        classStand = (TextView) findViewById(R.id.userpro_classStanding);
+        userEmail = (TextView) findViewById(R.id.userpro_email);
+
+        //get and display the info from the web to the appropriate ui field
+
+        //get and store
+        String firstPart = curUser.get(firstName).toString();
+        String lastPart = curUser.get(lastName).toString();
+
+        name.setText(firstPart + " " +lastPart);
+        classStand.setText(curUser.get(classStanding).toString());
+        userEmail.setText(curUser.get(email).toString());
     }
 
     /**
@@ -125,6 +132,22 @@ public class user_profile extends DashboardActivity {
      */
     protected void onResume () {
         super.onResume ();
+        ParseUser curUser = ParseUser.getCurrentUser();
+
+        //connect ui widgets to their private variables
+        name = (TextView) findViewById(R.id.userpro_name);
+        classStand = (TextView) findViewById(R.id.userpro_classStanding);
+        userEmail = (TextView) findViewById(R.id.userpro_email);
+
+        //get and display the info from the web to the appropriate ui field
+
+        //get and store
+        String firstPart = curUser.get(firstName).toString();
+        String lastPart = curUser.get(lastName).toString();
+
+        name.setText(firstPart + " " +lastPart);
+        classStand.setText(curUser.get(classStanding).toString());
+        userEmail.setText(curUser.get(email).toString());
     }
 
     /**
@@ -151,7 +174,6 @@ public class user_profile extends DashboardActivity {
     protected void onStop()
     {
         super.onStop();
-        //Log.d("iHHIHIPHOUHOHOUHOHPUHO", "MYonStop is called");
         // insert here your instructions
     }
 

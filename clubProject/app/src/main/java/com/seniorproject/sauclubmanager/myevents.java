@@ -33,26 +33,9 @@ public class myevents extends DashboardActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.calendar_activity);
+        setContentView(R.layout.cal_event);
         //Logout_button();
     }
-/*
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.calendar_activity, container, false);
 
-        CalendarView calendarView = (CalendarView) rootView.findViewById(R.id.calendarView);
-        calendarView.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                Toast.makeText(this, "Viewing Current Events for Today...", Toast.LENGTH_SHORT).show();
-                Intent myintent = new Intent(getActivity(), cal_event_frag.class);
-                startActivity(myintent);
-            }
-        });
-        return rootView;
-    }
-*/
 }
 

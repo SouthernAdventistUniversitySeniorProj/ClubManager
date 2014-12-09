@@ -177,12 +177,9 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements OnCli
       }
       ///GET CLASS STANDING AND MAIN CLUB SELECTION
 
+      String CLASSSTAND = classSelector.getSelectedItem().toString();
 
-      //if (.toString() != "class standing") {
-         // CLASSSTAND = classSelector.toString();
-    //  }
-      String CLASSSTAND = classSelector.toString();;
-      String MAINCLUB = clubSelection.toString();
+      String MAINCLUB = clubSelection.getSelectedItem().toString();
 
 
 

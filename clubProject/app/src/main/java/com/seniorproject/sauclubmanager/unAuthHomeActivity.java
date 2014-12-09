@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.parse.ParseUser;
 import com.parse.ui.ParseLoginBuilder;
 import com.seniorproject.sauclubmanager.DashboardActivity;
 import com.seniorproject.sauclubmanager.R;
 import com.seniorproject.sauclubmanager.clubs;
+import com.seniorproject.sauclubmanager.com.seniorproject.utilities.DispatchActivity;
 import com.seniorproject.sauclubmanager.myevents;
 import com.seniorproject.sauclubmanager.myfeed;
 import com.seniorproject.sauclubmanager.sa;
@@ -27,7 +29,15 @@ public class unAuthHomeActivity extends DashboardActivity {
        // Logout_button();
        // getActionBar().setHomeButtonEnabled(true);
        // getActionBar().setDisplayHomeAsUpEnabled(true);
+        //CHECK TO SEE IF ANYONE IS LOGGED IN
+        if (ParseUser.getCurrentUser()!=null)
+        {
+            startActivity(new Intent(this, DispatchActivity.class));
+        }
     }
+
+
+
 
     // MOVE THIS LOGIC TO A MENU FOR UNIFORMITY
   /*  public void Logout_button() {
@@ -81,6 +91,11 @@ public class unAuthHomeActivity extends DashboardActivity {
      */
     protected void onRestart () {
         super.onRestart ();
+        //CHECK TO SEE IF ANYONE IS LOGGED IN
+        if (ParseUser.getCurrentUser()!=null)
+        {
+            startActivity(new Intent(this, DispatchActivity.class));
+        }
     }
 
     /**
@@ -92,6 +107,11 @@ public class unAuthHomeActivity extends DashboardActivity {
      */
     protected void onResume () {
         super.onResume ();
+        //CHECK TO SEE IF ANYONE IS LOGGED IN
+        if (ParseUser.getCurrentUser()!=null)
+        {
+            startActivity(new Intent(this, DispatchActivity.class));
+        }
     }
 
     /**
@@ -102,6 +122,11 @@ public class unAuthHomeActivity extends DashboardActivity {
      */
     protected void onStart () {
         super.onStart ();
+        //CHECK TO SEE IF ANYONE IS LOGGED IN
+        if (ParseUser.getCurrentUser()!=null)
+        {
+            startActivity(new Intent(this, DispatchActivity.class));
+        }
     }
 
     /**

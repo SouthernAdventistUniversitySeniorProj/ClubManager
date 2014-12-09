@@ -165,6 +165,7 @@ public class ParseLoginActivity extends FragmentActivity implements
     // RESULT_OK.
     // You can change this implementation if you want a different behavior.
     setResult(RESULT_OK);
+      //startActivity(new Intent(this,com.seniorproject.sauclubmanager));
     finish();
   }
 

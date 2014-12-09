@@ -2,6 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.seniorproject.sauclubmanager" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <!--
+      IMPORTANT: Change "com.parse.tutorials.pushnotifications.permission.C2D_MESSAGE" in the lines below
+      to match your app's package name + ".permission.C2D_MESSAGE".
+    -->
+    <permission android:protectionLevel="signature"
+        android:name="com.seniorproject.sauclubmanager.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.seniorproject.sauclubmanager.permission.C2D_MESSAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/s_a_icon"
@@ -23,7 +39,8 @@
         <activity
             android:name="com.parse.ui.ParseLoginActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Base">
             <meta-data
                 android:name="com.parse.ui.ParseLoginActivity.PARSE_LOGIN_ENABLED"
                 android:value="true"/>
@@ -71,12 +88,36 @@
         <activity android:name=".settings"
                   android:label="Settings"
                   android:icon="@drawable/title_home_default"/>
-        <activity android:name=".report"
-                  android:label="Send Report"
-                  android:icon="@drawable/title_home_default"/>
-        <activity android:name=".reg_login"
-                  android:label="@string/reg_text" >
-        </activity>
+
+        <service android:name="com.parse.PushService" />
+        <receiver android:name="com.parse.ParseBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.parse.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+
+                <category android:name="com.seniorproject.sauclubmanager" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.seniorproject.sauclubmanager.com.seniorproject.utilities.Receiver" android:exported="false">
+            <intent-filter>
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.DELETE" />
+                <action android:name="com.parse.push.intent.OPEN" />
+            </intent-filter>
+        </receiver>
+
+        <!-- replace @drawable/push_icon with your push icon identifier -->
+<!--        uncomment to use a different image for push besides the apps default
+        <meta-data android:name="com.parse.push.notification_icon" android:resource="@drawable/push_icon"/>-->
+
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -85,5 +126,3 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />\
 </manifest>
-    <!--android:name=".LoginScreen"
-               android:label="@string/title_activity_login_screen"-->
