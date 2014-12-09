@@ -2,84 +2,51 @@ package com.seniorproject.sauclubmanager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.AutoCompleteTextView;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import com.parse.ui.ParseLoginBuilder;
+import com.seniorproject.sauclubmanager.DashboardActivity;
+import com.seniorproject.sauclubmanager.R;
+import com.seniorproject.sauclubmanager.clubs;
+import com.seniorproject.sauclubmanager.myevents;
+import com.seniorproject.sauclubmanager.myfeed;
+import com.seniorproject.sauclubmanager.sa;
+import com.seniorproject.sauclubmanager.sa_senate_;
+import com.seniorproject.sauclubmanager.user_profile;
 
-public class user_profile extends DashboardActivity {
+public class unAuthHomeActivity extends DashboardActivity {
     /**
      * onCreate - called when the activity is first created.
      * Called when the activity is first created.
      * This is where you should do all of your normal static set up: create views, bind data to lists, etc.
      * This method also provides you with a Bundle containing the activity's previously frozen state, if there was one.
      */
-
-    private String id, fname, lname, pass;
-    private AutoCompleteTextView email;
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_profile);
-        getActionBar().setHomeButtonEnabled(true);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
-        email = (AutoCompleteTextView) findViewById(R.id.email);
-
-
-      //  public void onAttachedToWindow() {
-          //  super.onAttachedToWindow();
-           // this.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD);
-
-
-
-        //Setup DB Connection
-        String DRIVER = "net.sourceforge.jtds.jdbc.Driver";
-
-        // Register the native JDBC driver. If the driver cannot be
-        // registered, the test cannot continue.
-        try {
-            Class.forName(DRIVER);
-        } catch (Exception e) {
-            System.out.println("Driver failed to register.");
-            System.out.println(e.getMessage());
-            System.exit(1);
-        }
-
-        Connection response;
-        Statement statement;
-        //  ResultSet resultSet = null;
-        //  String dbUsername;
-
-        try {
-            // Simulate network access.
-            Thread.sleep(2000);
-            Log.d("salfjg;sajfjsagjsajg", "Before attempting to open db connection");
-            String dbURL = "jdbc:jtds:sqlserver://216.249.119.136;instance=ClubProject;DatabaseName=ClubDatabase";
-
-            //login to server
-            response = DriverManager.getConnection(dbURL, "sa", "d1559563!");
-            Log.d("salfjg;sajfjsagjsajg", "tried to open db connection");
-            statement = response.createStatement();
-           // statement.executeSQLQuery("Select * From Users Where Email = '"+email+"';", null, null, null);
-
-        } catch (InterruptedException e) {
-            // return false;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        //TextView userpro_text = (TextView)findViewById(R.id.userpro_title);
-       // userpro_text.setText("Welcome " + fname + " " + lname + "!");
+        setContentView(R.layout.unhome_activity);
+       // Logout_button();
+       // getActionBar().setHomeButtonEnabled(true);
+       // getActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+    // MOVE THIS LOGIC TO A MENU FOR UNIFORMITY
+  /*  public void Logout_button() {
+        ImageButton Logout_button = (ImageButton) findViewById(R.id.logout_button);
+        Logout_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoginScreen.loginPreferences = getSharedPreferences("saveLogin", MODE_PRIVATE);
+                LoginScreen.loginPrefsEditor.remove("username");
+                LoginScreen.loginPrefsEditor.remove("password");
+                LoginScreen.loginPrefsEditor.commit();
+                LoginScreen.saveLoginCheckbox.setChecked(false);
+                Intent intent = new Intent(HomeActivity.this, LoginScreen.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }*/
 
     /**
      * onDestroy
@@ -147,13 +114,37 @@ public class user_profile extends DashboardActivity {
      * Followed by either onRestart() if this activity is coming back to interact with the user,
      * or onDestroy() if this activity is going away.
      */
-    @Override
-    protected void onStop()
-    {
-        super.onStop();
-        //Log.d("iHHIHIPHOUHOHOUHOHPUHO", "MYonStop is called");
-        // insert here your instructions
+    protected void onStop () {
+        super.onStop ();
     }
+
+
+
+    /**
+     * Handle the click of a Feature button.
+     */
+    public void onClickFeature (View v) {
+        int id = v.getId ();
+        switch (id) {
+            case R.id.login_feature ://LOGIN
+               // startActivity (new Intent(getApplicationContext(), user_profile.class));
+                ParseLoginBuilder builder = new ParseLoginBuilder(unAuthHomeActivity.this);
+                startActivityForResult(builder.build(),0);
+                break;
+            case R.id.home_btn_feature4 :
+                startActivity (new Intent(getApplicationContext(), clubs.class));
+                break;
+            case R.id.home_btn_feature5 :
+                startActivity (new Intent(getApplicationContext(), sa.class));
+                break;
+            case R.id.home_btn_feature6 :
+                startActivity (new Intent(getApplicationContext(), sa_senate_.class));
+                break;
+            default:
+                break;
+        }
+    }
+
 
 
 

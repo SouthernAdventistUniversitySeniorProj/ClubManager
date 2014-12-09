@@ -12,6 +12,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.ParseUser;
+import com.seniorproject.sauclubmanager.com.seniorproject.utilities.DispatchActivity;
+
 public class DashboardActivity extends Activity {
 
     /**
@@ -41,13 +44,14 @@ public class DashboardActivity extends Activity {
         if(item.getItemId() == R.id.action_example){
             Log.d("salfjg;sajfjsagjsajg", "Logout Clicked");
             //get shared prefs and clear them
-            LoginScreen.loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+           /* LoginScreen.loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
             LoginScreen.loginPrefsEditor.putBoolean("saveLogin", false);
             LoginScreen.loginPrefsEditor.putString("username", "email");
             LoginScreen.loginPrefsEditor.putString("password", "password");
             LoginScreen.loginPrefsEditor.commit();
-            LoginScreen.saveLoginCheckbox.setChecked(false);
-            Intent intent = new Intent(DashboardActivity.this, LoginScreen.class);
+            LoginScreen.saveLoginCheckbox.setChecked(false);*/
+            ParseUser.logOut();
+            Intent intent = new Intent(DashboardActivity.this, DispatchActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
@@ -62,8 +66,8 @@ public class DashboardActivity extends Activity {
         }
 
         if(item.getItemId() == R.id.action_report) {
-            Intent intent = new Intent(DashboardActivity.this, report.class);
-            startActivity(intent);
+            //Intent intent = new Intent(DashboardActivity.this, report.class);
+           // startActivity(intent);
         }
 
 ////Home button pressed take me back to the main screen

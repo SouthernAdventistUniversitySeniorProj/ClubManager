@@ -64,6 +64,15 @@
         <item>Wellness Club</item>
     </string-array>
 
+    <string-array name="class_standing">
+        <item>class standing</item>
+        <item>Freshman</item>
+        <item>Sophomore</item>
+        <item>Junior</item>
+        <item>Senior</item>
+    </string-array>
+
+
     <string-array name="sa_info_array">
         <item>links</item>
         <item>About</item>
