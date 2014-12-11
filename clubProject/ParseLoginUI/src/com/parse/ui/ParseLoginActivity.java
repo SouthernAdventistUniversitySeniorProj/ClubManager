@@ -34,8 +34,16 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Window;
 
+import com.parse.FindCallback;
 import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseRelation;
+import com.parse.ParseUser;
+
+import java.util.List;
 
 /**
  * Encapsulates the Parse login flow. The user can log in by username/password,
@@ -164,9 +172,69 @@ public class ParseLoginActivity extends FragmentActivity implements
     // This default implementation returns to the parent activity with
     // RESULT_OK.
     // You can change this implementation if you want a different behavior.
-    setResult(RESULT_OK);
+
+      //Assign club object to User
+
+      ///PREQ...get the club just stored in the mainclub feild of the current user.
+      final ParseUser curUser = ParseUser.getCurrentUser();
+      //final ParseObject clubObj = null;
+      //Store the club name in a string
+
+      //ParseObject clubObj =
+      String myClub = curUser.get("mainClub").toString();
+
+// select object id where the clubId = the supplied clubname
+
+
+
+
+
+ /*     //Place club object in the user's club array
+      curUser.put("clubs",myClub);
+
+      curUser.saveInBackground();
+*/
+
+
+      //1) query club object
+      ParseQuery<ParseObject> findClub = ParseQuery.getQuery("Club");
+
+      //2) compare the club choice of the user to the club objects in the DB
+
+      findClub.whereEqualTo("clubName",myClub);
+
+      //SHOULD RETURN ONE CLUB AND I PLACE THAT CLUB IN MY CLUB VARIABLE
+      findClub.findInBackground(new FindCallback<ParseObject>() {
+          @Override
+          public void done(List<ParseObject> club, ParseException e) {
+              if(e==null) {
+                  Log.d("Brand", "Retrieved " + club.size() + " clubs");
+                  ParseRelation<ParseObject> relation = ParseUser.getCurrentUser().getRelation("clubs");
+                  relation.add(club.get(club.size()-1));
+                  Log.d("Relation", "Relation added sucessfully");
+                  ParseUser.getCurrentUser().saveInBackground();
+
+
+
+                  //Save user in Club object
+                  ParseRelation<ParseObject> relation2 = club.get(club.size()-1).getRelation("Members");
+                  relation2.add(ParseUser.getCurrentUser());
+                  club.get(club.size()-1).saveInBackground();
+
+
+                  //myClub = club.get(0);
+              }else{
+                  Log.d("Brand", "Error: " + e.getMessage());
+              }
+          }
+      });
+
+      setResult(RESULT_OK);
       //startActivity(new Intent(this,com.seniorproject.sauclubmanager));
     finish();
+
+
+
   }
 
   /**

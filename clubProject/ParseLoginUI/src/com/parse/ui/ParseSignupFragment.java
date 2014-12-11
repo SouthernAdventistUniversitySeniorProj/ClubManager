@@ -24,6 +24,7 @@ package com.parse.ui;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,9 +34,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+
+import java.util.List;
 
 /**
  * Fragment for the user signup screen.
@@ -58,6 +64,8 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements OnCli
 
   private ParseLoginConfig config;
   private int minPasswordLength;
+
+    private ParseObject myClub = null;
 
   private static final String LOG_TAG = "ParseSignupFragment";
   private static final int DEFAULT_MIN_PASSWORD_LENGTH = 6;
@@ -183,6 +191,8 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements OnCli
 
 
 
+
+
     if (username.length() == 0) {
       showToast(R.string.com_parse_ui_no_username_toast);
     } else if (password.length() == 0) {
@@ -218,10 +228,15 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements OnCli
         private static final String email = "email";
         private static final String classStanding = "class standing";
         private static final String mainClub = "main club";*/
+        String usrBio = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam rhoncus ullamcorper quam vitae egestas. Sed diam nulla, pharetra non erat id, placerat gravida ante. " +
+                "Nullam cursus ligula vel mauris placerat, quis accumsan tortor vestibulum. Quisque sit amet leo est. Aliquam sollicitudin vel ex vitae imperdiet. Vestibulum cursus, dolor nec " +
+                "auctor varius, nibh velit luctus arcu, et suscipit arcu dui eget libero. Morbi tempor ligula turpis, in convallis neque pharetra et. Cras non elementum lectus. Proin venenatis est " +
+                "varius, pretium augue ac, fringilla enim. Quisque congue quam ac blandit dapibus. Vestibulum et mauris a lacus pulvinar tempor sit amet vel est. Vestibulum at neque quis risus dictum faucibus.";
 
 
 
-      // Set additional custom fields only if the user filled it out
+
+        // Set additional custom fields only if the user filled it out
       if (fname.length() != 0) {
         user.put(firstName, fname);
       }
@@ -231,6 +246,8 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements OnCli
         }
         user.put(classStanding,CLASSSTAND);
         user.put(mainClub,MAINCLUB);
+        //user.put("clubs",myClub);
+        user.put("userBio",usrBio);
 
 
         loadingStart();
