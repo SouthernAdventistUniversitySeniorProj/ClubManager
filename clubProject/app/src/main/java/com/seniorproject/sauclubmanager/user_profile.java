@@ -1,31 +1,20 @@
 package com.seniorproject.sauclubmanager;
 
-import android.content.Intent;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.AutoCompleteTextView;
-import android.widget.ImageButton;
+import android.telephony.TelephonyManager;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.parse.FindCallback;
+import com.parse.GetDataCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.ParseQueryAdapter;
-import com.parse.ParseRelation;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.io.ByteArrayOutputStream;
 
 public class user_profile extends DashboardActivity {
     /**
@@ -35,25 +24,23 @@ public class user_profile extends DashboardActivity {
      * This method also provides you with a Bundle containing the activity's previously frozen state, if there was one.
      */
 
-    private String id, fname, lname, pass;
-
-
-    final ParseUser user = new ParseUser();
-
     //Setup Ui reference variables
     private TextView name;//userpro_name
     private TextView classStand;//userpro_classStanding
     private TextView userEmail;//userpro_email
-    private ListView userClubs;
 
+    //listing clubs
+    private ListView listView;
+    private String[] values;
+    private String[] clubPics;
 
     //SERVER SIDE KEY VALUES
     private static final String firstName = "firstName";
     private static final String lastName = "lastName";
     private static final String email = "email";
     private static final String classStanding = "classStanding";
+    public static String userphoto = "userPhoto";
     //private static final String mainClub = "mainClub";
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,97 +54,42 @@ public class user_profile extends DashboardActivity {
         name = (TextView) findViewById(R.id.userpro_name);
         classStand = (TextView) findViewById(R.id.userpro_classStanding);
         userEmail = (TextView) findViewById(R.id.userpro_email);
-        userClubs = (ListView) findViewById(R.id.userClubsListView);
 
         //get and display the info from the web to the appropriate ui field
 
         //get and store
         String firstPart = curUser.get(firstName).toString();
         String lastPart = curUser.get(lastName).toString();
+        String userPhoto = curUser.get(userphoto).toString();
+        ParseFile getPic = (ParseFile) curUser.get(userPhoto);
 
         name.setText(firstPart + " " +lastPart);
         classStand.setText(curUser.get(classStanding).toString());
         userEmail.setText(curUser.get(email).toString());
 
+        //gets current phone number from phone being used
+        TelephonyManager tMgr = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        String mPhoneNumber = tMgr.getLine1Number();
+        TextView userNum = (TextView) findViewById(R.id.userpro_PhoneNum);
+        userNum.setText(mPhoneNumber);
 
-        //find the column where clubnames are held in the user table then add them to the adapter list through a forloop
+        final ImageView viewImage = (ImageView) findViewById(R.id.imageView);
 
-
-       /* ParseQueryAdapter<ParseObject> adapter = new ParseQueryAdapter<ParseObject>(this, ParseUser);
-        adapter.setTextKey("name");
-        adapter.setImageKey("photo");*/
-
-       // ParseQuery<ParseObject> findMyClub = ParseQuery.getQuery("Club");
-
-       //
-       // findMyClub.whereEqualTo()
-
-        //Array of club objects
-        //final ParseObject clubObjs[] = null;
-
-
-       // ParseRelation <ParseObject> relation = ParseUser.getCurrentUser().getRelation("clubs");
-
-
-
-     /*   relation.getQuery().findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> results, ParseException e) {
-                if (e != null) {
-                    // There was an error
-                } else {
-                    // results have all the Posts the current user liked.
-                    //save the objects to an array
-
-                        //clubObjs[0]=results.get(results.size()-1);
+            getPic.getDataInBackground(new GetDataCallback() {
+                public void done(byte[] data, ParseException e) {
+                    if (e == null) {
+                        // data has the bytes for the resume
+                        Bitmap bitpic = BitmapFactory.decodeByteArray(data, 0, data.length);
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        bitpic.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        viewImage.setImageBitmap(bitpic);
+                    } else {
+                        // something went wrong
+                    }
 
                 }
-            }
-        });*/
 
-
-
-        //ParseUser curUser = ParseUser.getCurrentUser();
-
-        //1) query current user
-        ParseQuery<ParseUser> findUser = ParseQuery.getQuery(String.valueOf(curUser));
-
-        //2) compare the club choice of the user to the club objects in the DB
-
-        /*findClub.whereEqualTo("clubName",myClub);
-
-        //SHOULD RETURN ONE CLUB AND I PLACE THAT CLUB IN MY CLUB VARIABLE
-        findClub.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-
-
-
-
-       Log.d("PARSE USER CLUB", ParseUser.getCurrentUser().getRelation("clubs").toString());
-
-*/
-
-        //Log.d("PARSE USER CLUB", clubObjs[0].get("clubName").toString());
-
-        ///populate database with 1500 users!!!!!
-
-        //username-------------------------
-        //password
-        //email-----------
-        //class standing
-        //main club-string
-        //clubs - relation
-        // user - bio
-
-
-
-
-
-
-      //  }
-
-
-
-
+            });
 
     }
 
@@ -210,11 +142,6 @@ public class user_profile extends DashboardActivity {
         name.setText(firstPart + " " +lastPart);
         classStand.setText(curUser.get(classStanding).toString());
         userEmail.setText(curUser.get(email).toString());
-
-
-
-
-
     }
 
     /**
@@ -242,93 +169,6 @@ public class user_profile extends DashboardActivity {
         name.setText(firstPart + " " +lastPart);
         classStand.setText(curUser.get(classStanding).toString());
         userEmail.setText(curUser.get(email).toString());
-
-        ////////////////////DELETE BELOW????????
-       /* Random rnum = new Random();
-        Random rclub = new Random();
-        Random rclass = new Random();
-        // int randNum = rn.nextInt(99);
-        //int randClub = rn.nextInt(29);
-        //int randClass = rn.nextInt(4);
-        //
-
-        //array of names
-        String names[] = {"Nereida","Vesta", "Tameika","Tambra","Jacqueline","Eunice","Macy","Margert","Wendell","Colton","Carin","Cletus", "Sanjuanita","Arlena","Arie","Shanna", "Bruce","Lindsy","Agustin","Inocencia","Horace","Gabriel","Lynna","Allie","Yuko","Elyse","Norah","Shandra","Jetta","Geoffrey","Jorge","Julietta","Tawny","Lashonda","Raymon",
-                "Mari","Marianna","Catherina","Dwight","Vertie","Jerrold","Brenda","Shana","Lara","Michiko","Hattie","Angel","Penni","Belle","Darrell","Tamela","Rodolfo","Janyce","Raelene","Fernando",
-                "Glayds","Zackary","Demetrius","Aleshia","Yen","yrstal","Elwanda","Domenic","Cristina","Kimbery","Dianne","Reginia","Elma","Grayce","Renee","Coralee","Caitlin","Jaleesa","Xiomara","Justina","Renetta","Britta","Jospeh","Rima",
-                "Annalee","Barbara","Otelia","Vicky","Kathrine","Caroll","Grover","Otto","Marjorie","Gustavo","Benny","Audry","Seth","Quiana","Brandon","Robbie","Xenia","Loyd","Teresita","Freida","Florene", };
-
-        //select first name
-        // String fName = names[randNum];
-        //select last name
-        //  String lName = names[randNum];
-        //Select email
-        //String email = fName + lName + "@gmeil.com";
-        String passWrd = names[40]+"1234";
-
-        String[] clubName = this.getResources().getStringArray(R.array.club_names);
-        String[] className = this.getResources().getStringArray(R.array.class_standing);
-
-
-
-
-        //  for(int i = 0; i<100; i++){
-
-        String randEmail = names[rnum.nextInt(100)]+names[rnum.nextInt(100)]+"@gmeil.com";
-        user.setUsername(randEmail);
-        user.setPassword(names[rnum.nextInt(100)]+"123");
-        user.setEmail(randEmail);
-        user.put("firstName",names[rnum.nextInt(100)]);
-        user.put("lastName",names[rnum.nextInt(100)]);
-        //So the random club is the same random club in the relation
-        String ClubName = clubName[rclub.nextInt(29)];
-        user.put("mainClub",ClubName);
-        user.put("userBio",usrBio);
-        user.put("classStanding", className[rclass.nextInt(4)+1]);
-
-
-
-
-        //1) query club object
-        ParseQuery<ParseObject> findClub = ParseQuery.getQuery("Club");
-
-        //2) compare the club choice of the user to the club objects in the DB
-
-        findClub.whereEqualTo("clubName",ClubName);
-
-        //SHOULD RETURN ONE CLUB AND I PLACE THAT CLUB IN MY CLUB VARIABLE
-        findClub.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> club, ParseException e) {
-                if(e==null) {
-                    Log.d("Brand", "Retrieved " + club.size() + " clubs");
-                    ParseRelation<ParseObject> relation = user.getRelation("clubs");
-                    relation.add(club.get(club.size()-1));
-                    Log.d("Relation", "Relation added sucessfully");
-                    // user.saveInBackground();
-
-
-
-                    user.signUpInBackground();
-                    //Save user in Club object
-                    ParseRelation<ParseObject> relation2 = club.get(club.size()-1).getRelation("members");
-                    relation2.add(user);
-                    club.get(club.size()-1).saveInBackground();
-                    Log.d("Relation", "Should have saved the user into the club relation");
-
-
-                    //myClub = club.get(0);
-                }else{
-                    Log.d("Brand", "Error: " + e.getMessage());
-                }
-            }
-        });
-
-
-
-*/
-
-
     }
 
     /**

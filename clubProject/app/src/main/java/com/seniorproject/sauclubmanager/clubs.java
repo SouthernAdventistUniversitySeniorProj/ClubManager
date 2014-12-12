@@ -1,7 +1,5 @@
 package com.seniorproject.sauclubmanager;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -17,6 +15,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +41,9 @@ public class clubs extends DashboardActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clubs);
-        getActionBar().setHomeButtonEnabled(true);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        if (ParseUser.getCurrentUser() != null) {
+            getActionBar().setHomeButtonEnabled(true);
+            getActionBar().setDisplayHomeAsUpEnabled(true); }
 
 //Initialize private variables
         ctx=this;

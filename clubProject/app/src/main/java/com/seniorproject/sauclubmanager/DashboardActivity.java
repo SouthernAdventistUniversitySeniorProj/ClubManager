@@ -65,10 +65,10 @@ public class DashboardActivity extends Activity {
             startActivity(intent);
         }
 
-        if(item.getItemId() == R.id.action_report) {
-            //Intent intent = new Intent(DashboardActivity.this, report.class);
-           // startActivity(intent);
-        }
+//        if(item.getItemId() == R.id.action_report) {
+//            //Intent intent = new Intent(DashboardActivity.this, report.class);
+//           // startActivity(intent);
+//        }
 
 ////Home button pressed take me back to the main screen
         if(item.getItemId() == android.R.id.home){

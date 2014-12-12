@@ -1,1 +1,4 @@
-include ':facebook', ':app', ':ParseLoginUI'
+include ':app'
+include ':ParseLoginUI'
+include ':facebook'
+

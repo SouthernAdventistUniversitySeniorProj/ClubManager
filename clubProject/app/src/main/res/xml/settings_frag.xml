@@ -3,19 +3,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <PreferenceCategory
-        android:title="Username and Email"
+        android:title="Edit Profile"
         android:layout_width="match_parent">
+        <Preference
+            android:key="userpic"
+            android:title="Profile Picture"
+            android:summary="Update your profile picture here."/>
         <EditTextPreference
-            android:key="reg_pass"
-            android:title="Password"
-            android:summary="Edit your password here."
-            android:defaultValue=""
-            android:dialogTitle="Enter your new password: " />
+            android:key="reg_name"
+            android:title="Display Name"
+            android:summary="Edit your display name here."
+            android:dialogTitle="Enter your new display name (delimiter by space): " />
+        <ListPreference
+            android:key="reg_classStanding"
+            android:title="Class Standing"
+            android:summary="Change your class standing here."
+            android:entries="@array/class_standing"
+            android:entryValues="@array/classStandingVal"
+            android:dialogTitle="Choose your new class standing: "/>
+        <ListPreference
+            android:key="reg_mainClub"
+            android:title="Main Club"
+            android:summary="Change your main club here."
+            android:entries="@array/club_names"
+            android:entryValues="@array/clubvalues"
+            android:dialogTitle="Choose your new main club: "/>
         <EditTextPreference
-            android:key="reg_email"
-            android:title="Configure Email"
-            android:summary="Change your email address here."
-            android:defaultValue="your@email.com"
-            android:dialogTitle="Enter your new email here: "/>
+            android:key="user_bio"
+            android:title="About Me"
+            android:summary="Update your bio here."
+            android:dialogTitle="Enter your bio: "
+            android:lines="5"/>
     </PreferenceCategory>
 </PreferenceScreen>

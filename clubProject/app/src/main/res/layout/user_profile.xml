@@ -26,8 +26,12 @@
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="200px"
+                    android:src="@drawable/s_a_icon"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:padding="30px" />
             </LinearLayout>
 
             <LinearLayout
@@ -35,6 +39,11 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1">
+
+                <Space
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
                 <TextView
                     android:text="Name:"
@@ -50,12 +59,12 @@
                     android:id="@+id/userpro_classStanding"
                     android:layout_weight="1" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Age: "
-                    android:id="@+id/userpro_age"
-                    android:layout_weight="1" />
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:text="Age: "-->
+                    <!--android:id="@+id/userpro_age"-->
+                    <!--android:layout_weight="1" />-->
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -101,7 +110,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/userpro_biotext" />
+                    android:id="@+id/userpro_biotext"
+                    android:text="No information entered." />
             </FrameLayout>
 
         </LinearLayout>
@@ -125,11 +135,11 @@
                 android:text="____________________"
                 android:id="@+id/textView3" />
 
-            <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/userClubsListView"
-                android:layout_weight="1" />
+            <!--<ListView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/userClubsListView"-->
+                <!--android:layout_weight="1" />-->
         </LinearLayout>
 
     </LinearLayout>

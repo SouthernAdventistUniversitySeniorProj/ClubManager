@@ -13,6 +13,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.ParseUser;
+
 /**
  * Created by User on 10/26/2014.
  */
@@ -28,8 +30,9 @@ public class sa extends DashboardActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sa);
+        if (ParseUser.getCurrentUser() != null) {
         getActionBar().setHomeButtonEnabled(true);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true); }
 
         final Spinner spin = (Spinner) findViewById(R.id.sa_spinner);
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
