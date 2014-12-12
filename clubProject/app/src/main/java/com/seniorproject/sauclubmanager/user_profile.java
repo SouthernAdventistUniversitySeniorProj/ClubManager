@@ -1,20 +1,14 @@
 package com.seniorproject.sauclubmanager;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.parse.GetDataCallback;
-import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
-
-import java.io.ByteArrayOutputStream;
 
 public class user_profile extends DashboardActivity {
     /**
@@ -28,6 +22,7 @@ public class user_profile extends DashboardActivity {
     private TextView name;//userpro_name
     private TextView classStand;//userpro_classStanding
     private TextView userEmail;//userpro_email
+    private TextView userMainclub;
 
     //listing clubs
     private ListView listView;
@@ -40,6 +35,9 @@ public class user_profile extends DashboardActivity {
     private static final String email = "email";
     private static final String classStanding = "classStanding";
     public static String userphoto = "userPhoto";
+    public static String userBio = "userBio";
+    public static String userMainClub = "mainClub";
+
     //private static final String mainClub = "mainClub";
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +52,7 @@ public class user_profile extends DashboardActivity {
         name = (TextView) findViewById(R.id.userpro_name);
         classStand = (TextView) findViewById(R.id.userpro_classStanding);
         userEmail = (TextView) findViewById(R.id.userpro_email);
+        userMainclub = (TextView) findViewById(R.id.userpro_mainclub);
 
         //get and display the info from the web to the appropriate ui field
 
@@ -62,10 +61,13 @@ public class user_profile extends DashboardActivity {
         String lastPart = curUser.get(lastName).toString();
         String userPhoto = curUser.get(userphoto).toString();
         ParseFile getPic = (ParseFile) curUser.get(userPhoto);
+        String curBio = curUser.get(userBio).toString();
+        String curClassStanding = curUser.get(classStanding).toString();
+        String curMainClub = curUser.get(userMainClub).toString();
 
         name.setText(firstPart + " " +lastPart);
-        classStand.setText(curUser.get(classStanding).toString());
         userEmail.setText(curUser.get(email).toString());
+
 
         //gets current phone number from phone being used
         TelephonyManager tMgr = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
@@ -73,24 +75,33 @@ public class user_profile extends DashboardActivity {
         TextView userNum = (TextView) findViewById(R.id.userpro_PhoneNum);
         userNum.setText(mPhoneNumber);
 
-        final ImageView viewImage = (ImageView) findViewById(R.id.imageView);
+        //displaying userbio textview
+        TextView bio = (TextView) findViewById(R.id.userpro_biotext);
+        bio.setText(curBio);
 
-            getPic.getDataInBackground(new GetDataCallback() {
-                public void done(byte[] data, ParseException e) {
-                    if (e == null) {
-                        // data has the bytes for the resume
-                        Bitmap bitpic = BitmapFactory.decodeByteArray(data, 0, data.length);
-                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        bitpic.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                        viewImage.setImageBitmap(bitpic);
-                    } else {
-                        // something went wrong
-                    }
+        //displaying userclassStanding
+        classStand.setText(curClassStanding);
 
-                }
+        //displaying Main Club
+        userMainclub.setText(curMainClub);
 
-            });
-
+        //displaying photo from database
+        ImageView viewImage = (ImageView) findViewById(R.id.imageView);
+        if (curUser.has(userphoto)) {
+//            getPic.getDataInBackground(new GetDataCallback() {
+//                public void done(byte[] data, ParseException e) {
+//                    if (e == null) {
+//                        // data has the bytes for the resume
+//                        Bitmap bitpic = BitmapFactory.decodeByteArray(data, 0, data.length);
+//                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//                        bitpic.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//                        viewImage.setImageBitmap(bitpic);
+//                    } else {
+//                        // something went wrong
+//                    }
+//                }
+//            });
+        }
     }
 
     /**

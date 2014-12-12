@@ -38,6 +38,7 @@ public class settings extends DashboardActivity {
     public static String classStanding = "classStanding";
     public static String userBio = "userBio";
     public static String userphoto = "userPhoto";
+    public static String userMainClub = "mainClub";
 
 
     public static String[] userFullname;
@@ -61,14 +62,9 @@ public class settings extends DashboardActivity {
             manager.setSharedPreferencesName("settings_frag");
             addPreferencesFromResource(R.xml.settings_frag);
 
-            ParseUser curUser = ParseUser.getCurrentUser();
+            final ParseUser curUser = ParseUser.getCurrentUser();
             String firstPart = curUser.get(firstName).toString();
             String lastPart = curUser.get(lastName).toString();
-            String userclassStanding = curUser.get(classStanding).toString();
-
-            String cur_userBio = "OK?"; //curUser.get(userBio).toString();
-
-            //final ParseUser user = new ParseUser();
 
             // editing display name
             final EditTextPreference user_name = (EditTextPreference) findPreference("reg_name");
@@ -84,7 +80,7 @@ public class settings extends DashboardActivity {
             user_name.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    userFullname = user_name.getText().split(" ");
+                    userFullname = newValue.toString().split(" ");
                     ParseUser.getCurrentUser().put(firstName, userFullname[0]);
                     ParseUser.getCurrentUser().put(lastName, userFullname[1]);
                     ParseUser.getCurrentUser().saveInBackground();
@@ -94,11 +90,31 @@ public class settings extends DashboardActivity {
             });
 
             // editing class standing
-            final ListPreference classStanding = (ListPreference) findPreference("reg_classStanding");
-            classStanding.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            final ListPreference classstanding = (ListPreference) findPreference("reg_classStanding");
+            classstanding.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    final String[] classStandingArray = getResources().getStringArray(R.array.class_standing);
+                    int standVal = Integer.parseInt(newValue.toString());
+                    curUser.put(classStanding, classStandingArray[standVal]);
+                    curUser.saveInBackground();
+                    Toast.makeText(getActivity(), "You have successfully changed your class standing to "
+                            + classStandingArray[standVal], Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            });
 
+            // editing main club
+            final ListPreference pickmainClub = (ListPreference) findPreference("reg_mainClub");
+            pickmainClub.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    final String[] mainClubArray = getResources().getStringArray(R.array.club_names);
+                    int clubVal = Integer.parseInt(newValue.toString());
+                    curUser.put(userMainClub, mainClubArray[clubVal]);
+                    curUser.saveInBackground();
+                    Toast.makeText(getActivity(), "You have successfully changed your main club to "
+                            + mainClubArray[clubVal], Toast.LENGTH_SHORT).show();
                     return true;
                 }
             });
@@ -112,6 +128,19 @@ public class settings extends DashboardActivity {
                     return true;
                 }
             });
+
+            //editing bio
+            final EditTextPreference userTextBio = (EditTextPreference) findPreference("user_bio");
+            userTextBio.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    curUser.put(userBio, newValue);
+                    curUser.saveInBackground();
+                    Toast.makeText(getActivity(), "You have successfully updated your bio", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            });
+
 
         }
     }
@@ -146,7 +175,6 @@ public class settings extends DashboardActivity {
         }
 
     //handling profile pic
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -203,9 +231,6 @@ public class settings extends DashboardActivity {
                 int index = picturePath.lastIndexOf("/");
                 String fileName = picturePath.substring(index + 1);
                 Log.w("path of image from gallery......******************.........", picturePath + " ------ " + fileName);
-
-
-
                     Bitmap picPath = BitmapFactory.decodeFile(picturePath);
                     // Convert it to byte
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -216,12 +241,7 @@ public class settings extends DashboardActivity {
                     file.saveInBackground();
                     ParseUser.getCurrentUser().put(userphoto, file);
                     ParseUser.getCurrentUser().saveInBackground();
-
-
             }
         }
     }
 }
-
-
-

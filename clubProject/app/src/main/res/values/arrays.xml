@@ -65,6 +65,7 @@
     </string-array>
 
     <string-array name="clubvalues">
+        <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -92,7 +93,6 @@
         <item>26</item>
         <item>27</item>
         <item>28</item>
-        <item>29</item>
     </string-array>
 
     <string-array name="class_standing">
@@ -104,11 +104,11 @@
     </string-array>
 
     <string-array name="classStandingVal">
+        <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
-        <item>5</item>
     </string-array>
 
 
