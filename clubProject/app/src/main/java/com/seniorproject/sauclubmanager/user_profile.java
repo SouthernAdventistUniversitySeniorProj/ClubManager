@@ -1,14 +1,25 @@
 package com.seniorproject.sauclubmanager;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.parse.GetDataCallback;
+import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseRelation;
 import com.parse.ParseUser;
+
+import java.io.ByteArrayOutputStream;
+import java.util.List;
 
 public class user_profile extends DashboardActivity {
     /**
@@ -28,6 +39,9 @@ public class user_profile extends DashboardActivity {
     private ListView listView;
     private String[] values;
     private String[] clubPics;
+
+    private List<ParseObject> ob;
+
 
     //SERVER SIDE KEY VALUES
     private static final String firstName = "firstName";
@@ -59,8 +73,8 @@ public class user_profile extends DashboardActivity {
         //get and store
         String firstPart = curUser.get(firstName).toString();
         String lastPart = curUser.get(lastName).toString();
-        String userPhoto = curUser.get(userphoto).toString();
-        ParseFile getPic = (ParseFile) curUser.get(userPhoto);
+        //String userPhoto = curUser.get(userphoto).toString();
+        ParseFile getPic = (ParseFile) curUser.get(userphoto);
         String curBio = curUser.get(userBio).toString();
         String curClassStanding = curUser.get(classStanding).toString();
         String curMainClub = curUser.get(userMainClub).toString();
@@ -86,22 +100,38 @@ public class user_profile extends DashboardActivity {
         userMainclub.setText(curMainClub);
 
         //displaying photo from database
-        ImageView viewImage = (ImageView) findViewById(R.id.imageView);
+        final ImageView viewImage = (ImageView) findViewById(R.id.imageView);
         if (curUser.has(userphoto)) {
-//            getPic.getDataInBackground(new GetDataCallback() {
-//                public void done(byte[] data, ParseException e) {
-//                    if (e == null) {
-//                        // data has the bytes for the resume
-//                        Bitmap bitpic = BitmapFactory.decodeByteArray(data, 0, data.length);
-//                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//                        bitpic.compress(Bitmap.CompressFormat.PNG, 100, stream);
-//                        viewImage.setImageBitmap(bitpic);
-//                    } else {
-//                        // something went wrong
-//                    }
-//                }
-//            });
+            getPic.getDataInBackground(new GetDataCallback() {
+                public void done(byte[] data, ParseException e) {
+                    if (e == null) {
+                        // data has the bytes for the resume
+                        Bitmap bitpic = BitmapFactory.decodeByteArray(data, 0, data.length);
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        bitpic.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        viewImage.setImageBitmap(bitpic);
+                    } else {
+                        // something went wrong
+                    }
+                }
+            });
         }
+
+        //displaying list of clubs that user is in
+        ListView userClubs = (ListView) findViewById(R.id.userClubsListView);
+        ParseRelation<ParseObject> relation = curUser.getRelation("clubs");
+        ParseQuery<ParseObject> query = relation.getQuery();
+        try {
+            ob = query.find();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        ArrayAdapter<String> itemsAdapter =
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+        for (ParseObject clubs : ob) {
+            itemsAdapter.add((String) clubs.get("clubName"));
+        }
+        userClubs.setAdapter(itemsAdapter);
     }
 
     /**

@@ -185,13 +185,8 @@ public class ParseLoginActivity extends FragmentActivity implements
 
 // select object id where the clubId = the supplied clubname
 
-
-
-
-
  /*     //Place club object in the user's club array
       curUser.put("clubs",myClub);
-
       curUser.saveInBackground();
 */
 
@@ -214,13 +209,10 @@ public class ParseLoginActivity extends FragmentActivity implements
                   Log.d("Relation", "Relation added sucessfully");
                   ParseUser.getCurrentUser().saveInBackground();
 
-
-
                   //Save user in Club object
                   ParseRelation<ParseObject> relation2 = club.get(club.size()-1).getRelation("Members");
                   relation2.add(ParseUser.getCurrentUser());
                   club.get(club.size()-1).saveInBackground();
-
 
                   //myClub = club.get(0);
               }else{

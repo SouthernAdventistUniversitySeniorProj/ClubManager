@@ -135,11 +135,11 @@
                 android:text="____________________"
                 android:id="@+id/textView3" />
 
-            <!--<ListView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/userClubsListView"-->
-                <!--android:layout_weight="1" />-->
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/userClubsListView"
+                android:layout_weight="1" />
         </LinearLayout>
 
     </LinearLayout>

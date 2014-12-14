@@ -1,30 +1,34 @@
 package com.seniorproject.sauclubmanager;
 
-
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * Created by Qwynn on 12/3/2014.
- */
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseRelation;
+import com.parse.ParseUser;
+
+import java.util.List;
+
 public class ClubActivity extends DashboardActivity {
 
-public ClubActivity(){};
+    public ClubActivity(){};
 
     private TextView textView;
     private ImageView imageView;
-
-
     public String CLUB_NAME = "default club name";
-
     public String CLUB_PIC = "drawable/accounting";
-
+    private List<ParseObject> ob;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +37,18 @@ public ClubActivity(){};
         getActionBar().setHomeButtonEnabled(true);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-//Initialize private variables
+        final ParseUser curUser = ParseUser.getCurrentUser();
+
+
+
+        //Initialize private variables
         textView = (TextView) findViewById(R.id.club_name);
         imageView = (ImageView) findViewById(R.id.clubImageView);
-//RETRIEVE NAME AND PIC PASSED FROM PREVIOUS ACTIVITIES
+
+        //RETRIEVE NAME AND PIC PASSED FROM PREVIOUS ACTIVITIES
         Intent intent = getIntent();
         CLUB_NAME = intent.getExtras().getString("CLUB_NAME");
         CLUB_PIC = intent.getExtras().getString("CLUB_PIC");
-
-
 
         textView.setText(CLUB_NAME);
 
@@ -49,17 +56,32 @@ public ClubActivity(){};
         Drawable image = this.getResources().getDrawable(imageResource);
         imageView.setImageDrawable(image);
 
-        //handling joining a club
+        final ParseQuery<ParseObject> lookupClub = ParseQuery.getQuery("Club");
+        lookupClub.whereEqualTo("clubName", CLUB_NAME);
 
+        //handling joining a club
         ImageButton join = (ImageButton) findViewById(R.id.join_button);
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String information = ("Congratulations you have now joined " + CLUB_NAME);
-                Toast.makeText(getApplicationContext(), information, Toast.LENGTH_SHORT).show();
+                lookupClub.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> parseObjects, ParseException e) {
+                        if (e == null) {
+                            ParseRelation<ParseObject> relation = curUser.getRelation("clubs");
+                            relation.add(parseObjects.get(parseObjects.size()-1));
+                            curUser.saveInBackground();
 
+                            ParseRelation<ParseObject> relation2 = parseObjects.get(parseObjects.size()-1).getRelation("Members");
+                            relation2.add(curUser);
+                            parseObjects.get(parseObjects.size()-1).saveInBackground();
+                        }
+                    }
+                });
+                Toast.makeText(getApplicationContext(), information, Toast.LENGTH_SHORT).show();
             }
-        }) ;
+        });
 
         //handling leaving a club
         ImageButton leave = (ImageButton) findViewById(R.id.leave_button);
@@ -67,16 +89,54 @@ public ClubActivity(){};
             @Override
             public void onClick(View v) {
                 String information = ("You are currently removed from " + CLUB_NAME);
+                lookupClub.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> RMparseObjects, ParseException e) {
+                        if (e == null) {
+                            ParseRelation<ParseObject> relation = curUser.getRelation("clubs");
+                            relation.remove(RMparseObjects.get(RMparseObjects.size()-1));
+                            curUser.saveInBackground();
+
+                            ParseRelation<ParseObject> relation2 = RMparseObjects.get(RMparseObjects.size()-1).getRelation("Members");
+                            relation2.remove(curUser);
+                            RMparseObjects.get(RMparseObjects.size()-1).saveInBackground();
+                        }
+                    }
+                });
                 Toast.makeText(getApplicationContext(), information, Toast.LENGTH_SHORT).show();
-
             }
-        }) ;
+        });
 
+        //displaying list of clubs that user is in
+        ListView clubMembers = (ListView) findViewById(R.id.listView);
+        ParseQuery clubclass = new ParseQuery("Club");
+        clubclass.findInBackground( new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (e == null) {
+                    for (ParseObject Objects : objects) {
 
+                    }
+                }
+            }
+        });
+        ParseObject curClub = new ParseObject(CLUB_NAME);
+        ParseRelation<ParseObject> relation = curClub.getRelation("Members");
+        ParseQuery<ParseObject> query = relation.getQuery();
+
+        try {
+            ob = query.find();
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        ArrayAdapter<String> itemsAdapter =
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+        for (ParseObject members : ob) {
+
+            itemsAdapter.add(members.get("firstName") + " " + members.get("lastName"));
+        }
+        clubMembers.setAdapter(itemsAdapter);
     }
 
-
-
-
 }
-
