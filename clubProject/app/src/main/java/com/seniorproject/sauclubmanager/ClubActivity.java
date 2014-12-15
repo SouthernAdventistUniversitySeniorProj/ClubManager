@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -105,59 +107,27 @@ public class ClubActivity extends DashboardActivity {
             }
         });
 
-//        //displaying list of clubs that user is in
-//        ListView clubMembers = (ListView) findViewById(R.id.listView);
-//        final ArrayAdapter<String> itemsAdapter =
-//                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-//
-//        ParseQuery<ParseObject> clubclass = ParseQuery.getQuery("Club");
-//        clubclass.whereEqualTo("clubName", CLUB_NAME);
-//
-//        clubclass.findInBackground(new FindCallback<ParseObject>() {
-//            @Override
-//            public void done(List<ParseObject> club, ParseException e) {
-//                if (e == null) {
-//
-//                } else {
-//                    Log.d("Get Club", "Error " + e.getMessage());
-//                }
-//            }
-//        });
-//
-//
-//
-//        //ParseRelation<ParseObject> relation = clubclass
-//        try {
-//            ob = clubclass.find();
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        ArrayAdapter<String> itemsAdapter =
-//                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-//        for (ParseObject clubs : ob) {
-//            itemsAdapter.add((String) clubs.get("clubName"));
-//        }
-//
-////        ParseObject clubObject = new ParseObject("Club");
-////        clubObject.getRelation("Members");
-////
-////
-////        clubclass.getInBackground(CLUB_NAME, new GetCallback() {
-////            @Override
-////            public void done(ParseObject parseObject, ParseException e) {
-////                ParseRelation<ParseObject> relation = parseObject.getRelation("Members");
-////                ParseQuery<ParseObject> query = relation.getQuery();
-////                try {
-////                    ob = query.find();
-////                } catch (ParseException i) {
-////                    i.printStackTrace();
-////                }
-////                for (ParseObject members : ob) {
-////                    itemsAdapter.add(members.get("firstName") + " " + members.get("lastName"));
-////                }
-////            }
-////        });
-//        clubMembers.setAdapter(itemsAdapter);
+        //displaying list of clubs that user is in
+        ListView clubMembers = (ListView) findViewById(R.id.listView);
+        final ArrayAdapter<String> itemsAdapter =
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+
+        ParseQuery<ParseObject> clubclass = ParseQuery.getQuery("Club");
+        clubclass.whereEqualTo("clubName", CLUB_NAME);
+
+        //ParseObject clubObject = new ParseObject("Club");
+        //ParseRelation<ParseObject> relation = curUser.getRelation("Members");
+        final ParseQuery query = curUser.getQuery();
+        query.whereEqualTo("mainClub", CLUB_NAME);
+                try {
+                    ob = query.find();
+                } catch (ParseException i) {
+                    i.printStackTrace();
+                }
+                for (ParseObject members : ob) {
+                    itemsAdapter.add(members.get("firstName") + " " + members.get("lastName"));
+                }
+        clubMembers.setAdapter(itemsAdapter);
     }
 
 }

@@ -82,14 +82,6 @@ public class myevents extends DashboardActivity {
         return null;
     }
 
-//    public ListPreference.OnPreferenceClickListener clubPickerListener = new ListPreference.OnPreferenceClickListener() {
-//
-//        @Override
-//        public boolean onPreferenceClick(Preference preference) {
-//            return false;
-//        }
-//    };
-
     private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
         // when dialog box is closed, below method will be called.
         public void onDateSet(DatePicker view, int selectedYear,
@@ -104,8 +96,6 @@ public class myevents extends DashboardActivity {
             event.put("mMonth", mMonth);
             event.put("mDay", mDay);
             event.saveInBackground();
-
-
 
 //            String bookingdate = String.valueOf(mYear) + "-" + String.valueOf(mMonth) + "-" + String.valueOf(mDay);
 //            Toast.makeText(getApplicationContext(), bookingdate, Toast.LENGTH_SHORT).show();
