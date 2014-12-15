@@ -49,14 +49,14 @@ public class clubs extends DashboardActivity {
         ctx=this;
         values = this.getResources().getStringArray(R.array.club_names);
         clubPics = this.getResources().getStringArray(R.array.club_pics);
-        clubListView = ( ListView ) findViewById( R.id.club_list);
+        clubListView = (ListView) findViewById(R.id.club_list);
 //List to hold club objects
         List clubList = new ArrayList();
 //forloop to initialize club objects
         for (int i = 0; i < values.length; i++) {
             clubList.add(new Club(values[i],clubPics[i]));
         }
-        clubListView.setAdapter( new ClubListAdapterWithCache(ctx, R.layout.picture_list, clubList ));
+        clubListView.setAdapter( new ClubListAdapterWithCache(ctx, R.layout.picture_list, clubList));
         clubListView.setOnItemClickListener(new OnItemClickListenerListViewItem(){
 
             public void onItemClick(AdapterView<?> a, View

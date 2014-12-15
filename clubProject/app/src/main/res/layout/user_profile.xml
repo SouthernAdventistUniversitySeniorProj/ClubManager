@@ -137,9 +137,8 @@
 
             <ListView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/userClubsListView"
-                android:layout_weight="1" />
+                android:layout_height="150dp"
+                android:id="@+id/userClubsListView" />
         </LinearLayout>
 
     </LinearLayout>
