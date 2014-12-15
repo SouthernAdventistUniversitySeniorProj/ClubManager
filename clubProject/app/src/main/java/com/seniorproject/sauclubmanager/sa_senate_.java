@@ -13,16 +13,6 @@ import android.widget.Toast;
 import com.parse.ParseUser;
 
 public class sa_senate_ extends DashboardActivity {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,7 +21,6 @@ public class sa_senate_ extends DashboardActivity {
             getActionBar().setHomeButtonEnabled(true);
             getActionBar().setDisplayHomeAsUpEnabled(true); }
         setContentView(R.layout.senate);
-        //Logout_button();
 
         View aboutSA = findViewById(R.id.textView);
         ((TextView)aboutSA).setText("Senate is the legislative branch of the Student Association responsible " +
@@ -51,12 +40,13 @@ public class sa_senate_ extends DashboardActivity {
             }
         }) ;
 
+        //drop list for sa senate information directed to web
         final Spinner spin = (Spinner) findViewById(R.id.senate_spinner);
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int arg2, long arg3) {
-                // TODO Auto-generated method stub
+
                 String  mselection = spin.getSelectedItem().toString();
                 if (mselection.equals("Mintues")) {
                     Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
@@ -75,8 +65,7 @@ public class sa_senate_ extends DashboardActivity {
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-                //
+
             }
         });
     }

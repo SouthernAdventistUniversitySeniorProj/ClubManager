@@ -39,8 +39,6 @@ public class ClubActivity extends DashboardActivity {
 
         final ParseUser curUser = ParseUser.getCurrentUser();
 
-
-
         //Initialize private variables
         textView = (TextView) findViewById(R.id.club_name);
         imageView = (ImageView) findViewById(R.id.clubImageView);
@@ -49,7 +47,6 @@ public class ClubActivity extends DashboardActivity {
         Intent intent = getIntent();
         CLUB_NAME = intent.getExtras().getString("CLUB_NAME");
         CLUB_PIC = intent.getExtras().getString("CLUB_PIC");
-
         textView.setText(CLUB_NAME);
 
         int imageResource = this.getResources().getIdentifier(CLUB_PIC, null, this.getPackageName());
@@ -115,8 +112,6 @@ public class ClubActivity extends DashboardActivity {
         ParseQuery<ParseObject> clubclass = ParseQuery.getQuery("Club");
         clubclass.whereEqualTo("clubName", CLUB_NAME);
 
-        //ParseObject clubObject = new ParseObject("Club");
-        //ParseRelation<ParseObject> relation = curUser.getRelation("Members");
         final ParseQuery query = curUser.getQuery();
         query.whereEqualTo("mainClub", CLUB_NAME);
                 try {
@@ -129,5 +124,4 @@ public class ClubActivity extends DashboardActivity {
                 }
         clubMembers.setAdapter(itemsAdapter);
     }
-
 }

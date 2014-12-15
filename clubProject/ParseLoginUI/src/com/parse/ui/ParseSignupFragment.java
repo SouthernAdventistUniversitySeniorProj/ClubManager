@@ -1,30 +1,8 @@
-/*
- *  Copyright (c) 2014, Facebook, Inc. All rights reserved.
- *
- *  You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
- *  copy, modify, and distribute this software in source code or binary form for use
- *  in connection with the web services and APIs provided by Facebook.
- *
- *  As with any software that integrates with the Facebook platform, your use of
- *  this software is subject to the Facebook Developer Principles and Policies
- *  [http://developers.facebook.com/policy/]. This copyright notice shall be
- *  included in all copies or substantial portions of the software.
- *
- *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
- *  FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
- *  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
- *  IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
- *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *
- */
-
 package com.parse.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,14 +12,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
-
-import java.util.List;
 
 /**
  * Fragment for the user signup screen.
@@ -50,29 +24,25 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements OnCli
   public static final String USERNAME = "com.parse.ui.ParseSignupFragment.USERNAME";
   public static final String PASSWORD = "com.parse.ui.ParseSignupFragment.PASSWORD";
 
+  // initializing variables for login xml
   private EditText usernameField;
   private EditText passwordField;
   private EditText confirmPasswordField;
   private EditText emailField;
-  //private EditText nameField;
   private EditText fNameField;
   private EditText lNameField;
   private Spinner classSelector;
   private Spinner clubSelection;
   private Button createAccountButton;
   private ParseOnLoginSuccessListener onLoginSuccessListener;
-
   private ParseLoginConfig config;
   private int minPasswordLength;
-
-    private ParseObject myClub = null;
+  private ParseObject myClub = null;
 
   private static final String LOG_TAG = "ParseSignupFragment";
   private static final int DEFAULT_MIN_PASSWORD_LENGTH = 6;
 
-    //SERVER SIDE KEY VALUES
-  //private static final String USER_OBJECT_FNAME_FIELD = "first name";
-  //private static final String USER_OBJECT_LNAME_FIELD = "last name";
+    //initializing SERVER SIDE KEY VALUES
     private static final String firstName = "firstName";
     private static final String lastName = "lastName";
     private static final String email = "email";
@@ -89,6 +59,7 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements OnCli
     return signupFragment;
   }
 
+  //setting up the view for the user registration page
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup parent,
                            Bundle savedInstanceState) {
@@ -112,7 +83,6 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements OnCli
     confirmPasswordField = (EditText) v
         .findViewById(R.id.signup_confirm_password_input);
     emailField = (EditText) v.findViewById(R.id.signup_email_input);
-    //nameField = (EditText) v.findViewById(R.id.signup_name_input);
     fNameField = (EditText) v.findViewById(R.id.signup_fname_input);
     lNameField = (EditText) v.findViewById(R.id.signup_lname_input);
     classSelector = (Spinner) v.findViewById(R.id.class_selector);
@@ -173,7 +143,7 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements OnCli
       email = emailField.getText().toString();
     }
 
-      ///GET AND CHECK FIRST AND LAST NAMES
+    //GET AND CHECK FIRST AND LAST NAMES
     String fname = null;
     if (fNameField  != null) {
       fname = fNameField.getText().toString();
@@ -183,16 +153,13 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements OnCli
       if (lNameField != null) {
           lname = lNameField.getText().toString();
       }
-      ///GET CLASS STANDING AND MAIN CLUB SELECTION
 
+      //GET CLASS STANDING AND MAIN CLUB SELECTION
       String CLASSSTAND = classSelector.getSelectedItem().toString();
-
       String MAINCLUB = clubSelection.getSelectedItem().toString();
 
 
-
-
-
+    // returning error messages to user if certain required fields are not correctly filled out
     if (username.length() == 0) {
       showToast(R.string.com_parse_ui_no_username_toast);
     } else if (password.length() == 0) {
@@ -221,14 +188,8 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements OnCli
       user.setPassword(password);
       user.setEmail(email);
 
-
-
-        /*private static final String firstName = "first name";
-        private static final String lastName = "last name";
-        private static final String email = "email";
-        private static final String classStanding = "class standing";
-        private static final String mainClub = "main club";*/
-        String usrBio = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam rhoncus ullamcorper quam vitae egestas. Sed diam nulla, pharetra non erat id, placerat gravida ante. " +
+      //settings default user bio if not has been specified
+      String usrBio = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam rhoncus ullamcorper quam vitae egestas. Sed diam nulla, pharetra non erat id, placerat gravida ante. " +
                 "Nullam cursus ligula vel mauris placerat, quis accumsan tortor vestibulum. Quisque sit amet leo est. Aliquam sollicitudin vel ex vitae imperdiet. Vestibulum cursus, dolor nec " +
                 "auctor varius, nibh velit luctus arcu, et suscipit arcu dui eget libero. Morbi tempor ligula turpis, in convallis neque pharetra et. Cras non elementum lectus. Proin venenatis est " +
                 "varius, pretium augue ac, fringilla enim. Quisque congue quam ac blandit dapibus. Vestibulum et mauris a lacus pulvinar tempor sit amet vel est. Vestibulum at neque quis risus dictum faucibus.";
@@ -246,10 +207,9 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements OnCli
         }
         user.put(classStanding,CLASSSTAND);
         user.put(mainClub,MAINCLUB);
-        //user.put("clubs",myClub);
         user.put("userBio",usrBio);
 
-
+        // return error messages if user's information doesn't agree with database
         loadingStart();
       user.signUpInBackground(new SignUpCallback() {
 

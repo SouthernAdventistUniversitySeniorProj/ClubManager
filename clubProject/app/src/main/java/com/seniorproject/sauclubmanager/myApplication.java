@@ -6,12 +6,8 @@ import android.util.Log;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParsePush;
-import com.parse.ParseTwitterUtils;
 import com.parse.SaveCallback;
 
-/**
- * Created by Qwynn on 12/8/2014.
- */
 public class myApplication extends Application {
     @Override
     public void onCreate() {

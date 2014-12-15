@@ -31,7 +31,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-
 public class settings extends DashboardActivity {
     public static String firstName = "firstName";
     public static String lastName = "lastName";
@@ -39,8 +38,6 @@ public class settings extends DashboardActivity {
     public static String userBio = "userBio";
     public static String userphoto = "userPhoto";
     public static String userMainClub = "mainClub";
-
-
     public static String[] userFullname;
 
     @Override
@@ -72,8 +69,6 @@ public class settings extends DashboardActivity {
             user_name.setOnPreferenceClickListener( new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-
-
                     return true;
                 }
             });
@@ -144,10 +139,9 @@ public class settings extends DashboardActivity {
 
         }
     }
+    //method to give user option of uploading a photo in various ways
         private void selectImage() {
-
             final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
-
             AlertDialog.Builder builder = new AlertDialog.Builder(settings.this);
             builder.setTitle("Add Photo!");
             builder.setItems(options, new DialogInterface.OnClickListener() {

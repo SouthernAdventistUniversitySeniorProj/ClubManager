@@ -6,15 +6,7 @@ import android.view.View;
 
 import com.parse.ParseUser;
 import com.parse.ui.ParseLoginBuilder;
-import com.seniorproject.sauclubmanager.DashboardActivity;
-import com.seniorproject.sauclubmanager.R;
-import com.seniorproject.sauclubmanager.clubs;
 import com.seniorproject.sauclubmanager.com.seniorproject.utilities.DispatchActivity;
-import com.seniorproject.sauclubmanager.myevents;
-import com.seniorproject.sauclubmanager.myfeed;
-import com.seniorproject.sauclubmanager.sa;
-import com.seniorproject.sauclubmanager.sa_senate_;
-import com.seniorproject.sauclubmanager.user_profile;
 
 public class unAuthHomeActivity extends DashboardActivity {
     /**
@@ -26,37 +18,13 @@ public class unAuthHomeActivity extends DashboardActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.unhome_activity);
-       // Logout_button();
-       // getActionBar().setHomeButtonEnabled(true);
-       // getActionBar().setDisplayHomeAsUpEnabled(true);
+
         //CHECK TO SEE IF ANYONE IS LOGGED IN
         if (ParseUser.getCurrentUser()!=null)
         {
             startActivity(new Intent(this, DispatchActivity.class));
         }
     }
-
-
-
-
-    // MOVE THIS LOGIC TO A MENU FOR UNIFORMITY
-  /*  public void Logout_button() {
-        ImageButton Logout_button = (ImageButton) findViewById(R.id.logout_button);
-        Logout_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LoginScreen.loginPreferences = getSharedPreferences("saveLogin", MODE_PRIVATE);
-                LoginScreen.loginPrefsEditor.remove("username");
-                LoginScreen.loginPrefsEditor.remove("password");
-                LoginScreen.loginPrefsEditor.commit();
-                LoginScreen.saveLoginCheckbox.setChecked(false);
-                Intent intent = new Intent(HomeActivity.this, LoginScreen.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }*/
 
     /**
      * onDestroy
@@ -143,16 +111,13 @@ public class unAuthHomeActivity extends DashboardActivity {
         super.onStop ();
     }
 
-
-
     /**
-     * Handle the click of a Feature button.
+     * Handle the click of a Feature buttons of dashboard that is displaye when not logged in.
      */
     public void onClickFeature (View v) {
         int id = v.getId ();
         switch (id) {
             case R.id.login_feature ://LOGIN
-               // startActivity (new Intent(getApplicationContext(), user_profile.class));
                 ParseLoginBuilder builder = new ParseLoginBuilder(unAuthHomeActivity.this);
                 startActivityForResult(builder.build(),0);
                 break;
@@ -169,9 +134,4 @@ public class unAuthHomeActivity extends DashboardActivity {
                 break;
         }
     }
-
-
-
-
-
 }

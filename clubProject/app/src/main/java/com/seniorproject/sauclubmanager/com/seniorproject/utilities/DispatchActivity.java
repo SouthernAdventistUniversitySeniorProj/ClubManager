@@ -3,18 +3,11 @@ package com.seniorproject.sauclubmanager.com.seniorproject.utilities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.parse.Parse;
 import com.parse.ParseUser;
-import com.parse.ui.ParseLoginBuilder;
 import com.seniorproject.sauclubmanager.HomeActivity;
-import com.seniorproject.sauclubmanager.clubs;
 import com.seniorproject.sauclubmanager.unAuthHomeActivity;
 
-/**
- * Created by Qwynn on 12/8/2014.
- */
 public class DispatchActivity extends Activity {
 
     public DispatchActivity() {

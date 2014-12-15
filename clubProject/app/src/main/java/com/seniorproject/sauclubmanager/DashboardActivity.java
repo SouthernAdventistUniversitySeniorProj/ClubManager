@@ -27,8 +27,6 @@ public class DashboardActivity extends Activity {
         super.onCreate(savedInstanceState);
     }
 
-
-
     //GLOBAL MENU
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -43,13 +41,7 @@ public class DashboardActivity extends Activity {
 
         if(item.getItemId() == R.id.action_example){
             Log.d("salfjg;sajfjsagjsajg", "Logout Clicked");
-            //get shared prefs and clear them
-           /* LoginScreen.loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-            LoginScreen.loginPrefsEditor.putBoolean("saveLogin", false);
-            LoginScreen.loginPrefsEditor.putString("username", "email");
-            LoginScreen.loginPrefsEditor.putString("password", "password");
-            LoginScreen.loginPrefsEditor.commit();
-            LoginScreen.saveLoginCheckbox.setChecked(false);*/
+            //logs user out
             ParseUser.logOut();
             Intent intent = new Intent(DashboardActivity.this, DispatchActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -65,12 +57,7 @@ public class DashboardActivity extends Activity {
             startActivity(intent);
         }
 
-//        if(item.getItemId() == R.id.action_report) {
-//            //Intent intent = new Intent(DashboardActivity.this, report.class);
-//           // startActivity(intent);
-//        }
-
-////Home button pressed take me back to the main screen
+        //Home button pressed take me back to the main screen
         if(item.getItemId() == android.R.id.home){
             Intent intent = new Intent(DashboardActivity.this, HomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -80,7 +67,6 @@ public class DashboardActivity extends Activity {
         else{
             // if a the new item is clicked show "Toast" message.
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -165,21 +151,6 @@ public class DashboardActivity extends Activity {
     public void onClickHome (View v) {
         goHome (this);
     }
-
-    /**
-     * Handle the click on the search button.
-     */
-    public void onClickSearch (View v) {
-        //startActivity (new Intent(getApplicationContext(), SearchActivity.class));
-    }
-
-    /**
-     * Handle the click on the About button.
-     */
-    public void onClickAbout (View v) {
-       // startActivity (new Intent(getApplicationContext(), AboutActivity.class));
-    }
-
 
 // More Methods
 

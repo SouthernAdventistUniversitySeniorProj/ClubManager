@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.seniorproject.sauclubmanager" >
 
+    <!-- Providing access to certain permissions required for app to run -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -20,14 +21,11 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <!--
-      IMPORTANT: Change "com.parse.tutorials.pushnotifications.permission.C2D_MESSAGE" in the lines below
-      to match your app's package name + ".permission.C2D_MESSAGE".
-    -->
+
     <permission android:protectionLevel="signature"
         android:name="com.seniorproject.sauclubmanager.permission.C2D_MESSAGE" />
     <uses-permission android:name="com.seniorproject.sauclubmanager.permission.C2D_MESSAGE" />
-
+    <!-- app name and icon gets set here -->
     <application
         android:allowBackup="true"
         android:icon="@drawable/s_a_icon"
@@ -39,7 +37,6 @@
             android:name=".com.seniorproject.utilities.DispatchActivity"
             android:label="SAU Clubs"
             android:noHistory="true">
-            <!--android:windowSoftInputMode="adjustResize|stateVisible"-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -54,6 +51,7 @@
             <meta-data
                 android:name="com.parse.ui.ParseLoginActivity.PARSE_LOGIN_ENABLED"
                 android:value="true"/>
+
             <!-- Added these options below to customize the login flow -->
             <meta-data
                 android:name="com.parse.ui.ParseLoginActivity.APP_LOGO"
@@ -69,6 +67,7 @@
                 android:value="true"/>
         </activity>
 
+        <!--  ADDED TO RECOGNIZE DIFFERENT ACTIVITIES BEING CALLED -->
         <activity android:name = ".HomeActivity"
                   android:label="My Dashboard"/>
         <activity android:name = ".unAuthHomeActivity"
@@ -112,7 +111,6 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-
                 <category android:name="com.seniorproject.sauclubmanager" />
             </intent-filter>
         </receiver>
@@ -123,12 +121,5 @@
                 <action android:name="com.parse.push.intent.OPEN" />
             </intent-filter>
         </receiver>
-
-        <!-- replace @drawable/push_icon with your push icon identifier -->
-<!--        uncomment to use a different image for push besides the apps default
-        <meta-data android:name="com.parse.push.notification_icon" android:resource="@drawable/push_icon"/>-->
-
     </application>
-
-
 </manifest>

@@ -21,7 +21,6 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class clubs extends DashboardActivity {
 
     private String[] values;
@@ -29,9 +28,6 @@ public class clubs extends DashboardActivity {
     private ListView clubListView;
     private Context ctx;
     private Intent intent;
-
-    public final static String CLUB_NAME = "default club name";
-    public final static String CLUB_PIC = "drawable/accounting";
 
     public clubs() {
         // Required empty public constructor
@@ -41,21 +37,26 @@ public class clubs extends DashboardActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clubs);
+        //shows back button only if user is logged in
         if (ParseUser.getCurrentUser() != null) {
             getActionBar().setHomeButtonEnabled(true);
             getActionBar().setDisplayHomeAsUpEnabled(true); }
 
-//Initialize private variables
+        //Initialize private variables
         ctx=this;
         values = this.getResources().getStringArray(R.array.club_names);
         clubPics = this.getResources().getStringArray(R.array.club_pics);
         clubListView = (ListView) findViewById(R.id.club_list);
-//List to hold club objects
+
+        //List to hold club objects
         List clubList = new ArrayList();
-//forloop to initialize club objects
+
+        //forloop to initialize club objects
         for (int i = 0; i < values.length; i++) {
             clubList.add(new Club(values[i],clubPics[i]));
         }
+
+        //when a club is selected from the array of clubs
         clubListView.setAdapter( new ClubListAdapterWithCache(ctx, R.layout.picture_list, clubList));
         clubListView.setOnItemClickListener(new OnItemClickListenerListViewItem(){
 
@@ -65,19 +66,16 @@ public class clubs extends DashboardActivity {
                 launchClubPage(values[position],clubPics[position]);
             }
         });
-
     }
-    public  void launchClubPage(String clubName, String clubPic){
 
+    public  void launchClubPage(String clubName, String clubPic){
         intent = new Intent(this,ClubActivity.class);
         intent.putExtra("CLUB_NAME", clubName);
         intent.putExtra("CLUB_PIC", clubPic);
         startActivity(intent);
     }
 
-
-
-    //// CLUB OBJECT
+    // CLUB OBJECT
     public class Club {
         private String Name;
         private String Image;
@@ -102,7 +100,7 @@ public class clubs extends DashboardActivity {
         }
     }
 
-    ///// CACHE for clubs used for efficiency
+    // CACHE for clubs used for efficiency
     class ClubListViewCache {
         private View BaseView;
         private TextView clubNameText;
@@ -126,7 +124,8 @@ public class clubs extends DashboardActivity {
             return clubImage;
         }
     }
-    /////////////// Custom Adapter for clubs listview
+
+    // Custom Adapter for clubs listview
     public class ClubListAdapterWithCache extends ArrayAdapter<Club>{
         private int resource;
         private LayoutInflater inflater;
@@ -139,6 +138,7 @@ public class clubs extends DashboardActivity {
             context=ctx;
         }
 
+        // setting up how the array is displayed once populated
         @Override
         public View getView ( int position, View convertView, ViewGroup parent ) {
             Club clubObj = getItem(position);
@@ -149,7 +149,6 @@ public class clubs extends DashboardActivity {
                 convertView.setTag( viewCache );
             }
             else {
-                convertView = ( RelativeLayout ) convertView;
                 viewCache = ( ClubListViewCache ) convertView.getTag();
             }
             TextView txtName = viewCache.getClubNameText(resource);
@@ -163,6 +162,7 @@ public class clubs extends DashboardActivity {
             return convertView;
         }
     }
+    //getting information when a club is clicked
     public class OnItemClickListenerListViewItem implements AdapterView.OnItemClickListener {
 
         @Override
@@ -180,11 +180,6 @@ public class clubs extends DashboardActivity {
 
             // just toast it
             Toast.makeText(context, "Item: " + listItemText + ", Item ID: " + listItemId, Toast.LENGTH_SHORT).show();
-
-           // ((DashboardActivity) context).alertDialogStores.cancel();
-
         }
-
     }
-
 }

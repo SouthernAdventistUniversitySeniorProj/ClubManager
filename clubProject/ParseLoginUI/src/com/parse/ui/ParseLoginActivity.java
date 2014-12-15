@@ -173,23 +173,13 @@ public class ParseLoginActivity extends FragmentActivity implements
     // RESULT_OK.
     // You can change this implementation if you want a different behavior.
 
-      //Assign club object to User
-
-      ///PREQ...get the club just stored in the mainclub feild of the current user.
+      ///PREQ...get the club just stored in the mainclub field of the current user.
       final ParseUser curUser = ParseUser.getCurrentUser();
       //final ParseObject clubObj = null;
       //Store the club name in a string
 
       //ParseObject clubObj =
       String myClub = curUser.get("mainClub").toString();
-
-// select object id where the clubId = the supplied clubname
-
- /*     //Place club object in the user's club array
-      curUser.put("clubs",myClub);
-      curUser.saveInBackground();
-*/
-
 
       //1) query club object
       ParseQuery<ParseObject> findClub = ParseQuery.getQuery("Club");
@@ -222,16 +212,11 @@ public class ParseLoginActivity extends FragmentActivity implements
       });
 
       setResult(RESULT_OK);
-      //startActivity(new Intent(this,com.seniorproject.sauclubmanager));
     finish();
-
-
-
   }
 
   /**
    * Called when we are in progress retrieving some data.
-   *
    * @param showSpinner
    *     Whether to show the loading dialog.
    */
@@ -287,7 +272,6 @@ public class ParseLoginActivity extends FragmentActivity implements
     if (getIntent().getExtras() != null) {
       mergedOptions.putAll(getIntent().getExtras());
     }
-
     return mergedOptions;
   }
 }

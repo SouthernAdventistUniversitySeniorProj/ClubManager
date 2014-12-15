@@ -2,8 +2,6 @@ package com.seniorproject.sauclubmanager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 
 public class HomeActivity extends DashboardActivity {
@@ -16,29 +14,7 @@ public class HomeActivity extends DashboardActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
-       // Logout_button();
-       // getActionBar().setHomeButtonEnabled(true);
-       // getActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
-    // MOVE THIS LOGIC TO A MENU FOR UNIFORMITY
-  /*  public void Logout_button() {
-        ImageButton Logout_button = (ImageButton) findViewById(R.id.logout_button);
-        Logout_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LoginScreen.loginPreferences = getSharedPreferences("saveLogin", MODE_PRIVATE);
-                LoginScreen.loginPrefsEditor.remove("username");
-                LoginScreen.loginPrefsEditor.remove("password");
-                LoginScreen.loginPrefsEditor.commit();
-                LoginScreen.saveLoginCheckbox.setChecked(false);
-                Intent intent = new Intent(HomeActivity.this, LoginScreen.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }*/
 
     /**
      * onDestroy
@@ -110,10 +86,8 @@ public class HomeActivity extends DashboardActivity {
         super.onStop ();
     }
 
-
-
     /**
-     * Handle the click of a Feature button.
+     * Handle the click of a Feature button on Auth dashboard.
      */
     public void onClickFeature (View v) {
         int id = v.getId ();
@@ -140,9 +114,4 @@ public class HomeActivity extends DashboardActivity {
                 break;
         }
     }
-
-
-
-
-
 }

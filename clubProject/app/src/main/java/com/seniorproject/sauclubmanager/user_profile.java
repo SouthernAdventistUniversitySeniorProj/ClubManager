@@ -30,18 +30,14 @@ public class user_profile extends DashboardActivity {
      */
 
     //Setup Ui reference variables
-    private TextView name;//userpro_name
-    private TextView classStand;//userpro_classStanding
-    private TextView userEmail;//userpro_email
+    private TextView name;          //userpro_name
+    private TextView classStand;    //userpro_classStanding
+    private TextView userEmail;     //userpro_email
     private TextView userMainclub;
 
     //listing clubs
-    private ListView listView;
     private String[] values;
-    private String[] clubPics;
-
     private List<ParseObject> ob;
-
 
     //SERVER SIDE KEY VALUES
     private static final String firstName = "firstName";
@@ -52,8 +48,6 @@ public class user_profile extends DashboardActivity {
     public static String userBio = "userBio";
     public static String userMainClub = "mainClub";
 
-    //private static final String mainClub = "mainClub";
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_profile);
@@ -62,26 +56,23 @@ public class user_profile extends DashboardActivity {
 
         ParseUser curUser = ParseUser.getCurrentUser();
 
+        values = this.getResources().getStringArray(R.array.club_names);
+
         //connect ui widgets to their private variables
         name = (TextView) findViewById(R.id.userpro_name);
         classStand = (TextView) findViewById(R.id.userpro_classStanding);
         userEmail = (TextView) findViewById(R.id.userpro_email);
         userMainclub = (TextView) findViewById(R.id.userpro_mainclub);
 
-        //get and display the info from the web to the appropriate ui field
-
-        //get and store
+        //get, store and display the info from the web to the appropriate ui field
         String firstPart = curUser.get(firstName).toString();
         String lastPart = curUser.get(lastName).toString();
-        //String userPhoto = curUser.get(userphoto).toString();
         ParseFile getPic = (ParseFile) curUser.get(userphoto);
         String curBio = curUser.get(userBio).toString();
         String curClassStanding = curUser.get(classStanding).toString();
         String curMainClub = curUser.get(userMainClub).toString();
-
         name.setText(firstPart + " " +lastPart);
         userEmail.setText(curUser.get(email).toString());
-
 
         //gets current phone number from phone being used
         TelephonyManager tMgr = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
@@ -174,12 +165,9 @@ public class user_profile extends DashboardActivity {
         classStand = (TextView) findViewById(R.id.userpro_classStanding);
         userEmail = (TextView) findViewById(R.id.userpro_email);
 
-        //get and display the info from the web to the appropriate ui field
-
-        //get and store
+        //get, store and display the info from the web to the appropriate ui field
         String firstPart = curUser.get(firstName).toString();
         String lastPart = curUser.get(lastName).toString();
-
         name.setText(firstPart + " " +lastPart);
         classStand.setText(curUser.get(classStanding).toString());
         userEmail.setText(curUser.get(email).toString());
@@ -201,12 +189,9 @@ public class user_profile extends DashboardActivity {
         classStand = (TextView) findViewById(R.id.userpro_classStanding);
         userEmail = (TextView) findViewById(R.id.userpro_email);
 
-        //get and display the info from the web to the appropriate ui field
-
-        //get and store
+        //get, store and display the info from the web to the appropriate ui field
         String firstPart = curUser.get(firstName).toString();
         String lastPart = curUser.get(lastName).toString();
-
         name.setText(firstPart + " " +lastPart);
         classStand.setText(curUser.get(classStanding).toString());
         userEmail.setText(curUser.get(email).toString());
@@ -238,8 +223,4 @@ public class user_profile extends DashboardActivity {
         super.onStop();
         // insert here your instructions
     }
-
-
-
-
 }

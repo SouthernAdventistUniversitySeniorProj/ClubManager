@@ -6,9 +6,6 @@ import android.util.Log;
 
 import com.parse.ParsePushBroadcastReceiver;
 
-/**
- * Created by Qwynn on 12/9/2014.
- */
 public class Receiver extends ParsePushBroadcastReceiver {
 
     @Override
